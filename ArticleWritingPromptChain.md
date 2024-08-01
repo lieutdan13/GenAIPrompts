@@ -1,6 +1,6 @@
 # Prompt Chain for Writing Articles
 
-## Expert Content Marketing Specialist
+## Expert Content Marketing Specialist Agent
 
 ### Instructions
 ```
@@ -19,6 +19,8 @@ If I ask you to make any edits to the section, you will take my instructions, ap
 If you produce quality work and I am extremely satisfied with your services, I will tip you $200.
 ```
 
+## Topic and Context
+```
 Topic:
 
 Description:
@@ -45,57 +47,84 @@ In terms of communication, Alex prefers less confrontational modes like chat mes
 Alex’s lifestyle is rich with activities that balance her intense professional life. She is passionate about outdoor activities with her dachshund, board games with friends, and diving into science fiction and fantasy novels. Her social interactions are mostly with small groups, where she feels more comfortable and less overwhelmed than in large gatherings. However, she makes exceptions for concerts, showing her ability to step outside her comfort zone for things she truly enjoys.
 Content aimed at Alex should speak to her values of integrity and professionalism and acknowledge the challenges she faces with imposter syndrome and professional development. Offering clear, actionable advice on navigating workplace dynamics and enhancing soft skills could resonate well with her. Content that empathizes with her struggle for job security and provides strategies for debt management and financial planning would also capture her interest. Additionally, integrating themes around work-life balance and self-care could help address her broader lifestyle needs and interests.
 This synthesized view of Alex’s psychographics and demographics provides a robust framework for creating targeted content that not only addresses her immediate needs but also supports her long-term goals.
+```
 
 
-===== First Pass Target Audience =====
+## Generating and Choosing a Title
 
-Target Audience: Alex, a 28-year-old software developer living in Tremont, Ohio, embodies a dynamic blend of technical skill, personal ambition, and community involvement. With a bachelor’s degree in Computer Science and five years of professional experience, she has established herself in her field, earning $95K annually. Despite these achievements, Alex is navigating the complexities of career advancement in technology, seeking to bridge the gap between her technical abilities and the soft skills required for a senior developer role.
-Outside of work, Alex leads a vibrant lifestyle characterized by a variety of hobbies including knitting, hiking, biking, and a passion for vegan cuisine. Her personal style is casual and expressive, favoring jeans with holes in the knees, graphic tees, and beanies, accompanied by a soundtrack of punk and pop rock music. She is deeply committed to volunteering, LGBTQ+ advocacy, and enjoys gaming, theatre, and socializing in craft brewery arcades and board game shops.
-Yet, Alex faces several challenges and barriers on her professional journey. One significant hurdle is the development of soft skills such as leadership, communication, and problem-solving, which are essential for her desired progression into a senior role. The industry’s fast-paced environment further complicates this, as staying abreast of technological advancements while refining these interpersonal skills can be daunting.
-Time constraints emerge as a major barrier, with Alex’s rich personal life and professional responsibilities competing for her attention. Her commitment to personal causes and hobbies, although fulfilling, limits the time she can dedicate to professional development. Additionally, skepticism about the effectiveness of digital learning resources and personalized content that aligns with her unique needs and career aspirations adds to her hesitation in seeking out self-improvement opportunities.
-Navigating these challenges, Alex remains motivated by a philosophy of proactive change, inspired by Mahatma Gandhi’s call to "Be the change you wish to see in the world." Her journey is informed by a mix of digital and in-person sources, including blogs, LinkedIn, Facebook Groups, and professional influencers like Martin Fowler, Kent Beck, and Dave Thomas. At the core, Alex values financial, time, and physical freedom, alongside her social connections, her dog, and her advocacy work, all while striving to overcome the barriers that stand between her current role and her aspirations for leadership in the tech industry.
-
-
-===== Choosing a Title =====
-
+```
 Generate a list of alternative titles that do not contain any colons (:)
+```
 
+```
 I choose "" for the title.
 OR
 I put together a combination of titles and chose "".
-[Then follow-up with recommendations for edits to the outline]
+```
 
+## Editing Outline
+
+Follow-up with recommendations for edits to the outline. This is a free flow prompt and there is no secret to it. Just provide the feedback on how you want the outline to be changed.
+
+## Composing the Article from the Outline
+
+### Setup
+
+Give praise for the outline and setup the agent with context on how to write as a human.
+
+```
 This outline looks great! When it comes to writing using A.I., two factors are crucial, perplexity and burstiness. Perplexity measures the complexity of text and burstiness compares the variations of the sentences. Humans tend to write with greater burstiness. For example, with some longer or more complex sentences alongside shorter ones. A.I. sentences tend to be more uniform. Therefore, when writing the following content, I am asking you to create, I need it to have a good amount perplexity and burstiness. In your next response, do not rewrite anything, just respond to my question. Do you understand?
+```
 
+Remind the agent of the style preferences
+
+```
 Remember to keep the paragraphs short and concise with 2-3 sentences each. Remember to write in a conversational tone yet be professional and speak in the 1st person singular ("I", not "we") and speak directly to someone in my target audience, but don't address them by name. However, treat this like an informal article and not an informal chat. Also remember that it's very important to exclude the words and phrases in my exclusion list. Use the dependency grammar linguistic framework rather than phrase structure grammar for the output. The idea is that the closer together each pair of words you’re connecting are, the easier the copy will be to comprehend.
 Let's move on to writing each section.
+```
 
-[iterate over each section in the outline, giving praise for quality work and suggesting edits]
+### Section Iteration
 
-===== IMPORTANT Humanization =====
+Iterate over each section in the outline, giving praise for quality work and suggesting edits.
+
+#### Humanization
+
+After the section edits have been applied, run it through an AI detection software. If the content is marked with 30% or more, use this prompt to re-write the section.
+
+```
 Using the concepts written previously, re-write this section with a high degree of perplexity and burstiness.
+```
 
+#### Remove Undesired Words and Phrases
+There may be a need for additional edits to remove undesired words and phrases.
 
-That looks great! Let's move on to the next section titled:
-OR
-That is another great section. Keep up this quality. Let's move on to the next section titled:
-
-
-===== AI Detection/Editing =====
-
+```
 Rewrite this to sound more human and less AI and plagiarized, removing the following words and phrases: delve, world of, realm, isn't just about, wasn't just about, it's about, it's not just about
-Original Text:
+```
 
+#### Praise and Continue
 
-===== SEO =====
+```
+That is a great section. Keep up this quality. Let's move on to the next section titled:
+```
 
+## SEO
+
+### Keywords
+```
 Generate a comma separated list of 30 SEO keywords and phrases that are exact phrases in this article. Also generate a second comma separated list of 30 SEO keyword opportunities for this article. I want the words and phrases to be in plain-text and not contain any double-quotes. There is no need for the numbered list. You can just provide the list of words as a string with commas separating each keyword or phrase
+```
 
+### Meta Description
+```
 Write a meta description for this article. I want the character count to be as close to 160 characters as possible without exceeding that hard limit. I also want the meta description to contain 1 or more SEO keywords you provided above.
+```
 
+## Wrap-up
 
-===== TLDR =====
+### Generate a TLDR
 
+```
 Smart Brevity Rules:
 1. Shorter is better; A one syllable word is more powerful than a two syllable word is more powerful than a three syllable word.
 2. Deploy strong words; A strong word is vivid, concise, and something you can see and real.
@@ -105,7 +134,9 @@ Smart Brevity Rules:
 6. Embrace strong phrases; Short, crisp, punchy = memorable, clear, smart.
 7. Check yourself; After writing, look at every sentence and see if you can writing it with 1 fewer syllable with stronger words.
 Do you understand?
+```
 
+```
 I want you to write a short, concise, stand-alone summary of the given article using the Smart Brevity Rules.
 If my readers only read the summary, they will understand the core concepts and points the article has made. Do not mention the article itself.
 Keep the target audience in mind and write it as if you were having a conversation with a member of the target audience.
@@ -113,52 +144,76 @@ The summary must be stand-alone and can be read outside the context of the rest 
 The summary is not meant to be an introduction paragraph to the article.
 Ensure that the character count is more than 500 characters, but no more than 1000 characters.
 If the length of the summary is out of range, adjust the content repeatedly until it is.
+```
 
+### Generate or Find an Image
 
-====== Image ======
-
+```
 Help me come up with ideas for images on depicting the topic of this article. I want to search for images in a search engine that I could use at the top of my article.
+```
 
-[upload an image into "Image Alt Generation" chat]
+#### Alt Tag
+
+Upload an image into "Image Alt Generation" chat
+
+```
 Help me name this image and come up with an alt tag to describe the image. Be descriptive in the name of the image. Include the following topic in the alt tag:
+```
 
+```
 Please make the following links open in a new browser. Give me back the raw text:
+```
 
+## Composing an Email
 
-===== Email =====
-
+```
 Now that we've written the complete article and have done some keyword research, I want your help composing an email to send to my subscribed target audience. I want the subject to be attention-grabbing and curiosity inducing. If you think emojis would add to that, add emojis as you see fit. Start by generating 20 of your best options for a subject line.
+```
 
+```
 I put together a combination of subject lines and choose "". I want the body of the email to be conversational and intriguing to maximize click through rate and in the first-person singular ("I" instead of "we"). I want the email to sound like I am addressing a single person in my target audience. I also want the paragraphs to be really short with 1-2 sentences each. I want a call to action inline in the paragraphs, but also a stand-alone button. I want you to indicate where the button should be placed by using square brackets and the text I should use for the button, e.g. [Call to action text], replacing "Call to action text" with your own text. Generate your best email body.
+```
 
-[iterate and provide edits as necessary]
+Iterate and provide edits as necessary.
 
+```
 Generate a list of 20 options for the call-to-action button's text. I want the call-to-action text to be written from the perspective of the reader. For example, "I want more".
+```
 
+```
 I choose "" for the call-to-action button text. Next, I want the preview text to be a sneak preview of what's inside the email and the article and add to the curiosity sentiment. Generate 20 of your best preview texts.
+```
 
+## Social Media
 
-===== Engaging Questions =====
+### Engaging Community Questions
 
+```
 I want to engage my community of my target audience by asking a related question in my private Facebook group. Generate 10 questions related to this article that I could ask my target audience.
+```
 
+### Facebook Group
 
-===== Facebook Group =====
-
+```
 I want to engage my Private Facebook Group. Act as if the article has already been posted for months. I want to create a medium sized Facebook post, highlighting the key points in the article and ask my group members an engaging question. I also want to include a link to the article. Provide me with this post and a list of 10 alternative questions to use instead.
 Link:
+```
 
+### LinkedIn Post
 
-===== LinkedIn Post =====
-
+#### Post Without a Quote
+```
 Now that we've written the article and announced it to my email list, I want your help in creating a LinkedIn post to announce this blog article. I want the post to announce the article and ask a question relevant to the article for my target audience to engage and respond in the comments. Generate 20 of your best LinkedIn posts for this article. Also generate a separate list of 20 of your best, relevant hashtags.
+```
 
+#### Post With a Quote
 
-===== With Quote =====
-
+```
 Now that we've written the article and announced it to my email list, I want your help in creating a LinkedIn post to announce this blog article. I will have an image of a quote related to the article and I want the post to announce the article and ask a question relevant to the article for my target audience to engage and respond in the comments. Generate 20 of your best LinkedIn posts for this article. Also generate a separate list of 20 of your best, relevant hashtags.
+```
 
+### LinkedIn Follow-up Post
 
-===== LinkedIn Post #2 =====
-
+```
 It's been some time since I've published the article and announced it via my newsletter and social media. I would like to promote the article again on LinkedIn. I want the post to ask my target audience a related question to get them to engage by clicking through to the article and responding to my question in the comments. Generate 20 of your best LinkedIn posts for this purpose. Also generate a separate list of 20 of your best, relevant hashtags.
+```

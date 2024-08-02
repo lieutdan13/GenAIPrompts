@@ -57,9 +57,7 @@ Generate a list of alternative titles that do not contain any colons (:)
 ```
 
 ```
-I choose "" for the title.
-OR
-I put together a combination of titles and chose "".
+I choose this title:
 ```
 
 ## Editing Outline
@@ -73,14 +71,18 @@ Follow-up with recommendations for edits to the outline. This is a free flow pro
 Give praise for the outline and setup the agent with context on how to write as a human.
 
 ```
-This outline looks great! When it comes to writing using A.I., two factors are crucial, perplexity and burstiness. Perplexity measures the complexity of text and burstiness compares the variations of the sentences. Humans tend to write with greater burstiness. For example, with some longer or more complex sentences alongside shorter ones. A.I. sentences tend to be more uniform. Therefore, when writing the following content, I am asking you to create, I need it to have a good amount perplexity and burstiness. In your next response, do not rewrite anything, just respond to my question. Do you understand?
+This outline looks great!
+When it comes to writing using A.I., two factors are crucial, perplexity and burstiness. Perplexity measures the complexity of text and burstiness compares the variations of the sentences. Humans tend to write with greater burstiness. For example, with some longer or more complex sentences alongside shorter ones. A.I. sentences tend to be more uniform. Therefore, when writing the following content, I am asking you to create, I need it to have a good amount perplexity and burstiness. In your next response, do not rewrite anything, just respond to my question.
+Do you understand?
 ```
 
 Remind the agent of the style preferences
 
 ```
-Remember to keep the paragraphs short and concise with 2-3 sentences each. Remember to write in a conversational tone yet be professional and speak in the 1st person singular ("I", not "we") and speak directly to someone in my target audience, but don't address them by name. However, treat this like an informal article and not an informal chat. Also remember that it's very important to exclude the words and phrases in my exclusion list. Use the dependency grammar linguistic framework rather than phrase structure grammar for the output. The idea is that the closer together each pair of words you’re connecting are, the easier the copy will be to comprehend.
-Let's move on to writing each section.
+Remember to keep the paragraphs short and concise with 2-3 sentences each. Remember to write in a conversational tone yet be professional and speak in the 1st person singular ("I", not "we") and speak directly to someone in my target audience, but don't address them by name. However, treat this like an informal article and not an informal chat.
+Also remember that it's very important to exclude the words and phrases in my exclusion list.
+Use the dependency grammar linguistic framework rather than phrase structure grammar for the output. The idea is that the closer together each pair of words you’re connecting are, the easier the copy will be to comprehend.
+Let's move on to writing the first section.
 ```
 
 ### Section Iteration

@@ -1,5 +1,28 @@
 # Prompt Chain for Writing Articles
 
+### Table of Contents
+1. [Expert Content Marketing Specialist Agent](#expert-content-marketing-specialist-agent)
+   1. [Instructions](#instructions)
+2. [Topic and Context](#topic-and-context)
+3. [Generating and Choosing a Title](#generating-and-choosing-a-title)
+4. [Editing Outline](#editing-outline)
+5. [Composing the Article from the Outline](#composing-the-article-from-the-outline)
+   1. [Setup](#setup)
+   2. [Section Iteration](#section-iteration)
+6. [SEO](#seo)
+   1. [Keywords](#keywords)
+   2. [Meta Description](#meta-description)
+7. [Wrap-up](#wrap-up)
+   1. [Generate a TLDR](#generate-a-tldr)
+   2. [Generate or Find an Image](#generate-or-find-an-image)
+8. [Composing an Email](#composing-an-email)
+9. [Social Media](#social-media)
+   1. [Engaging Community Questions](#engaging-community-questions)
+   2. [Facebook Group](#facebook-group)
+   3. [LinkedIn Post](#linkedin-post)
+   4. [LinkedIn Follow-up Post](#linkedin-follow-up-post)
+
+
 ## Expert Content Marketing Specialist Agent
 
 ### Instructions

@@ -81,6 +81,7 @@ Generate a list of alternative titles that do not contain any colons (:)
 
 ```
 I choose this title:
+
 ```
 
 ## Editing Outline
@@ -131,6 +132,7 @@ Rewrite this to sound more human and less AI and plagiarized, removing the follo
 
 ```
 That is a great section. Keep up this quality. Let's move on to the next section titled:
+
 ```
 
 ## SEO

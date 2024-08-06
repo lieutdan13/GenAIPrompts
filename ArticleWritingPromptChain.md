@@ -198,7 +198,9 @@ Now that we've written the complete article and have done some keyword research,
 ```
 
 ```
-I put together a combination of subject lines and choose "". I want the body of the email to be conversational and intriguing to maximize click through rate and in the first-person singular ("I" instead of "we"). I want the email to sound like I am addressing a single person in my target audience. I also want the paragraphs to be really short with 1-2 sentences each. I want a call to action inline in the paragraphs, but also a stand-alone button. I want you to indicate where the button should be placed by using square brackets and the text I should use for the button, e.g. [Call to action text], replacing "Call to action text" with your own text. Generate your best email body.
+I chose the following for the subject line:
+
+I want the body of the email to be conversational and intriguing to maximize click through rate and in the first-person singular ("I" instead of "we"). I want the email to sound like I am addressing a single person in my target audience. I also want the paragraphs to be really short with 1-2 sentences each. I want a call to action inline in the paragraphs, but also a stand-alone button. I want you to indicate where the button should be placed by using square brackets and the text I should use for the button, e.g. [Call to action text], replacing "Call to action text" with your own text. Generate your best email body.
 ```
 
 Iterate and provide edits as necessary.
@@ -208,7 +210,9 @@ Generate a list of 20 options for the call-to-action button's text. I want the c
 ```
 
 ```
-I choose "" for the call-to-action button text. Next, I want the preview text to be a sneak preview of what's inside the email and the article and add to the curiosity sentiment. Generate 20 of your best preview texts.
+I choose the following for the call to action button text:
+
+Next, I want the preview text to be a sneak preview of what's inside the email and the article and add to the curiosity sentiment. Generate 20 of your best preview texts.
 ```
 
 ## Social Media

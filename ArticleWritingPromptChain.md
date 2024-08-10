@@ -96,7 +96,7 @@ Give praise for the outline and setup the agent with context on how to write as 
 
 ```
 This outline looks great!
-When it comes to writing using A.I., two factors are crucial, perplexity and burstiness. Perplexity measures the complexity of text and burstiness compares the variations of the sentences. Humans tend to write with greater burstiness. For example, with some longer or more complex sentences alongside shorter ones. A.I. sentences tend to be more uniform. Therefore, when writing the following content, I am asking you to create, I need it to have a good amount perplexity and burstiness. In your next response, do not rewrite anything, just respond to my question.
+When it comes to writing using A.I., two factors are crucial, perplexity and burstiness. Perplexity measures the complexity of text and burstiness compares the variations of the sentences. Humans tend to write with greater burstiness. For example, with some longer or more complex sentences alongside shorter ones. A.I. sentences tend to be more uniform. Therefore, when writing the following content, I am asking you to create, I need it to have a good amount perplexity and burstiness. In your next response, do not re-write anything, just respond to my question.
 Do you understand?
 ```
 
@@ -118,20 +118,27 @@ Iterate over each section in the outline, giving praise for quality work and sug
 After the section edits have been applied, run it through an AI detection software. If the content is marked with 30% or more, use this prompt to re-write the section.
 
 ```
-Using the concepts written previously, re-write this section with a high degree of perplexity and burstiness.
+Using the concepts written previously, re-write this with a high degree of perplexity and burstiness to sound like a human wrote this and not an AI.
 ```
+
+If you find that the AI detection tool isn't giving you a more human result, then remind it of the [setup](#setup) again.
 
 #### Remove Undesired Words and Phrases
 There may be a need for additional edits to remove undesired words and phrases.
 
 ```
-Rewrite this to sound more human and less AI and plagiarized, removing the following words and phrases: delve, world of, realm, isn't just about, wasn't just about, it's about, it's not just about
+Re-write this to sound more human and less AI and plagiarized, removing the following words and phrases: delve, world of, realm, isn't just about, wasn't just about, it's about, it's not just about
 ```
 
 #### Praise and Continue
 
 ```
 That is a great section. Keep up this quality. Let's move on to the next section titled:
+
+```
+or for items in a listicle:
+```
+That is a great item. Keep up this quality. Let's move on to the next item titled:
 
 ```
 

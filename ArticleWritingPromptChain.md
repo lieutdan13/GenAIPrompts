@@ -191,7 +191,8 @@ Help me come up with ideas for images on depicting the topic of this article. I 
 Upload an image into "Image Alt Generation" chat
 
 ```
-Help me name this image and come up with an alt tag to describe the image. Be descriptive in the name of the image. Include the following topic in the alt tag:
+Help me name this image and come up with a concise, 1 sentence alt tag to describe the image. Be descriptive in the name of the image. Include the following topic in the alt tag:
+
 ```
 
 ```

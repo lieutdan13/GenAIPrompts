@@ -166,7 +166,7 @@ Smart Brevity Rules:
 4. Avoid foggy words; Say what is happening and avoid words like 'could', 'may', and 'might'. Tell me what is really happening.
 5. Use active verbs; Using active verbs brings action to your writing. Use this formula: [who] [doing what].
 6. Embrace strong phrases; Short, crisp, punchy = memorable, clear, smart.
-7. Check yourself; After writing, look at every sentence and see if you can writing it with 1 fewer syllable with stronger words.
+7. Check yourself; After writing, look at every sentence and see if you can write it with 1 fewer syllable with stronger words.
 Do you understand?
 ```
 
@@ -235,24 +235,32 @@ I want to engage my community of my target audience by asking a related question
 
 ```
 I want to engage my Private Facebook Group. Act as if the article has already been posted for months. I want to create a medium sized Facebook post, highlighting the key points in the article and ask my group members an engaging question. I also want to include a link to the article. Provide me with this post and a list of 10 alternative questions to use instead.
-Link:
+Here is the url to the article:
+
 ```
 
 ### LinkedIn Post
 
 #### Post Without a Quote
 ```
-Now that we've written the article and announced it to my email list, I want your help in creating a LinkedIn post to announce this blog article. I want the post to announce the article and ask a question relevant to the article for my target audience to engage and respond in the comments. Generate 20 of your best LinkedIn posts for this article. Also generate a separate list of 20 of your best, relevant hashtags.
+Now that we've written the article and announced it to my email list, I want your help in creating a LinkedIn post to announce this blog article. I want the post to announce the article and ask a question relevant to the article for my target audience to engage and respond in the comments. Generate 15 of your best LinkedIn posts for this article. Also generate a separate list of 15 of your best, relevant hashtags.
+Here is the url to the article:
+
 ```
 
 #### Post With a Quote
 
 ```
-Now that we've written the article and announced it to my email list, I want your help in creating a LinkedIn post to announce this blog article. I will have an image of a quote related to the article and I want the post to announce the article and ask a question relevant to the article for my target audience to engage and respond in the comments. Generate 20 of your best LinkedIn posts for this article. Also generate a separate list of 20 of your best, relevant hashtags.
+Now that we've written the article and announced it to my email list, I want your help in creating a LinkedIn post to announce this blog article. I will have an image of a quote related to the article and I want the post to announce the article and ask a question relevant to the article for my target audience to engage and respond in the comments. Generate 15 of your best LinkedIn posts for this article. Also generate a separate list of 15 of your best, relevant hashtags.
+Here is the quote in the image: "" -
+Here is the url to the article:
+
 ```
 
 ### LinkedIn Follow-up Post
 
 ```
-It's been some time since I've published the article and announced it via my newsletter and social media. I would like to promote the article again on LinkedIn. I want the post to ask my target audience a related question to get them to engage by clicking through to the article and responding to my question in the comments. Generate 20 of your best LinkedIn posts for this purpose. Also generate a separate list of 20 of your best, relevant hashtags.
+It's been some time since I've published the article and announced it via my newsletter and social media. I would like to promote the article again on LinkedIn. I want the post to ask my target audience a related question to get them to engage by clicking through to the article and responding to my question in the comments. Generate 15 of your best LinkedIn posts for this purpose. Also generate a separate list of 15 of your best, relevant hashtags.
+Here is the url to the article:
+
 ```

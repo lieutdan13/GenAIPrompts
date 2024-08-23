@@ -234,7 +234,7 @@ I want to engage my community of my target audience by asking a related question
 ### Facebook Group
 
 ```
-I want to engage my Private Facebook Group. Act as if the article has already been posted for months. I want to create a medium sized Facebook post, highlighting the key points in the article and ask my group members an engaging question. I also want to include a link to the article. Provide me with this post and a list of 10 alternative questions to use instead.
+I want to engage my Private Facebook Group. Act as if the article has already been posted for months. I want to create a medium sized Facebook post, highlighting the key points in the article and ask my group members an engaging question. I also want to include a link to the article in plain text. Do not add an href with words. Provide me with this post and a list of 10 alternative questions to use instead.
 Here is the url to the article:
 
 ```

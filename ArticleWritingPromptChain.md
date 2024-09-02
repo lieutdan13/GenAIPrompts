@@ -54,6 +54,8 @@ Style: I want the paragraphs to be 2-3 short and concise sentences with very few
 
 Words to exclude: I want you to avoid using words and phrases that are commonly used in AI generated content, such as: "delve", "world of", "realm", "isn't just about", "wasn't just about", "it's about", "it's not just about".
 
+SEO Keywords: Before giving title suggestions and an outline, I want you to generate a list of 15 of the strongest SEO keywords on this topic. Consider the target audience and how they might search Google for topics that would lead to this article. These keywords will be used to create the title and the outline headings.
+
 Title suggestions: Your list of title suggestions should be a mix of titles that do and do not contain any colons (:)
 
 Outline Format: When creating the outline, I want each of the section headers to be a heading, followed by the bullet points as an unordered list for each section. I want the format to be easy to copy and paste directly into WordPress. I want the last section to be "Final Thoughts"

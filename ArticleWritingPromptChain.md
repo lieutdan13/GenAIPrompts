@@ -90,6 +90,11 @@ I choose this title:
 
 Follow-up with recommendations for edits to the outline. This is a free flow prompt and there is no secret to it. Just provide the feedback on how you want the outline to be changed.
 
+```
+Here's some feedback on the outline:
+
+```
+
 ## Composing the Article from the Outline
 
 ### Setup

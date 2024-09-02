@@ -271,3 +271,10 @@ Now, act as if it's been some time (a month or two) since I've published the art
 Here is the url to the article:
 
 ```
+
+##### Engagement w/ Posts
+```
+I have posted on social media with a link to my article on the topic below and a question. I now want to engage with my own post to see if I can get the conversation started. How would you best answer this question to elicit other responses.
+The topic is:
+The question is:
+```

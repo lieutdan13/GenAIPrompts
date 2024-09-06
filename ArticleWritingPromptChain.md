@@ -14,7 +14,8 @@
    2. [Meta Description](#meta-description)
 7. [Wrap-up](#wrap-up)
    1. [Generate a TLDR](#generate-a-tldr)
-   2. [Generate or Find an Image](#generate-or-find-an-image)
+   2. [Find Quotes](#find-quotes)
+   3. [Generate or Find an Image](#generate-or-find-an-image)
 8. [Composing an Email](#composing-an-email)
 9. [Social Media](#social-media)
    1. [Engaging Community Questions](#engaging-community-questions)
@@ -185,6 +186,11 @@ The summary must be stand-alone and can be read outside the context of the rest 
 The summary is not meant to be an introduction paragraph to the article.
 Ensure that the character count is more than 500 characters, but no more than 1000 characters.
 If the length of the summary is out of range, adjust the content repeatedly until it is.
+```
+
+### Find Quotes
+```
+Help me come up with ideas for quotes on the topic of this article. I want to search for quotes in a search engine that I could use at the top of my article.
 ```
 
 ### Generate or Find an Image

@@ -213,25 +213,27 @@ Please make the following links open in a new browser. Give me back the raw text
 ## Composing an Email
 
 ```
-Now that we've written the complete article and have done some keyword research, I want your help composing an email to send to my subscribed target audience. I want the subject to be attention-grabbing and curiosity inducing. If you think emojis would add to that, add emojis as you see fit. Start by generating 20 of your best options for a subject line.
+Now I want your help composing an email to send to my subscribed target audience. I want the subject to be attention-grabbing and curiosity inducing. If you think emojis would add to that, add emojis as you see fit. Start by generating 10 of your best options for a subject line. Before each variation, I want you to think through what a good subject line would be and elaborate on your reasoning before you write out the subject.
 ```
 
 ```
 I chose the following for the subject line:
 
-I want the body of the email to be conversational and intriguing to maximize click through rate and in the first-person singular ("I" instead of "we"). I want the email to sound like I am addressing a single person in my target audience. I also want the paragraphs to be really short with 1-2 sentences each. I want a call to action inline in the paragraphs, but also a stand-alone button. I want you to indicate where the button should be placed by using square brackets and the text I should use for the button, e.g. [Call to action text], replacing "Call to action text" with your own text. Generate your best email body.
+I want the body of the email to be conversational and intriguing to maximize click through rate and in the first-person singular ("I" instead of "we"). I want the email to sound like I am addressing a single person in my target audience. I also want the paragraphs to be really short with 1-2 sentences each. Remember any notes I made earlier about the email.
+
+I want 2 calls to action: 1 call to action inline in the middle of a sentence or paragraph, and another as a stand-alone button between paragraphs. I want you to indicate where the call to action and the button should be placed by using square brackets and the text I should use for the call to action, e.g. [Call to action text], replacing "Call to action text" with your own text. Generate your best email body.
 ```
 
 Iterate and provide edits as necessary.
 
 ```
-Generate a list of 20 options for the call-to-action button's text. I want the call-to-action text to be written from the perspective of the reader. For example, "I want more".
+Generate a list of 20 options for the call-to-action button's text. I want the call-to-action text to be written from the perspective of the reader. For example, "I want more". Before each variation, I want you to think through what a good call-to-action text would be and elaborate on your reasoning before you write out the call-to-action text.
 ```
 
 ```
 I choose the following for the call to action button text:
 
-Next, I want the preview text to be a sneak preview of what's inside the email and the article and add to the curiosity sentiment. Generate 20 of your best preview texts.
+Next, I want the preview text to be a sneak preview of what's inside the email and the article and add to the curiosity sentiment. Generate 10 of your best preview texts. Before each variation, I want you to think through what a good preview text line would be and elaborate on your reasoning before you write out the preview text.
 ```
 
 ## Social Media
@@ -239,13 +241,14 @@ Next, I want the preview text to be a sneak preview of what's inside the email a
 ### Engaging Community Questions
 
 ```
-I want to engage my community of my target audience by asking a related question in my private Facebook group. Generate 10 questions related to this article that I could ask my target audience.
+I want to engage my community of my target audience by asking a related question in my private Facebook group. Generate 10 questions related to this article that I could ask my target audience. Before each variation, I want you to think through what a good question would be and elaborate on your reasoning before you write out the question.
 ```
 
 ### Facebook Group
 
 ```
-I want to engage my Private Facebook Group. Act as if the article has already been posted for months. I want to create a medium sized Facebook post, highlighting the key points in the article and ask my group members an engaging question. I also want to include a link to the article in plain text. Do not add an href with words. Provide me with this post and a list of 10 alternative questions to use instead.
+I want to engage my Private Facebook Group. Act as if the article has already been posted for months. I want to create a medium sized Facebook post, highlighting the key points in the article and ask my group members an engaging question. I also want to include a link to the article in plain text. Do not add an href with words. Before writing the post, I want you to think through what a good post is and elaborate on your reasoning for you write it out. Also provide a list of 10 alternative questions thinking through what a good question would be and elaborate on your reasoning before you write out the question.
+For the url, I want you to add utm_source=facebook, utm_medium=post and utm_campaign=fb-group-engagement.
 Here is the url to the article:
 
 ```
@@ -254,7 +257,7 @@ Here is the url to the article:
 
 #### Post Without a Quote
 ```
-Now that we've written the article and announced it to my email list, I want your help in creating a LinkedIn post to announce this blog article. I want the post to announce the article and ask a question relevant to the article for my target audience to engage and respond in the comments. Generate 15 of your best LinkedIn posts for this article. Also generate a separate list of 15 of your best, relevant hashtags.
+Now I want your help in creating a LinkedIn post to announce this blog article to my followers. I want the post to announce the article and ask a question relevant to the article for my target audience to engage and respond in the comments. Generate 15 of your best LinkedIn posts for this article. Also generate a separate list of 15 of your best, relevant hashtags. Before each variation, I want you to think through what a good hashtag would be and elaborate on your reasoning before you write out the hashtag. For the url, I want you to add utm_source=linkedin, utm_medium=post, and utm_campaign=engagement
 Here is the url to the article:
 
 ```
@@ -262,7 +265,7 @@ Here is the url to the article:
 #### Post With a Quote
 
 ```
-Now that we've written the article and announced it to my email list, I want your help in creating a LinkedIn post to announce this blog article. I will have an image of a quote related to the article and I want the post to announce the article and ask a question relevant to the article for my target audience to engage and respond in the comments. Generate 15 of your best LinkedIn posts for this article. Also generate a separate list of 15 of your best, relevant hashtags.
+Now that we've written the article and announced it to my email list, I want your help in creating a LinkedIn post to announce this blog article. I will have an image of a quote related to the article and I want the post to announce the article and ask a question relevant to the article for my target audience to engage and respond in the comments. Generate 15 of your best LinkedIn posts for this article. Also generate a separate list of 15 of your best, relevant hashtags. Before each variation, I want you to think through what a good post and hashtag would be and elaborate on your reasoning before you write out the post and hashtag.
 Here is the quote in the image: "" -
 Here is the url to the article:
 
@@ -271,7 +274,7 @@ Here is the url to the article:
 ### LinkedIn Follow-up Post
 
 ```
-Now, act as if it's been some time (a month or two) since I've published the article and announced it via my newsletter and social media. I would like to promote the article again on LinkedIn. I want the post to ask my target audience a related question to get them to engage by clicking through to the article and responding to my question in the comments. Generate 15 of your best LinkedIn posts for this purpose. Also generate a separate list of 15 of your best, relevant hashtags.
+Now, act as if it's been some time (a month or two) since I've published the article and announced it via my newsletter and social media. I would like to promote the article again on LinkedIn. I want the post to ask my target audience a related question to get them to engage by clicking through to the article and responding to my question in the comments. Generate 15 of your best LinkedIn posts for this purpose. Also generate a separate list of 15 of your best, relevant hashtags. Before each variation, I want you to think through what a good post and hashtag would be and elaborate on your reasoning before you write out the post and hashtag.
 Here is the url to the article:
 
 ```

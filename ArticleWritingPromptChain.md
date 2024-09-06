@@ -19,10 +19,11 @@
    4. [Post-Publishing](#post-publishing)
 8. [Composing an Email](#composing-an-email)
 9. [Social Media](#social-media)
-   1. [Engaging Community Questions](#engaging-community-questions)
-   2. [Facebook Group](#facebook-group)
-   3. [LinkedIn Post](#linkedin-post)
-   4. [LinkedIn Follow-up Post](#linkedin-follow-up-post)
+   1. [LinkedIn Post](#linkedin-post)
+   2. [LinkedIn Follow-up Post](#linkedin-follow-up-post)
+   3. [Engaging Community Questions](#engaging-community-questions)
+   4. [Facebook Group](#facebook-group)
+   5. [Engagement w/ Posts](#engagement-w-posts)
 
 
 ## Expert Content Marketing Specialist Agent
@@ -246,28 +247,11 @@ Next, I want the preview text to be a sneak preview of what's inside the email a
 
 ## Social Media
 
-### Engaging Community Questions
-
-```
-I want to engage my community of my target audience by asking a related question in my private Facebook group. Generate 10 questions related to this article that I could ask my target audience. Before each variation, I want you to think through what a good question would be and elaborate on your reasoning before you write out the question.
-```
-
-### Facebook Group
-
-```
-I want to engage my Private Facebook Group. Act as if the article has already been posted for months. I want to create a medium sized Facebook post, highlighting the key points in the article and ask my group members an engaging question. I also want to include a link to the article in plain text. Do not add an href with words. Before writing the post, I want you to think through what a good post is and elaborate on your reasoning for you write it out. Also provide a list of 10 alternative questions thinking through what a good question would be and elaborate on your reasoning before you write out the question.
-For the url, I want you to add utm_source=facebook, utm_medium=post and utm_campaign=fb-group-engagement.
-Here is the url to the article:
-
-```
-
 ### LinkedIn Post
 
 #### Post Without a Quote
 ```
 Now I want your help in creating a LinkedIn post to announce this blog article to my followers. I want the post to announce the article and ask a question relevant to the article for my target audience to engage and respond in the comments. Generate 15 of your best LinkedIn posts for this article. Also generate a separate list of 15 of your best, relevant hashtags. Before each variation, I want you to think through what a good hashtag would be and elaborate on your reasoning before you write out the hashtag. For the url, I want you to add utm_source=linkedin, utm_medium=post, and utm_campaign=engagement
-Here is the url to the article:
-
 ```
 
 #### Post With a Quote
@@ -275,19 +259,33 @@ Here is the url to the article:
 ```
 Now I want your help in creating a LinkedIn post to announce this blog article. I will have an image of a quote related to the article and I want the post to announce the article and ask a question relevant to the article for my target audience to engage and respond in the comments. Generate 15 of your best LinkedIn posts for this article. Also generate a separate list of 15 of your best, relevant hashtags. Before each variation, I want you to think through what a good post and hashtag would be and elaborate on your reasoning before you write out the post and hashtag. For the url, I want you to add utm_source=linkedin, utm_medium=post, and utm_campaign=quote
 Here is the quote in the image: "" -
-Here is the url to the article:
-
 ```
 
 ### LinkedIn Follow-up Post
 
 ```
 Now, act as if it's been some time (a month or two) since I've published the article and announced it via my newsletter and social media. I would like to promote the article again on LinkedIn. I want the post to ask my target audience a related question to get them to engage by clicking through to the article and responding to my question in the comments. Generate 10 of your best LinkedIn posts for this purpose. Also generate a separate list of 10 of your best, relevant hashtags. Before each variation, I want you to think through what a good post and hashtag would be and elaborate on your reasoning before you write out the post and hashtag. For the url, I want you to add utm_source=linkedin, utm_medium=post, and utm_campaign=engagement
-Here is the url to the article:
+```
+
+### Engaging Community Questions
+
+```
+I want to engage my community of my target audience by asking a related question in my private Facebook group. Generate 10 questions related to this article that I could ask my target audience. Before each variation, I want you to think through what a good question would be and elaborate on your reasoning before you write out the question. Each question must be less than 132 characters.
+```
+
+```
+I like this set of questions, but I want them to be more concise and less than 132 characters:
 
 ```
 
-##### Engagement w/ Posts
+### Facebook Group
+
+```
+I want to engage my Private Facebook Group. Act as if the article has already been posted for months. I want to create a medium sized Facebook post, highlighting the key points in the article and ask my group members an engaging question. I also want to include a link to the article in plain text. Do not add an href with words. Before writing the post, I want you to think through what a good post is and elaborate on your reasoning for you write it out. Also provide a list of 10 alternative questions thinking through what a good question would be and elaborate on your reasoning before you write out the question.
+For the url, I want you to add utm_source=facebook, utm_medium=post and utm_campaign=fb-group-engagement.
+```
+
+### Engagement w/ Posts
 ```
 I have posted on social media with a link to my article on the topic below and a question. I now want to engage with my own post to see if I can get the conversation started. How would you best answer this question to elicit other responses.
 The topic is:

@@ -45,19 +45,17 @@ If you produce quality work and I am extremely satisfied with your services, I w
 
 ## Topic and Context
 ```
-Tone: conversational, yet professional as if I were talking to a single person in my target audience
+Tone: conversational, relatable, direct, and engaging, as if I were talking to a single person in my target audience. I also want the text to have a strong emotional appeal to my target audience.
 
 Perspective: I want all content to be written in the 1st person singular ("I" instead of "we")
 
 Reading Level: 8th grade reading level
 
-Style: I want the paragraphs to be 2-3 short and concise sentences with very few filler words. I want the article to sound like a human wrote it and not plagiarized or AI wrote it.
+Sentence Structure: I want the paragraphs to be 2-3 short and straightforward sentences, prioritizing clarity by using simpler and more concise language. I want the content to flow naturally. Use engaging language and strong verbs. I want the article to sound like a human wrote it and not plagiarized or AI wrote it.
 
 Words to exclude: I want you to avoid using words and phrases that are commonly used in AI generated content, such as: "delve", "world of", "realm", "isn't just about", "wasn't just about", "it's about", "it's not just about".
 
 SEO Keywords: Before giving title suggestions and an outline, I want you to generate a list of 15 of the strongest SEO keywords on this topic. Consider the target audience and how they might search Google for topics that would lead to this article. These keywords will be used to create the title and the outline headings.
-
-Title suggestions: Your list of title suggestions should be a mix of titles that do and do not contain any colons (:)
 
 Outline Format: When creating the outline, I want each of the section headers to be a heading, followed by the bullet points as an unordered list for each section. I want the format to be easy to copy and paste directly into WordPress. I want the last section to be "Final Thoughts"
 

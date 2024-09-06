@@ -16,6 +16,7 @@
    1. [Generate a TLDR](#generate-a-tldr)
    2. [Find Quotes](#find-quotes)
    3. [Generate or Find an Image](#generate-or-find-an-image)
+   4. [Post-Publishing](#post-publishing)
 8. [Composing an Email](#composing-an-email)
 9. [Social Media](#social-media)
    1. [Engaging Community Questions](#engaging-community-questions)
@@ -208,6 +209,13 @@ Help me name this image and come up with a concise, 1 sentence alt tag to descri
 
 ```
 Please make the following links open in a new browser. Give me back the raw text:
+```
+
+### Post-Publishing
+```
+I've scheduled the post. Keep the below information in mind for the rest of the chat.
+URL:
+Publish Date:
 ```
 
 ## Composing an Email

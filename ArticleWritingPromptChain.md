@@ -274,7 +274,7 @@ Here is the url to the article:
 ### LinkedIn Follow-up Post
 
 ```
-Now, act as if it's been some time (a month or two) since I've published the article and announced it via my newsletter and social media. I would like to promote the article again on LinkedIn. I want the post to ask my target audience a related question to get them to engage by clicking through to the article and responding to my question in the comments. Generate 15 of your best LinkedIn posts for this purpose. Also generate a separate list of 15 of your best, relevant hashtags. Before each variation, I want you to think through what a good post and hashtag would be and elaborate on your reasoning before you write out the post and hashtag. For the url, I want you to add utm_source=linkedin, utm_medium=post, and utm_campaign=engagement
+Now, act as if it's been some time (a month or two) since I've published the article and announced it via my newsletter and social media. I would like to promote the article again on LinkedIn. I want the post to ask my target audience a related question to get them to engage by clicking through to the article and responding to my question in the comments. Generate 10 of your best LinkedIn posts for this purpose. Also generate a separate list of 10 of your best, relevant hashtags. Before each variation, I want you to think through what a good post and hashtag would be and elaborate on your reasoning before you write out the post and hashtag. For the url, I want you to add utm_source=linkedin, utm_medium=post, and utm_campaign=engagement
 Here is the url to the article:
 
 ```

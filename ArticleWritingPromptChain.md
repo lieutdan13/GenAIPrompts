@@ -138,6 +138,14 @@ There may be a need for additional edits to remove undesired words and phrases.
 Re-write this to sound more human and less AI and plagiarized, removing the following words and phrases: delve, world of, realm, isn't just about, wasn't just about, it's about, it's not just about
 ```
 
+#### Inform with Edits
+Use this prompt if you've provided edits outside the chat, to inform the agent of how you would like to have other content written.
+
+```
+Below is the section with the edits I made. Please take note of the differences and apply the concepts to future sections:
+
+```
+
 #### Praise and Continue
 
 ```

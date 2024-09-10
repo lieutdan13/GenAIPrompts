@@ -157,6 +157,11 @@ or for items in a listicle:
 That is a great item. Keep up this quality. Let's move on to the next item titled:
 
 ```
+or simply:
+```
+Let's move on to the next section titled:
+
+```
 
 ## SEO
 

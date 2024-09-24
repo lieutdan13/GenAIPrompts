@@ -270,13 +270,20 @@ I want 2 calls to action: 1 call to action inline in the middle of a sentence or
 Iterate and provide edits as necessary.
 
 ```
-Generate a list of 20 options for the call-to-action button's text. I want the call-to-action text to be written from the perspective of the reader. For example, "I want more". Before each variation, I want you to think through what a good call-to-action text would be and elaborate on your reasoning before you write out the call-to-action text.
+Generate a list of 10 options for the call-to-action button's text. I want the call-to-action text to be written from the perspective of the reader. For example, "I want more". Before each variation, I want you to think through what a good call-to-action text would be and elaborate on your reasoning before you write out the call-to-action text.
 ```
 
 ```
-I choose the following for the call to action button text:
+I choose the following 2 calls to action:
 
-Next, I want the preview text to be a sneak preview of what's inside the email and the article and add to the curiosity sentiment. Generate 10 of your best preview texts. Before each variation, I want you to think through what a good preview text line would be and elaborate on your reasoning before you write out the preview text.
+
+Now I need your help with creating the URLs for the CTAs. For each of the CTAs, I want you to add utm_source=newsletter, utm_medium=email, utm_campaign=announcements, and the utm_content will be the text of the CTA with spaces replaced with a plus "+" sign.
+```
+
+```
+Generate 10 of your best preview texts for this email. I want the preview text to be a sneak preview of what's inside the email and the article. It must add to the curiosity sentiment. Before each variation, I want you to think through what a good preview text line would be and elaborate on your reasoning before you write out the preview text.
+
+At the end of this response, I also want you to add a code block with "Article: " followed by the title of the article.
 ```
 
 ## Social Media

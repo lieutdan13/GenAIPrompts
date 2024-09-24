@@ -326,8 +326,8 @@ I like this set of questions, but I want them to be more concise and less than 1
 ### Facebook Group
 
 ```
-I want to engage my Private Facebook Group. Act as if the article has already been posted for months. I want to create a medium sized Facebook post, highlighting the key points in the article and ask my group members an engaging question. I also want to include a link to the article in plain text. Do not add an href with words. Before writing the post, I want you to think through what a good post is and elaborate on your reasoning for you write it out. Also provide a list of 10 alternative questions thinking through what a good question would be and elaborate on your reasoning before you write out the question.
-For the url, I want you to add utm_source=facebook, utm_medium=post and utm_campaign=fb-group-engagement.
+I want to engage my Private Facebook Group. Act as if the article has already been posted for months. I want to create a medium sized Facebook post, highlighting the key points in the article and ask my group members an engaging question. I also want to include a link to the article in plain text. Before writing the post, I want you to think through what a good post is and elaborate on your reasoning for you write it out. Also provide a list of 10 alternative questions thinking through what a good question would be and elaborate on your reasoning before you write out the question.
+For the url, I want you to add utm_source=facebook, utm_medium=post and utm_campaign=fb-group-engagement and show the URL in plain text.
 ```
 
 ### Engagement w/ Posts

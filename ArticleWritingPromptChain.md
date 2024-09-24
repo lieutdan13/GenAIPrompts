@@ -68,7 +68,7 @@ If you produce quality work and I am extremely satisfied with your services, I w
 
 ## Topic and Context
 ```
-Tone: conversational, relatable, direct, and engaging, as if I were talking to a single person in my target audience. I also want the text to have a strong emotional appeal to my target audience.
+Tone: conversational, active, relatable, direct, and engaging, as if I were talking to a single person in my target audience. I also want the text to have a strong emotional appeal to my target audience.
 
 Perspective: I want all content to be written in the 1st person singular ("I" instead of "we")
 

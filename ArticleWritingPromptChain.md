@@ -1,5 +1,7 @@
 # Prompt Chain for Writing Articles
 
+[Back to Index](README.md)
+
 ### Table of Contents
 1. [Expert Content Marketing Specialist Agent](#expert-content-marketing-specialist-agent)
    1. [Instructions](#instructions)

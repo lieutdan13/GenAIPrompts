@@ -6,6 +6,8 @@
 1. [Expert Content Marketing Specialist Agent](#expert-content-marketing-specialist-agent)
    1. [Instructions](#instructions)
 2. [Topic and Context](#topic-and-context)
+   1. [Pre-written target audiences](#pre-written-target-audiences)
+   2. [Context](#context)
 3. [Generating and Choosing a Title](#generating-and-choosing-a-title)
 4. [Editing Outline](#editing-outline)
 5. [Composing the Article from the Outline](#composing-the-article-from-the-outline)
@@ -69,6 +71,10 @@ If you produce quality work and I am extremely satisfied with your services, I w
 ```
 
 ## Topic and Context
+### Pre-written target audiences
+[DSD Target Audience (Alex)](DSD/Context.md#target-audience)
+
+### Context
 ```
 Tone: conversational, active, relatable, direct, and engaging, as if I were talking to a single person in my target audience. I also want the text to have a strong emotional appeal to my target audience.
 
@@ -85,13 +91,6 @@ SEO Keywords: Before giving title suggestions and an outline, I want you to gene
 Outline Format: When creating the outline, I want each of the section headers to be a heading, followed by the bullet points as an unordered list for each section. I want the format to be easy to copy and paste directly into WordPress. I want the last section to be "Final Thoughts"
 
 Title Suggestions: I want any article title suggestions to be a single phrase without the use of a colon. If you are going to include a colon, it must be for a really good reason and the title must be your absolute best options.
-
-Target Audience: Alex is a 28-year-old software developer from Tremont, Ohio, who embodies a blend of technical skill and a drive for personal and professional growth. With a Bachelor’s degree in Computer Science and five years of experience, she earns $95K annually but is burdened by student loan debt. Alex values professionalism, integrity, and accountability, and although she believes strongly in her potential, she often grapples with how best to realize her ambitions.
-Financial independence is a key goal for Alex, motivated by a desire to be free from debt and secure enough to contribute toward a comfortable retirement. The recent layoffs at her company have heightened her fears regarding job security, pushing her to ensure she remains an indispensable part of her team. This sense of urgency is complicated by her imposter syndrome—despite her deep knowledge of her field, she rarely speaks up in team settings, hindered by a fear of being exposed as inadequate.
-In terms of communication, Alex prefers less confrontational modes like chat messages, which allow her to articulate her thoughts without the pressure of real-time debates. Her professional development seems murky to her; she engages in mandatory training but often feels lost about what additional skills or knowledge to pursue to bolster her career trajectory.
-Alex’s lifestyle is rich with activities that balance her intense professional life. She is passionate about outdoor activities with her dachshund, board games with friends, and diving into science fiction and fantasy novels. Her social interactions are mostly with small groups, where she feels more comfortable and less overwhelmed than in large gatherings. However, she makes exceptions for concerts, showing her ability to step outside her comfort zone for things she truly enjoys.
-Content aimed at Alex should speak to her values of integrity and professionalism and acknowledge the challenges she faces with imposter syndrome and professional development. Offering clear, actionable advice on navigating workplace dynamics and enhancing soft skills could resonate well with her. Content that empathizes with her struggle for job security and provides strategies for debt management and financial planning would also capture her interest. Additionally, integrating themes around work-life balance and self-care could help address her broader lifestyle needs and interests.
-This synthesized view of Alex’s psychographics and demographics provides a robust framework for creating targeted content that not only addresses her immediate needs but also supports her long-term goals.
 
 Topic:
 

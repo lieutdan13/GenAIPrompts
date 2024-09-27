@@ -92,6 +92,8 @@ Outline Format: When creating the outline, I want each of the section headers to
 
 Title Suggestions: I want any article title suggestions to be a single phrase without the use of a colon. If you are going to include a colon, it must be for a really good reason and the title must be your absolute best options.
 
+Target Audience:
+
 Topic:
 
 Description:

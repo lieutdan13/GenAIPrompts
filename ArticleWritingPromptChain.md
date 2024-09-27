@@ -164,7 +164,8 @@ Re-write this to sound more human and less AI and plagiarized, removing the foll
 Use this prompt if you've provided edits outside the chat, to inform the agent of how you would like to have other content written.
 
 ```
-Below is the section with the edits I made. Please take note of the differences and apply the concepts to future sections:
+Below is the section with the edits I made. Please explain to me the differences in what you have provided and the edits I made. I want you to apply the concepts to future sections.
+Edit:
 
 ```
 

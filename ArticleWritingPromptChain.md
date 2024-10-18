@@ -60,7 +60,7 @@ Your task is to generate a highly converting and appealing blog outline on the t
 2. Ask me if I want to make edits to the section.
 3. Apply the suggested edits to the section and respond back with the full section with the edits applied.
 4. Repeat the editing process until I am satisfied with the section.
-4. I may edit the section on the side and provide you with my exact edits. You will analyze the section that you provided and compare it to the one I provided. Take what you've learned during your analysis and apply that the the next section.
+4. I may edit the section on the side and provide you with my exact edits. You will analyze the section that you provided and compare it to the one I provided. Take what you've learned during your analysis and apply that to the next section.
 5. Only move on to the next section when I way to do so.
 
 ### Example
@@ -94,7 +94,7 @@ Title Suggestions: I want any article title suggestions to be a single phrase wi
 
 Target Audience:
 
-Topic:
+Topic of Article:
 
 Description:
 ```
@@ -192,12 +192,12 @@ Let's move on to the next section titled:
 
 ### Keywords
 ```
-Generate a comma separated list of 30 SEO keywords and phrases that are exact phrases in this article. Also generate a second comma separated list of 30 SEO keyword opportunities for this article. I want the words and phrases to be in plain-text and not contain any double-quotes. There is no need for the numbered list. You can just provide the list of words as a string with commas separating each keyword or phrase
+Generate a comma-separated list of 30 SEO keywords and exact phrases in this article. Also, generate a second comma-separated list of 30 SEO keyword opportunities for this article. I want the words and phrases to be in plain text and not contain any double quotes. There is no need for the numbered list. You can just provide the list of words as a string with commas separating each keyword or phrase
 ```
 
 ### Meta Description
 ```
-Write a meta description for this article. I want the character count to be as close to 160 characters as possible without exceeding that hard limit. I also want the meta description to contain 1 or more SEO keywords you provided above.
+Write a meta description for this article. I want the character count to be as close to 160 without exceeding that hard limit. Please count the characters before suggesting a meta description. I also wish the meta description contained 1 or more of the abovementioned SEO keywords.
 ```
 
 ## Wrap-up
@@ -206,11 +206,11 @@ Write a meta description for this article. I want the character count to be as c
 
 ```
 Smart Brevity Rules:
-1. Shorter is better; A one syllable word is more powerful than a two syllable word is more powerful than a three syllable word.
+1. Shorter is better; A one-syllable word is more powerful than a two-syllable word is more powerful than a three-syllable word.
 2. Deploy strong words; A strong word is vivid, concise, and something you can see and real.
 3. Purge weak words; If you wouldn't say it at a bar or the beach, kill it. Do not use words that make you sound smart.
 4. Avoid foggy words; Say what is happening and avoid words like 'could', 'may', and 'might'. Tell me what is really happening.
-5. Use active verbs; Using active verbs brings action to your writing. Use this formula: [who] [doing what].
+5. Use active verbs; active verbs bring action to your writing. Use this formula: [who] [doing what].
 6. Embrace strong phrases; Short, crisp, punchy = memorable, clear, smart.
 7. Check yourself; After writing, look at every sentence and see if you can write it with 1 fewer syllable with stronger words.
 Do you understand?
@@ -219,11 +219,11 @@ Do you understand?
 ```
 I want you to write a short, concise, stand-alone summary of the given article using the Smart Brevity Rules.
 If my readers only read the summary, they will understand the core concepts and points the article has made. Do not mention the article itself.
-Keep the target audience in mind and write it as if you were having a conversation with a member of the target audience.
+Keep the target audience in mind and write it as if you were conversing with a target audience member.
 The summary must be stand-alone and can be read outside the context of the rest of the article. Do not mention the article itself.
 The summary is not meant to be an introduction paragraph to the article.
-Ensure that the character count is more than 500 characters, but no more than 1000 characters.
-If the length of the summary is out of range, adjust the content repeatedly until it is.
+Ensure that the character count is more than 500 characters but no more than 1000 characters.
+If the summary length is out of range, adjust the content repeatedly until it is.
 ```
 
 ### Find Quotes
@@ -237,22 +237,21 @@ Help me come up with ideas for quotes on the topic of this article. I want to se
 Help me come up with ideas for images on depicting the topic of this article. I want to search for images in a search engine that I could use at the top of my article.
 ```
 
-#### Alt Tag
+#### Alt Tag/Caption
 
 Upload an image into "Image Alt Generation" chat
 
 ```
-Help me name this image and come up with a concise, 1 sentence alt tag to describe the image. Be descriptive in the name of the image. Include the following topic in the alt tag:
+Help me name this image and develop a concise one-sentence alt tag to describe it. Be descriptive in the name of the image. I will also provide a caption for the image, and I want you to make the links open in a new browser tab. For the format, I want the caption to be the raw text.
 
-```
-
-```
-Please make the following links open in a new browser. Give me back the raw text:
+Include the following topic in the alt tag:
+Original Caption:
 ```
 
 ### Post-Publishing
 ```
 I've scheduled the post. Keep the below information in mind for the rest of the chat.
+Title:
 URL:
 Publish Date:
 ```
@@ -260,34 +259,35 @@ Publish Date:
 ## Composing an Email
 
 ```
-Now I want your help composing an email to send to my subscribed target audience. I want the subject to be attention-grabbing and curiosity inducing. If you think emojis would add to that, add emojis as you see fit. Start by generating 10 of your best options for a subject line. Before each variation, I want you to think through what a good subject line would be and elaborate on your reasoning before you write out the subject.
+I want you to compose an email for my subscribed target audience. I want the subject to be attention-grabbing and curiosity-inducing. If you think emojis would add to that, add emojis as you see fit. Start by generating 10 of your best options for a subject line. Before each variation, I want you to think through a good subject line and elaborate on your reasoning before you write out the subject.
 ```
 
 ```
 I chose the following for the subject line:
 
-I want the body of the email to be conversational and intriguing to maximize click through rate and in the first-person singular ("I" instead of "we"). I want the email to sound like I am addressing a single person in my target audience. I also want the paragraphs to be really short with 1-2 sentences each. Remember any notes I made earlier about the email.
+I want the body of the email to be conversational and intriguing to maximize the click-through rate. It should be in the first-person singular ("I" instead of "we"). I want the email to sound like I am addressing a single person in my target audience. I also want the paragraphs to be really short, with 1-2 sentences each. Remember any notes I made earlier about the email.
 
-I want 2 calls to action: 1 call to action inline in the middle of a sentence or paragraph, and another as a stand-alone button between paragraphs. I want you to indicate where the call to action and the button should be placed by using square brackets and the text I should use for the call to action, e.g. [Call to action text], replacing "Call to action text" with your own text. Generate your best email body.
+I want 2 calls to action: 1 call to action inline in the middle of a sentence or paragraph and another as a stand-alone button between paragraphs. I want you to indicate where the call to action and the button should be placed using square brackets and the text I should use for the call to action, e.g. [Call to action text], replacing "Call to action text" with your own text. Generate your best email body.
 ```
 
 Iterate and provide edits as necessary.
 
 ```
-Generate a list of 10 options for the call-to-action button's text. I want the call-to-action text to be written from the perspective of the reader. For example, "I want more". Before each variation, I want you to think through what a good call-to-action text would be and elaborate on your reasoning before you write out the call-to-action text.
+Generate a list of 10 options for the call-to-action button's text. I want the call-to-action text to be written from the reader's perspective. For example, "I want more". Before each variation, I want you to think through what a good call-to-action text would be and elaborate on your reasoning before you write out the call-to-action text.
 ```
 
 ```
 I choose the following 2 calls to action:
+-
+-
 
-
-Now I need your help with creating the URLs for the CTAs. For each of the CTAs, I want you to add utm_source=newsletter, utm_medium=email, utm_campaign=announcements, and the utm_content will be the text of the CTA with spaces replaced with a plus "+" sign.
+For each of the calls to action, I want you to add utm_source=newsletter, utm_medium=email, utm_campaign=announcements, and the utm_content will be the text of the CTA with spaces replaced with a plus "+" sign. I want you to provide those in plain text as the full URL
 ```
 
 ```
-Generate 10 of your best preview texts for this email. I want the preview text to be a sneak preview of what's inside the email and the article. It must add to the curiosity sentiment. Before each variation, I want you to think through what a good preview text line would be and elaborate on your reasoning before you write out the preview text.
+Generate 10 of your best preview texts for this email. I want the preview text to be a sneak preview of what's inside the email and the article. It must add to the curiosity sentiment. Before each variation, I want you to think through what a good preview text line would be and elaborate on your reasoning before writing the preview text.
 
-At the end of this response, I also want you to add a code block with "Article: " followed by the title of the article.
+At the end of this response, I also want you to add a code block with "Article: " followed by the article's title.
 ```
 
 ## Social Media

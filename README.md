@@ -9,3 +9,4 @@
 - [Humanizing Editor](HumanizingEditor.md)
 - [Prompt Creator Prompt](PromptCreatorPrompt.md)
 - [SEO Specialist](SEOSpecialist.md)
+- [Topic Generator](TopicGenerator.md)

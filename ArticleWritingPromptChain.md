@@ -298,30 +298,39 @@ At the end of this response, I also want you to add a code block with "Article: 
 
 #### Post Without a Quote
 ```
-I want you to create a LinkedIn post to announce this blog article to my followers and to attract new followers. I want the post to announce the article and ask a question relevant to the article for my target audience to engage and respond in the comments. Generate 15 of your best LinkedIn posts for this article and I want you to think through what a good post and question would be and elaborate on your reasoning.
+I want you to create a LinkedIn post to announce this blog article to my followers and attract new followers. The post should announce the article and ask a relevant question for my target audience to engage with and respond to in the comments. Generate 15 of your best LinkedIn posts for this article. I want you to think through what a good post and question would be and elaborate on your reasoning.
 
-Also generate a separate list of 15 of your best, relevant hashtags. Before each variation, I want you to think through what a good hashtag would be and elaborate on your reasoning before you write out the hashtag.
+Also, generate a list of 15 of your best, relevant hashtags. Before each variation, I want you to think through what a good hashtag would be and elaborate on your reasoning before you write out the hashtag.
 
-For the url, I want you to add utm_source=linkedin, utm_medium=post, and utm_campaign=engagement and show the URL in plain text.
+For the URL, I want you to add utm_source=linkedin, utm_medium=post, and utm_campaign=engagement and show the URL in plain text.
 ```
 
 #### Post With a Quote
 
 ```
-I want you to create a LinkedIn post to announce this blog article to my followers and to attract new followers. I will have an image of a quote related to the article and I want the post to announce the article and ask a question relevant to the article for my target audience to engage and respond in the comments. Generate 15 of your best LinkedIn posts for this article. Also generate a separate list of 15 of your best, relevant hashtags. Before each variation, I want you to think through what a good post and hashtag would be and elaborate on your reasoning before you write out the post and hashtag. For the url, I want you to add utm_source=linkedin, utm_medium=post, and utm_campaign=quote and show the URL in plain text.
+I want you to create a LinkedIn post to announce this blog article to my followers and to attract new followers. I will have an image of a quote related to the article, and I want the post to announce the article and ask a relevant question for my target audience to engage and respond to in the comments. Generate 15 of your best LinkedIn posts for this article.
+
+Also, generate a list of 15 of your best, relevant hashtags. Before each variation, I want you to think through what a good post and hashtag would be and elaborate on your reasoning before you write out the post and hashtag.
+
+For the URL, I want you to add utm_source=linkedin, utm_medium=post, and utm_campaign=quote and show the URL in plain text.
+
 Here is the quote in the image: "" -
 ```
 
 ### LinkedIn Follow-up Post
 
 ```
-Now, act as if it's been some time (a month or two) since I've published the article and announced it via my newsletter and social media. I would like to promote the article again on LinkedIn. I want the post to ask my target audience a related question to get them to engage by clicking through to the article and responding to my question in the comments. Generate 10 of your best LinkedIn posts for this purpose. Also generate a separate list of 10 of your best, relevant hashtags. Before each variation, I want you to think through what a good post and hashtag would be and elaborate on your reasoning before you write out the post and hashtag. For the url, I want you to add utm_source=linkedin, utm_medium=post, and utm_campaign=engagement and show the URL in plain text.
+Now, act as if it's been some time (a month or two) since I've published the article and announced it via my newsletter and social media. I would like to promote the article again on LinkedIn. I want the post to ask my target audience a related question to get them to engage by clicking through to the article and responding to my question in the comments. Generate 10 of your best LinkedIn posts for this purpose.
+
+Also, generate a list of 10 of your best, relevant hashtags. Before each variation, I want you to think through what a good post and hashtag would be and elaborate on your reasoning before you write out the post and hashtag.
+
+For the URL, I want you to add utm_source=linkedin, utm_medium=post, and utm_campaign=engagement and show the URL in plain text.
 ```
 
 ### Engaging Community Questions
 
 ```
-I want to engage my community of my target audience by asking a related question in my private Facebook group. Generate 10 questions related to this article that I could ask my target audience. Before each variation, I want you to think through what a good question would be and elaborate on your reasoning before you write out the question. Each question must be less than 132 characters.
+I want to engage my target audience community by asking a related question in my private Facebook group. Generate 10 questions related to this article that I could ask my target audience. Before each variation, I want you to think through what a good question would be and elaborate on your reasoning before you write out the question. Each question must be less than 132 characters.
 ```
 
 ```
@@ -332,8 +341,11 @@ I like this set of questions, but I want them to be more concise and less than 1
 ### Facebook Group
 
 ```
-I want to engage my Private Facebook Group. Act as if the article has already been posted for months. I want to create a medium sized Facebook post, highlighting the key points in the article and ask my group members an engaging question. I also want to include a link to the article in plain text. Before writing the post, I want you to think through what a good post is and elaborate on your reasoning for you write it out. Also provide a list of 10 alternative questions thinking through what a good question would be and elaborate on your reasoning before you write out the question.
-For the url, I want you to add utm_source=facebook, utm_medium=post and utm_campaign=fb-group-engagement and show the URL in plain text.
+I want to engage my Private Facebook Group. Act as if the article has already been posted for months. I want to create a medium-sized Facebook post highlighting the key points in the article and ask my group members an engaging question. I also want to include a link to the article in plain text. Before writing the post, I want you to think through what a good post is and elaborate on your reasoning for writing it out.
+
+Also, provide a list of 10 alternative questions, think through what a good question would be, and elaborate on your reasoning before you write out the question.
+
+For the URL, I want you to add utm_source=facebook, utm_medium=post, and utm_campaign=fb-group-engagement and show the URL in plain text.
 ```
 
 ### Engagement w/ Posts

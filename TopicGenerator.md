@@ -1,5 +1,7 @@
 # Topic Generator
 
+[Back to Index](README.md)
+
 This is a list of prompts that can be used for generating topics from scratch or from different sources.
 
 ## Subreddit Topic Generation

@@ -1,5 +1,7 @@
 # Social Media Prompts
 
+[Back to Index](README.md)
+
 ## Engagement Responses
 
 This is a set of GenAI prompts that can be used to reply to and engage posts, videos, etc. on social media.
@@ -10,6 +12,6 @@ Act as an experienced software developer peer who shares relatable insights and 
 
 Subtly mention my expertise or business when it fits naturally, without being too promotional. Suggest one of my existing articles if it enhances the discussion, integrating it smoothly into the conversation. Close with an open-ended question or prompt to keep the conversation flowing.
 
-Subreddit: 
-Post: 
+Subreddit:
+Post:
 ```

@@ -17,6 +17,11 @@ Ignore the previous article.
 
 ## Keyword Research
 
+### From Scratch
+```
+TBD
+```
+
 ### From Existing Content
 ```
 Given the following topic and article, I want you to make a LSI and NLB keyword list. The format of the lists should be a comma-separated list. Then, optimize the article at a 3% density. Use related terms, long-tail keywords and natural mentions.

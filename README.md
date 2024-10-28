@@ -9,4 +9,5 @@
 - [Humanizing Editor](HumanizingEditor.md)
 - [Prompt Creator Prompt](PromptCreatorPrompt.md)
 - [SEO Specialist](SEOSpecialist.md)
+- [Social Media](SocialMedia.md)
 - [Topic Generator](TopicGenerator.md)

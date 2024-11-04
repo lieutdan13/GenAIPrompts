@@ -23,11 +23,12 @@
    4. [Post-Publishing](#post-publishing)
 8. [Composing an Email](#composing-an-email)
 9. [Social Media](#social-media)
-   1. [LinkedIn Post](#linkedin-post)
-   2. [LinkedIn Follow-up Post](#linkedin-follow-up-post)
-   3. [Engaging Community Questions](#engaging-community-questions)
-   4. [Facebook Group](#facebook-group)
-   5. [Engagement w/ Posts](#engagement-w-posts)
+   1. [LinkedIn Topic](#linkedin-topic)
+   2. [LinkedIn Post](#linkedin-post)
+   3. [LinkedIn Follow-up Post](#linkedin-follow-up-post)
+   4. [Engaging Community Questions](#engaging-community-questions)
+   5. [Facebook Group](#facebook-group)
+   6. [Engagement w/ Posts](#engagement-w-posts)
 
 
 ## Expert Content Marketing Specialist Agent
@@ -293,6 +294,18 @@ At the end of this response, I also want you to add a code block with "Article: 
 ```
 
 ## Social Media
+
+### LinkedIn Topic
+A prompt to generate a post on LinkedIn on the same topic as the article, but without promoting the article.
+```
+I want to create a medium-sized LinkedIn post highlighting the article's key points as a bullet list but not mentioning the article itself. I want to include a link to a page where you can sign up for my newsletter. The link will be in plain text. At the end of the post, I want to ask my audience an engaging question to respond to in the comments.
+Before writing the post, I want you to take your time to consider what a good post is and elaborate on your reasoning.
+
+Also, provide a list of 10 alternative questions, think through what a good question would be, and elaborate on your reasoning before you write out the question.
+
+
+Newsletter URL: https://danschaefer.dev/newsletter?utm_source=linkedin&utm_medium=post&utm_campaign=topic
+```
 
 ### LinkedIn Post
 

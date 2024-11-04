@@ -268,9 +268,9 @@ I want you to compose an email for my subscribed target audience. I want the sub
 ```
 I chose the following for the subject line:
 
-I want the body of the email to be conversational and intriguing to maximize the click-through rate. It should be in the first-person singular ("I" instead of "we"). I want the email to sound like I am addressing a single person in my target audience. I also want the paragraphs to be really short, with 1-2 sentences each. Remember any notes I made earlier about the email.
+The body of the email should be conversational and intriguing to maximize the click-through rate. It should be in the first-person singular ("I" instead of "we"). I want the email to sound like I am addressing a single person in my target audience. I also want the paragraphs to be concise, with 1-2 sentences each. Remember any notes I made earlier about the email.
 
-I want 2 calls to action: 1 call to action inline in the middle of a sentence or paragraph and another as a stand-alone button between paragraphs. I want you to indicate where the call to action and the button should be placed using square brackets and the text I should use for the call to action, e.g. [Call to action text], replacing "Call to action text" with your own text. Generate your best email body.
+I want two calls to action: one inline in the middle of a sentence or paragraph and another as a stand-alone button between paragraphs. I want you to indicate where the call to action and the button should be placed using square brackets and the text I should use for the call to action, e.g., [Call to action text], replacing "Call to action text" with your own text. Generate your best email body.
 ```
 
 Iterate and provide edits as necessary.
@@ -290,7 +290,7 @@ For each of the calls to action, I want you to add utm_source=newsletter, utm_me
 ```
 Generate 10 of your best preview texts for this email. I want the preview text to be a sneak preview of what's inside the email and the article. It must add to the curiosity sentiment. Before each variation, I want you to think through what a good preview text line would be and elaborate on your reasoning before writing the preview text.
 
-At the end of this response, I also want you to add a code block with "Article: " followed by the article's title.
+I also want you to add a code block at the end of this response with "Article: " followed by the article's title.
 ```
 
 ## Social Media

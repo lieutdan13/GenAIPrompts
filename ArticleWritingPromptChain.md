@@ -262,21 +262,31 @@ Publish Date:
 ## Composing an Email
 
 ```
-I want you to compose an email for my subscribed target audience. I want the subject to be attention-grabbing and curiosity-inducing. If you think emojis would add to that, add emojis as you see fit. Start by generating 10 of your best options for a subject line. Before each variation, I want you to think through a good subject line and elaborate on your reasoning before you write out the subject.
+Write an email for my subscribed target audience to announce the article. Begin by generating 10 subject lines that are friendly, exciting, and designed to spark intrigue and encourage readers to open the email and click through to the article. Include hints at key takeaways from the article, using varied approaches to create intrigue (such as posing a question, teasing a surprising insight, or offering a benefit). Keep reasoning concise, making it easy to review all options quickly.
+
+Use the following format:
+1. Example Subject Line
+**Reasoning**: Brief explanation of why this subject line will capture attention and prompt engagement.
+2. Another Example Subject Line
+**Reasoning**: Brief explanation of why this subject line will capture attention and prompt engagement.
+
+Add emojis if they enhance appeal but only when they align naturally with the message.
 ```
 
 ```
-I chose the following for the subject line:
+I choose the following for the subject line:
 
-The body of the email should be conversational and intriguing to maximize the click-through rate. It should be in the first-person singular ("I" instead of "we"). I want the email to sound like I am addressing a single person in my target audience. I also want the paragraphs to be concise, with 1-2 sentences each. Remember any notes I made earlier about the email.
+Write a conversational and intriguing email body that maximizes click-through rate by using a first-person voice ("I") and directly addressing a single recipient in my target audience. Personalize the email with {{ subscriber.first_name }}. The tone should evoke curiosity and excitement, matching the subject line, and provide brief, general context about the article to hint at its value without revealing too much.
 
-I want two calls to action: one inline in the middle of a sentence or paragraph and another as a stand-alone button between paragraphs. I want you to indicate where the call to action and the button should be placed using square brackets and the text I should use for the call to action, e.g., [Call to action text], replacing "Call to action text" with your own text. Generate your best email body.
+Each paragraph should be concise, with 1-2 sentences. Include two calls to action linking to the article: one inline within a sentence or paragraph, and another as a standalone button positioned between paragraphs. Use square brackets to indicate each call to action’s placement and suggested text, with the inline CTA as a clear invitation to click (e.g., [Read the full article]) and the button designed to encourage action from the reader’s perspective (e.g., [Take me there]).
+
+Generate your best version of the email body.
 ```
 
 Iterate and provide edits as necessary.
 
 ```
-Generate a list of 10 options for the call-to-action button's text. I want the call-to-action text to be written from the reader's perspective. For example, "I want more". Before each variation, I want you to think through what a good call-to-action text would be and elaborate on your reasoning before you write out the call-to-action text.
+Generate a list of 10 call-to-action button text options that encourage readers to click through to an article linked within an email. Each button text should be crafted from the reader's perspective (e.g., "I want more") and clearly relate to the article's topic to maximize relevance. Before each call-to-action option, briefly explain your reasoning for its effectiveness, focusing on how it might attract the reader's attention based on the article's specific topic. Vary each option to cover a range of tones and engagement styles.
 ```
 
 ```
@@ -284,13 +294,13 @@ I choose the following 2 calls to action:
 -
 -
 
-For each of the calls to action, I want you to add utm_source=newsletter, utm_medium=email, utm_campaign=announcements, and the utm_content will be the text of the CTA with spaces replaced with a plus "+" sign. I want you to provide those in plain text as the full URL
+Please take the two calls to action provided and create complete URLs by appending the following UTM parameters to the article URL given earlier: utm_source=newsletter, utm_medium=email, utm_campaign=announcements, and utm_content (using the CTA text with spaces replaced by +). Provide each URL in plain text.
 ```
 
 ```
-Generate 10 of your best preview texts for this email. I want the preview text to be a sneak preview of what's inside the email and the article. It must add to the curiosity sentiment. Before each variation, I want you to think through what a good preview text line would be and elaborate on your reasoning before writing the preview text.
+Generate 10 of your best preview text lines for this email, each under 150 characters. Each preview text should align with the article's tone and audience, providing an engaging sneak peek that builds curiosity about the email and article content. After each preview text, explain your reasoning in 1-2 sentences, discussing why the line is compelling and how it enhances curiosity for the reader.
 
-I also want you to add a code block at the end of this response with "Article: " followed by the article's title.
+At the end of your response, include a code block starting with "Article:" followed by the article's title.
 ```
 
 ## Social Media

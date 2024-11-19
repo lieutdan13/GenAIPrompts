@@ -331,18 +331,40 @@ For the URL, I want you to add utm_source=linkedin, utm_medium=post, and utm_cam
 #### Post With a Quote
 
 ```
-Please create a LinkedIn post to announce this blog article to my followers and attract new ones. I will have an image of a quote related to the article, and I want the post to announce the article and ask a relevant question for my target audience to engage and respond to in the comments. Generate 15 of your best LinkedIn posts for this article.
-Also, generate a list of 15 of your best, relevant hashtags. Before each variation, I want you to think through what a good post and hashtag would be and elaborate on your reasoning before you write out the post and hashtag.
-For the URL, I want you to add utm_source=linkedin, utm_medium=post, and utm_campaign=quote and show the URL in plain text.
-Here is the quote in the image: "" -
+Please create 15 LinkedIn post variations to announce this blog article. Each post should target my LinkedIn audience with a thought-provoking and inspirational tone, aiming to attract new followers and engage current ones.
+
+Each post should:
+- Introduce the article and incorporate the inspirational quote provided below into most variations.
+- Include a question prompt encouraging readers to share personal stories or insights in the comments.
+- Vary the opening style across posts, using a mix of questions, statements, and direct addresses to invite engagement (e.g., "Have you ever..." or "Today, let's talk about...").
+
+Before each post, write a brief rationale explaining the approach, focusing on how the language and hashtags aim to maximize engagement.
+
+Additionally, create a list of 15 relevant hashtags aligned with the article's topic and the inspirational theme, with a few top recommendations for each post.
+
+For the article URL, please add UTM parameters: utm_source=linkedin, utm_medium=post, and utm_campaign=quote, and display the full URL in plain text.
+
+Inspirational Quote: "" -
 ```
 
 ### LinkedIn Follow-up Post
 
 ```
-Now, act as if it's been some time (a month or two) since I've published the article and announced it via my newsletter and social media. I would like to promote the article again on LinkedIn. I want the post to ask my target audience a related question to get them to engage by clicking through to the article and responding to my question in the comments. Generate 10 of your best LinkedIn posts for this purpose. I want a mix of controversial and uncontroversial claims or takes on the topic.
-Also, generate a list of 10 of your best, relevant hashtags. Before each variation, I want you to think through what a good post and hashtag would be and elaborate on your reasoning before you write out the post and hashtag.
-For the URL, I want you to add utm_source=linkedin, utm_medium=post, and utm_campaign=engagement and show the URL in plain text.
+Imagine it's been one or two months since I published the article, which has already been shared in my newsletter and social media. I want to re-share it on LinkedIn with a casual, conversational post that prompts clicks and discussion in the comments.
+
+Generate 10 LinkedIn posts to engage my target audience by driving them to click on the article and answer a question in the comments. Each post should:
+
+1. Start with a brief rationale on what makes a strong LinkedIn post and effective hashtags for this re-engagement.
+2. Include a mix of 5 conversational and uncontroversial posts and 5 posts that open with a bold or controversial statement to spark curiosity.
+3. Pose a thought-provoking question about the article's topic to encourage engagement.
+4. Add the article link using these UTM parameters: utm_source=linkedin, utm_medium=post, and utm_campaign=engagement.
+5. Conclude with 5 relevant hashtags tailored to the article's topic and target audience.
+
+Additionally, vary the length and tone of each post, allowing some to be brief and punchy while others provide a little more context or intrigue.
+
+Considerations for Each Post:
+- Experiment with different opening statements to capture attention, including questions, bold claims, and curious statements.
+- End with a mix of open-ended questions and "either/or" questions to prompt varied responses.
 ```
 
 ### Engaging Community Questions

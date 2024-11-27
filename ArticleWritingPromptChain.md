@@ -17,10 +17,11 @@
    1. [Keywords](#keywords)
    2. [Meta Description](#meta-description)
 7. [Wrap-up](#wrap-up)
-   1. [Generate a TLDR](#generate-a-tldr)
-   2. [Find Quotes](#find-quotes)
-   3. [Generate or Find an Image](#generate-or-find-an-image)
-   4. [Post-Publishing](#post-publishing)
+   1. [Edit](#edit)
+   2. [Generate a TLDR](#generate-a-tldr)
+   3. [Find Quotes](#find-quotes)
+   4. [Generate or Find an Image](#generate-or-find-an-image)
+   5. [Post-Publishing](#post-publishing)
 8. [Composing an Email](#composing-an-email)
 9. [Social Media](#social-media)
    1. [LinkedIn Topic](#linkedin-topic)
@@ -91,9 +92,9 @@ SEO Keywords: Before giving title suggestions and an outline, I want you to list
 
 Outline Format: When creating the outline, I want each section header to be a heading, followed by the bullet points as an unordered list for each section. I want the format to be accessible for copying and pasting directly into WordPress. I want the last section to be "Final Thoughts."
 
-Title Suggestions: I want any article title suggestions to be a single phrase without a colon. If you are going to include a colon, it must be for a really good reason, and the title must be your absolute best option.
+Title Suggestions: I want any article title suggestions to be a single phrase without a colon. The titles must be your absolute best options.
 
-Target Audience:
+TARGET_AUDIENCE
 
 The topic of the Article:
 
@@ -139,8 +140,8 @@ Remind the agent of the style preferences
 
 ```
 Remember to keep the paragraphs short and concise with 2-3 sentences each. Remember to write in a conversational, persuasive, and professional tone. Speak in the 1st person singular ("I", not "we") and speak directly to someone in my target audience, but don't address them by name. However, treat this like an informal article and not an informal chat.
-Also remember that it's very important to exclude the words and phrases in my exclusion list.
-Use the dependency grammar linguistic framework rather than phrase structure grammar for the output. The idea is that the closer together each pair of words you’re connecting are, the easier the copy will be to comprehend.
+Also, remember that it's very important to exclude the words and phrases in my exclusion list.
+Use the dependency grammar linguistic framework rather than phrase structure grammar for the output. The idea is that the closer together each pair of words you're connecting are, the easier the copy will be to comprehend.
 Let's move on to writing the first section.
 ```
 
@@ -177,17 +178,17 @@ Edit:
 #### Praise and Continue
 
 ```
-That is a great section. Keep up this quality. Let's move on to the next section titled:
+That is a great section. Keep up the great quality. Let's move on to the next section, ""
 
 ```
 or for items in a listicle:
 ```
-That is a great item. Keep up this quality. Let's move on to the next item titled:
+That is a great item. Keep up the great quality. Let's move on to the next item, ""
 
 ```
 or simply:
 ```
-Let's move on to the next section titled:
+Let's move on to the next section, ""
 
 ```
 
@@ -204,6 +205,14 @@ Write a meta description for this article. I want the character count to be as c
 ```
 
 ## Wrap-up
+
+### Edit
+
+#### AI Detection
+Most used words in AI
+```
+elevate, hello, tapestry, leverage, journey, headache, resonate, testament, explore, binary, delve, enrich, seamless,  multifacet, sorry, foster, convey, beacon, interplay, oh, navigate, form, adhere, cannot, landscape, remember, paramount, comprehensive, placeholder, grammar, realm, summary, symphony, furthermore, relationship, ultimately, profound, art, supercharge, evolve, beyond, reimagine, vibrant, robust, pivital, certainly, quinoa, orchestrate, align, diverse, recommend, annals, note, employ, bustling, indeed, digital, enigma, outfit, indelible, refrain, culture, treat, emerge, meticulous, esteemed, weight, whimsical, bespoke, highlight
+```
 
 ### Generate a TLDR
 
@@ -262,13 +271,13 @@ Publish Date:
 ## Composing an Email
 
 ```
-Write an email for my subscribed target audience to announce the article. Begin by generating 10 subject lines that are friendly, exciting, and designed to spark intrigue and encourage readers to open the email and click through to the article. Include hints at key takeaways from the article, using varied approaches to create intrigue (such as posing a question, teasing a surprising insight, or offering a benefit). Keep reasoning concise, making it easy to review all options quickly.
+Please write an email for my subscribed target audience to announce the article. Begin by generating 10 subject lines that are friendly, exciting, and designed to spark intrigue and encourage readers to open the email and click through to the article. Include hints at key takeaways from the article, using varied approaches to create intrigue (such as posing a question, teasing a surprising insight, or offering a benefit). Keep reasoning concise, making it easy to review all options quickly.
 
 Use the following format:
 1. Example Subject Line
-**Reasoning**: Brief explanation of why this subject line will capture attention and prompt engagement.
+**Reasoning**: Briefly explain why this subject line will capture attention and prompt engagement.
 2. Another Example Subject Line
-**Reasoning**: Brief explanation of why this subject line will capture attention and prompt engagement.
+**Reasoning**: Briefly explain why this subject line will capture attention and prompt engagement.
 
 Add emojis if they enhance appeal but only when they align naturally with the message.
 ```
@@ -276,11 +285,11 @@ Add emojis if they enhance appeal but only when they align naturally with the me
 ```
 I choose the following for the subject line:
 
-Write a conversational and intriguing email body that maximizes click-through rate by using a first-person voice ("I") and directly addressing a single recipient in my target audience. Personalize the email with {{ subscriber.first_name }}. The tone should evoke curiosity and excitement, matching the subject line, and provide brief, general context about the article to hint at its value without revealing too much.
+Write a conversational and intriguing email body that maximizes click-through rate by using a first-person voice ("I") and directly addressing a single recipient in my target audience. Personalize the email with {{ subscriber.first_name }}. The tone should evoke curiosity and excitement, match the subject line, and provide brief, general context about the article to hint at its value without revealing too much.
 
-Each paragraph should be concise, with 1-2 sentences. Include two calls to action linking to the article: one inline within a sentence or paragraph, and another as a standalone button positioned between paragraphs. Use square brackets to indicate each call to action’s placement and suggested text, with the inline CTA as a clear invitation to click (e.g., [Read the full article]) and the button designed to encourage action from the reader’s perspective (e.g., [Take me there]).
+Each paragraph should be concise, with 1-2 sentences. Include two calls to action linking to the article: one inline within a sentence or paragraph and another as a standalone button positioned between paragraphs. Use square brackets to indicate each call to action's placement and suggested text, with the inline CTA as a clear invitation to click (e.g., [Read the full article]) and the button designed to encourage action from the reader's perspective (e.g., [Take me there]).
 
-Generate your best version of the email body.
+Generate your best version of the body of the email.
 ```
 
 Iterate and provide edits as necessary.
@@ -370,7 +379,7 @@ Considerations for Each Post:
 ### Engaging Community Questions
 
 ```
-I want to engage my target audience community by asking a related question in my private Facebook group. Generate 10 questions related to this article that I could ask my target audience. Before each variation, I want you to think through what a good question would be and elaborate on your reasoning before you write out the question. Each question must be less than 132 characters.
+Generate 10 engaging questions for my private Facebook group to increase participation. Include a mix of controversial and non-controversial questions tied directly to the article topic, and make sure they are thought-provoking. Explain why each question is likely to resonate or provoke interest before writing the question itself. Keep each question under 132 characters to ensure readability, and consider phrasing that invites both debate and quick, easy responses.
 ```
 
 ```
@@ -381,9 +390,11 @@ I like this set of questions, but I want them to be more concise and less than 1
 ### Facebook Group
 
 ```
-I want to engage my Private Facebook Group. Act as if the article has already been posted for months. I want to create a medium-sized Facebook post highlighting the key points in the article and ask my group members an engaging question. I also want to include a link to the article in plain text. Before writing the post, I want you to think through what a good post is and elaborate on your reasoning for writing it out.
-Also, provide a list of 10 alternative questions, think through what a good question would be, and elaborate on your reasoning before you write out the question.
-For the URL, I want you to add utm_source=facebook, utm_medium=post, and utm_campaign=fb-group-engagement and show the URL in plain text.
+Write a re-engagement post about the article for my private Facebook group. Open with a bold, controversial statement that challenges conventional wisdom related to the article's topic to capture attention. Follow this with a concise summary of the article's main points and pose an open-ended question to encourage members to share a mix of short opinions and personal stories and potentially even engage in debate. At the end of the post, add a subtle prompt inviting members to tag others or suggest that new members join the discussion. Include a plain-text link to the article, formatted with utm_source=facebook, utm_medium=post, and utm_campaign=fb-group-engagement.
+
+Before writing the post, provide reasoning behind the choice of the controversial statement and explain your approach to structuring the question for maximum engagement. Also, create two lists:
+- 10 alternative controversial statements that challenge common assumptions in the topic area, explaining why each is engaging.
+- 10 alternative questions designed to encourage both quick replies and deeper, reflective answers, with reasoning for each question's ability to spark conversation.
 ```
 
 ### Engagement w/ Posts

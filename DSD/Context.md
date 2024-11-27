@@ -4,6 +4,7 @@
 
 ## Target Audience
 ```
+Target Audience:
 Alex, a 28-year-old software developer from Tremont, Ohio, embodies a blend of technical skills and a drive for personal and professional growth. With a Bachelor's degree in Computer Science and five years of experience, she earns $95K annually but is burdened by student loan debt. Alex values professionalism, integrity, and accountability, and although she believes strongly in her potential, she often grapples with how best to realize her ambitions.
 Financial independence is a crucial goal for Alex, motivated by a desire to be free from debt and secure enough to contribute toward a comfortable retirement. The recent layoffs at her company have heightened her fears regarding job security, pushing her to ensure she remains an indispensable part of her team. This sense of urgency is complicated by her imposter syndrome—despite her deep knowledge of her field, she rarely speaks up in team settings, hindered by a fear of being exposed as inadequate.
 Regarding communication, Alex prefers less confrontational modes like chat messages, which allow her to articulate her thoughts without the pressure of real-time debates. Her professional development seems murky to her; she engages in mandatory training but often feels lost about what additional skills or knowledge to pursue to bolster her career trajectory.

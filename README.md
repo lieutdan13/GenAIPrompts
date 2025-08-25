@@ -11,3 +11,12 @@
 - [SEO Specialist](SEOSpecialist.md)
 - [Social Media](SocialMedia.md)
 - [Topic Generator](TopicGenerator.md)
+
+### Investments
+
+- [Stock Market Analyst](StockMarketAnalyst.md)
+
+### Career Development
+
+- [Job Fit Simulator](JobFitSumulator.md)
+- [Career Advisor](CareerAdvisor.md)

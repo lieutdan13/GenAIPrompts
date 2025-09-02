@@ -20,3 +20,14 @@
 
 - [Job Fit Simulator](JobFitSumulator.md)
 - [Career Advisor](CareerAdvisor.md)
+
+## AI Tool Use Cases
+
+| Use Case                               | Tools       |
+| -------------------------------------- | ----------- |
+| Deep Research for specific information | Manus AI    |
+| Code and Programming                   | Gemini      |
+| Code and Programming                   | Claude      |
+| Video and Audio                        | Notebook LM |
+| Sales Letters                          | ChatGPT     |
+

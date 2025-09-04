@@ -1,0 +1,879 @@
+{
+  "name": "AI ASSET SPRINT - V1.1 - PRODUCTION",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c6285251-90c9-49c8-86d9-3f701d956b0d",
+              "name": "keyword",
+              "value": "={{ $json.chatInput }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -40,
+        -1640
+      ],
+      "id": "a3afebef-6292-4e2b-8697-948bb13fff13",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You are a veteran market-research copywriter who uncovers deep customer pains and frustrations with clear, bullet-point precision.",
+              "role": "system"
+            },
+            {
+              "content": "=List the 10 biggest pains and frustrations people have around “{{ $json.keyword }}”.  \nReturn each as a concise bullet.\n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -200,
+        -1480
+      ],
+      "id": "64deca01-28b3-44ce-9648-aee824101847",
+      "name": "Brainstorming Pains",
+      "credentials": {
+        "openAiApi": {
+          "id": "PZfPwsui5EPhHQq2",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You are a seasoned problem-solving strategist who turns customer pains into clear, actionable solutions.",
+              "role": "system"
+            },
+            {
+              "content": "=Below are the top pains and frustrations people face around “{{ $('Edit Fields').item.json.keyword }}”:\n\n{{ $json.message.content }}\n\nFor each pain, write one concise solution that directly addresses it. \n\nReturn the solutions as a numbered list, keeping each item to one sentence.\n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -200,
+        -1340
+      ],
+      "id": "021cc6fc-a1c3-45f1-981f-5d1837dc0d6d",
+      "name": "Generate Solutions",
+      "credentials": {
+        "openAiApi": {
+          "id": "PZfPwsui5EPhHQq2",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -220,
+        -1640
+      ],
+      "id": "c9cd89ce-008f-4a2c-8bb5-ded12f908807",
+      "name": "When chat message received",
+      "webhookId": "4ffcb028-c596-4a87-913f-bb6e643a5f5a"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You are an expert direct-response strategist who crafts irresistible offers using Alex Hormozi’s $100M Offers framework.",
+              "role": "system"
+            },
+            {
+              "content": "=Topic / niche: “{{ $('Edit Fields').item.json.keyword }}”\n\nTop customer pains:\n{{ $('Brainstorming Pains').item.json.message.content }}\n\nYour task:\n1. Apply Alex Hormozi’s $100M Offers framework (Dream Outcome, Perceived Likelihood, Time Delay, Effort & Sacrifice).\n2. Craft a single, compelling offer that eliminates those pains.\n\nReturn in this exact format:\n\n• **Offer Title:** …\n• **Dream Outcome:** …\n• **Perceived Likelihood:** …\n• **Time Delay:** …\n• **Effort & Sacrifice:** …\n• **Key Features & Bonuses:** (3–5 bullets)\n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -200,
+        -1200
+      ],
+      "id": "9f4ec974-19fd-4bf2-a364-1ad70cd88f45",
+      "name": "$100M Offer",
+      "credentials": {
+        "openAiApi": {
+          "id": "PZfPwsui5EPhHQq2",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You are a seasoned marketing copywriter who crafts scroll-stopping ebook titles that promise a clear, tangible result.\n",
+              "role": "system"
+            },
+            {
+              "content": "=Here’s the offer we’ll be selling:\n\n{{ $json.message.content }}\n\n1. Propose **three punchy ebook titles** (each under 12 words) that convey the core outcome and spark curiosity.  \n2. Evaluate each title on clarity, emotional pull, specificity, and benefit.  \n3. Pick the single best title and explain—in one concise sentence—why it wins.\n\nReturn your answer as strict JSON with exactly these keys:\n{\n  \"titles\": [ \"Title 1\", \"Title 2\", \"Title 3\" ],\n  \"selectedTitle\": \"The winner\",\n  \"rationale\": \"Why this one converts best\"\n}\n"
+            }
+          ]
+        },
+        "jsonOutput": "={{$json.selectedTitle}}      // the winner\n{{$json.titles[0]}}          // first alternate\n{{$json.rationale}}          // one-sentence reason\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        240,
+        -1640
+      ],
+      "id": "1e47901f-0c17-43cd-a150-ef65400ff429",
+      "name": "Create Offer Title",
+      "credentials": {
+        "openAiApi": {
+          "id": "PZfPwsui5EPhHQq2",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You are an expert ebook outline strategist and educational content architect. You design structures that flow logically, teach clearly, and drive action.\n",
+              "role": "system"
+            },
+            {
+              "content": "=We’re writing an ebook titled “{{ $json.message.content.selectedTitle }}”.\n\nCreate a detailed outline that includes:\n\n1. **Introduction**  \n   • Hook readers with the core promise  \n   • Explain why this book matters for the {{ $('Edit Fields').item.json.keyword }} niche  \n\n2. **Section 1 – Section 6**  \n   • Give each section a bold, benefit-driven heading  \n   • Under every heading list 3–5 bullet points covering the sub-topics or steps  \n   • The finished book will expand each section to roughly 300–500 words  \n\n3. **Conclusion & 3-Step Action Plan**  \n   • Summarize key lessons  \n   • Provide three specific next steps readers can implement immediately  \n\nReturn the outline as a numbered list with sub-bullets under each heading.\n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        240,
+        -1500
+      ],
+      "id": "a16ebaca-9a5f-4379-b601-e1d9d3412abc",
+      "name": "Build Outline",
+      "credentials": {
+        "openAiApi": {
+          "id": "PZfPwsui5EPhHQq2",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You are a veteran nonfiction ghostwriter who turns outlines into engaging, easy-to-read ebooks at a 6th-grade reading level while still sounding professional and motivating.\n",
+              "role": "system"
+            },
+            {
+              "content": "=Title: “{{ $('Create Offer Title').item.json.message.content.selectedTitle }}”\n\nTarget niche: “{{ $('Edit Fields').item.json.keyword }}”\n\nBelow is the approved outline object:\n\n{{ $('Build Outline').item.json.message.content }}\n\nWrite the full ebook using that structure:\n\n• Keep every heading exactly as listed.  \n• For each section, expand its bullet points into 300–500 words of clear prose.  \n• Tone: friendly, confident, action-oriented (6th-grade reading level).  \n• Use short paragraphs and add the occasional bold phrase for emphasis.  \n• After the Conclusion, include the 3-step action plan as a numbered list.  \n\nReturn the completed manuscript as plain text—no additional commentary or JSON.\n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        240,
+        -1200
+      ],
+      "id": "21592e70-b6bf-43ef-ad02-89a902688872",
+      "name": "Create $100M Product",
+      "credentials": {
+        "openAiApi": {
+          "id": "PZfPwsui5EPhHQq2",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "model": "gpt-image-1",
+        "prompt": "=You are an award-winning creative director and ebook cover designer. Your job is to turn any topic, offer, and audience into a single, scroll-stopping image.\n\nWe’re publishing an ebook titled “{{ $('Create Offer Title').item.json.message.content.selectedTitle }}” for people interested in “{{ $('Edit Fields').item.json.keyword }}.”\n\n1. Infer the primary demographic most likely to buy (age range, gender, profession, vibe).\n2. Craft a detailed prompt for GPT Image 1 that includes:\n- A central figure, real person or scene representing that demographic.\n- Visual metaphors or icons tied to the core offer (e.g., toolbox for productivity, rocket for scaling, plant sprouting for growth)  \n- Bold, legible typography for the title  \n- High-contrast palette — black & white plus **one accent color, choose color based on high converting color therapy**  \n- Modern, minimalist layout  \n- **Portrait orientation at 1:1.4 aspect ratio** (e.g., 1400 × 1000 px)",
+        "options": {
+          "returnImageUrls": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        240,
+        -1360
+      ],
+      "id": "de292151-ed60-458e-a7f6-dc8612b71b23",
+      "name": "Generate Image Cover",
+      "alwaysOutputData": false,
+      "retryOnFail": true,
+      "waitBetweenTries": 2000,
+      "credentials": {
+        "openAiApi": {
+          "id": "PZfPwsui5EPhHQq2",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "917f1051-7fa7-49fe-a82d-1166bdb75e9a",
+              "name": "coverLink",
+              "value": "={{ $('Get Img Link').item.json.secure_url }}?v={{ $now.toMillis() }}",
+              "type": "string"
+            },
+            {
+              "id": "78fe3bb1-8199-47d6-a1fd-bf2022bd09f6",
+              "name": "ebookMarkdown",
+              "value": "={{ $node[\"Create $100M Product\"].json[\"message\"][\"content\"] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        -1080
+      ],
+      "id": "586d57c0-e674-40fb-a814-a4c9e66d042c",
+      "name": "Set coverLink"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * Build HTML optimized for DOCX conversion.\n * Expects:\n * $json.coverLink       (string)  – URL to the cover image\n * $json.ebookMarkdown   (string)  – Markdown content for the book\n *\n * Returns:\n * json.html             (string)  – Complete HTML string\n */\n\n/* -------------------------------------------------------------------------- */\n/* PULL INPUT VARIABLES                                                       */\n/* -------------------------------------------------------------------------- */\nconst coverUrl     = $json.coverLink        || '';\nconst bodyMarkdown = $json.ebookMarkdown    || '# Content Missing\\n\\nNo content was provided for the ebook.';\n\n/* -------------------------------------------------------------------------- */\n/* MARKDOWN TO HTML CONVERTER                                                 */\n/* -------------------------------------------------------------------------- */\nfunction mdToHtml(md) {\n  if (typeof md !== 'string') {\n    console.log(\"N8N_LOG_DEBUG --- mdToHtml received non-string input:\", md);\n    return '<p>Invalid content provided.</p>';\n  }\n\n  let html = md\n    .replace(/^### (.*)$/gm, '<h3>$1</h3>')\n    .replace(/^## (.*)$/gm,  '<h2>$1</h2>')\n    .replace(/^# (.*)$/gm,   '<h1>$1</h1>')\n    .replace(/\\*\\*(.*?)\\*\\*/g, '<strong>$1</strong>')\n    .replace(/\\*(.*?)\\\\*/g,     '<em>$1</em>');\n\n  const lines = html.split('\\n');\n  let inList = false;\n  let listType = ''; // 'ul' or 'ol'\n  let processedHtmlLines = [];\n\n  for (let i = 0; i < lines.length; i++) {\n    let line = lines[i];\n    const trimmedLine = line.trim();\n    const isUlItem = trimmedLine.startsWith('* ');\n    const isOlItem = /^\\d+\\.\\s/.test(trimmedLine);\n\n    if (isUlItem || isOlItem) {\n      const currentListType = isUlItem ? 'ul' : 'ol';\n      if (!inList || listType !== currentListType) {\n        if (inList) {\n          processedHtmlLines.push(`</${listType}>`);\n        }\n        processedHtmlLines.push(`<${currentListType}>`);\n        inList = true;\n        listType = currentListType;\n      }\n      const itemContent = isUlItem ? trimmedLine.substring(2) : trimmedLine.replace(/^\\d+\\.\\s/, '');\n      processedHtmlLines.push(`  <li>${itemContent.trim()}</li>`);\n    } else {\n      if (inList) {\n        processedHtmlLines.push(`</${listType}>`);\n        inList = false;\n      }\n      if (trimmedLine === '') {\n        // Skip\n      } else if (!(/^<(h[1-6]|p|ul|ol|li|blockquote|hr)/i.test(trimmedLine))) {\n        processedHtmlLines.push(`<p>${trimmedLine}</p>`);\n      } else {\n        processedHtmlLines.push(line);\n      }\n    }\n  }\n\n  if (inList) {\n    processedHtmlLines.push(`</${listType}>`);\n  }\n  \n  return processedHtmlLines.filter(line => line.trim() !== '<p></p>' && line.trim() !== '').join('\\n');\n}\n\n/* -------------------------------------------------------------------------- */\n/* ASSEMBLE FINAL HTML FOR DOCX                                               */\n/* -------------------------------------------------------------------------- */\nconst bodyHtmlContent = mdToHtml(bodyMarkdown);\n\nconst fullHtml = `\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>Ebook</title>\n  <style>\n    body {\n      font-family: Arial, Helvetica, sans-serif;\n      font-size: 16pt;\n      line-height: 1.4;\n      color: #000000;\n      margin: 2cm 1.5cm 2cm 1.5cm;\n    }\n    p { margin-top: 0; margin-bottom: 0.6em; }\n    h1, h2, h3 {\n      font-size: 20pt;\n      font-weight: bold;\n      color: #000000;\n      margin-top: 1.2em;\n      margin-bottom: 0.4em;\n      line-height: 1.2;\n      page-break-after: avoid;\n    }\n    .page-break-docx {\n      page-break-after: always;\n      height: 0pt;\n      line-height: 0pt;\n      font-size: 0pt;\n    }\n    strong, b { font-weight: bold; }\n    em, i { font-style: italic; }\n    ul, ol { margin-top: 0.3em; margin-bottom: 0.7em; padding-left: 1.8em; }\n    li { margin-bottom: 0.2em; }\n    .cover-image-container {\n      text-align: center;\n      margin: 0 auto 2cm auto;\n      page-break-after: always;\n    }\n  </style>\n</head>\n<body>\n    <!-- Simplified image approach for better DOCX compatibility -->\n    <div class=\"cover-image-container\">\n      <img src=\"${coverUrl}\" alt=\"Ebook Cover\" style=\"width:15cm; height:auto; max-width:100%;\" />\n    </div>\n\n  ${bodyHtmlContent}\n\n</body>\n</html>`;  // <-- THIS CLOSING BACKTICK WAS MISSING!\n\n/* -------------------------------------------------------------------------- */\n/* RETURN RESULT                                                              */\n/* -------------------------------------------------------------------------- */\nreturn [\n  {\n    json: { html: fullHtml }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        400,
+        -1080
+      ],
+      "id": "cbc08437-c8e6-4148-8af2-6113aeff9a6c",
+      "name": "Build HTML (ebook)"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You are a product strategist who creates high-perceived-value bonuses and upsells.",
+              "role": "system"
+            },
+            {
+              "content": "=Title: “{{ $('Create Offer Title').item.json.message.content.selectedTitle }}”\nTopic: “{{ $('Edit Fields').item.json.keyword }}”\nOffer summary:\n{{ $('$100M Offer').item.json.message.content }}\n\n1. Propose 5 high-value bonuses. For each:\n- name\n- format (template, checklist, etc.)\n- benefit (under 20 words)\n\n2. Suggest a paid One-Time Offer (price: $97–$297) that amplifies results. Include:\n- name\n- description\n- deliverables (3–5 bullets)\n\nReturn JSON:\n\n{\n  \"bonuses\": [ { \"name\": \"\", \"format\": \"\", \"benefit\": \"\" }, … ],\n  \"oto\": {\n    \"name\": \"\", \"price\": 97, \"description\": \"\", \"deliverables\": []\n  },\n  \"workbookOutline\": [\n    { \"section\": \"\", \"description\": \"\" }\n  ]\n}\n"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        720,
+        -1640
+      ],
+      "id": "d804b152-b491-4751-9f92-f6125ae5df98",
+      "name": "Value Enhancer",
+      "credentials": {
+        "openAiApi": {
+          "id": "PZfPwsui5EPhHQq2",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * Build HTML (Value Enhancer) for DOCX conversion.\n * Returns binary HTML for the next \"Binary Data1\" node.\n */\n\n// 1) Grab and parse VE JSON from the correct path\nconst rawOpenAiOutput = $node[\"Value Enhancer\"].json;\nlet veData = {}; // This will hold the object {bonuses, workbookOutline, oto}\n\nif (rawOpenAiOutput && rawOpenAiOutput.message && rawOpenAiOutput.message.content) {\n    const contentField = rawOpenAiOutput.message.content;\n    if (typeof contentField === 'string' && contentField.trim().startsWith('{')) {\n        try {\n            veData = JSON.parse(contentField);\n        } catch (e) {\n            console.log(\"N8N_LOG_ERROR (Build HTML Value Enhancer): Failed to parse AI content as JSON. Content:\", contentField, \"Error:\", e);\n            // veData remains {}\n        }\n    } else if (typeof contentField === 'object' && contentField !== null) {\n        veData = contentField; // It's already an object\n    } else {\n        console.log(\"N8N_LOG_ERROR (Build HTML Value Enhancer): AI content is not a string or object. Content:\", contentField);\n        // veData remains {}\n    }\n} else {\n    console.log(\"N8N_LOG_ERROR (Build HTML Value Enhancer): Expected path .message.content not found in Value Enhancer output. Raw Output:\", JSON.stringify(rawOpenAiOutput));\n    // veData remains {}\n}\n\n// 2) Safe-default arrays/objects using the extracted veData\nconst bonuses  = Array.isArray(veData.bonuses) ? veData.bonuses : [];\nconst workbook = Array.isArray(veData.workbookOutline) ? veData.workbookOutline : []; // Check AI prompt for exact key name\nconst oto      = (veData.oto && typeof veData.oto === 'object') ? veData.oto : { name:\"\", price:\"\", description:\"\", deliverables:[] };\n\n// 3) Helpers → build inner HTML lists\nconst listItems = (arr, templateFn) => {\n  if (!Array.isArray(arr)) return '';\n  return arr.map(item => item ? templateFn(item) : '').join(\"\"); // Added check for item\n};\n\nconst bonusHtml = `<ul>${listItems(bonuses, b =>\n  `<li><strong>${b.name || \"N/A\"}</strong> (${b.format || \"N/A\"}) – ${b.benefit || \"N/A\"}</li>`\n)}</ul>`;\n\nconst workbookHtml = `<ol>${listItems(workbook, w =>\n  `<li><strong>${w.section || \"N/A\"}</strong>: ${w.description || \"N/A\"}</li>`\n)}</ol>`;\n\n// Ensure oto.deliverables is an array before mapping\nconst otoDeliverables = Array.isArray(oto.deliverables) ? oto.deliverables : [];\nconst otoHtml = `\n  <h2>One-Time Offer — ${oto.name || \"N/A\"} ($${oto.price || \"N/A\"})</h2>\n  <p>${oto.description || \"N/A\"}</p>\n  <ul>${listItems(otoDeliverables, d => `<li>${d || \"N/A\"}</li>`)}</ul>\n`;\n\n// 4) Assemble full HTML document with DOCX-friendly styles\nconst fullHtml = `<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\"/>\n  <title>Value Enhancer</title>\n  <style>\n    /* Styles optimized for HTML to DOCX conversion */\n    body {\n      font-family: Arial, Helvetica, sans-serif;\n      font-size: 12pt; /* Approx 16px - standard for documents */\n      line-height: 1.4;\n      color: #000000;\n      margin: 2cm 1.5cm; /* Page Margins: Top/Bottom Left/Right. Adjust as needed. */\n    }\n    h1 {\n      font-size: 18pt; /* Larger for main title */\n      font-weight: bold;\n      color: #000000;\n      margin-top: 0; /* Main title often at the very top */\n      margin-bottom: 0.8em;\n      text-align: center; /* Optional: Center main title */\n    }\n    h2 {\n      font-size: 14pt; /* Sub-headings slightly smaller */\n      font-weight: bold;\n      color: #000000;\n      margin-top: 1.2em;\n      margin-bottom: 0.4em;\n      page-break-after: avoid;\n    }\n    p {\n      margin-top: 0;\n      margin-bottom: 0.6em;\n    }\n    ul, ol {\n      margin-top: 0.2em;\n      margin-bottom: 0.8em;\n      padding-left: 1.5em; /* Standard list indentation */\n    }\n    li {\n      margin-bottom: 0.2em;\n    }\n    strong {\n      font-weight: bold;\n    }\n  </style>\n</head>\n<body>\n  <h1>Bonus Vault &amp; Value Enhancer</h1>\n  \n  <h2>Bonus Bundle</h2>\n  ${bonusHtml}\n  \n  <h2>Workbook Outline</h2>\n  ${workbookHtml}\n  \n  ${otoHtml}\n</body>\n</html>`;\n\n// 5) Return as an object with a binary property 'html',\n//    which itself is an object containing the data Buffer.\n//    This is what \"Binary Data1\" node expects as input.\nreturn [{\n  json: {}, // Keep json part minimal or add useful metadata if needed\n  binary: {\n    html: { // This is the binary property name \"Binary Data1\" will look for\n      data: Buffer.from(fullHtml, \"utf8\"), // The HTML content as a Buffer\n      mimeType: \"text/html\",\n      fileName: \"value-enhancer.html\"\n    }\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        -1500
+      ],
+      "id": "a903db54-bc96-4bfd-8c37-231c23fc0ab8",
+      "name": "Build HTML (Value Enhancer)"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Revised Code for \"Binary Data1\" Node\n\n// Check if the basic path to the data exists\nif (!items[0].binary || !items[0].binary.html || !items[0].binary.html.data) {\n  console.log(\"N8N_LOG_DEBUG: Unexpected input structure in Binary Data1. Item:\", JSON.stringify(items[0]));\n  throw new Error(\"Input from 'Build HTML (Value Enhancer)' did not provide data at items[0].binary.html.data as expected.\");\n}\n\nlet inputHtmlContent = items[0].binary.html.data;\nlet inputHtmlBuffer;\n\n// Try to create a buffer intelligently\nif (inputHtmlContent instanceof Buffer) {\n  inputHtmlBuffer = inputHtmlContent;\n} else if (typeof inputHtmlContent === 'string') {\n  inputHtmlBuffer = Buffer.from(inputHtmlContent, 'utf8');\n} else if (typeof inputHtmlContent === 'object' && inputHtmlContent.type === 'Buffer' && Array.isArray(inputHtmlContent.data)) {\n  // Sometimes Buffers get serialized to objects like { type: \"Buffer\", data: [...] }\n  inputHtmlBuffer = Buffer.from(inputHtmlContent.data);\n} else {\n  console.log(\"N8N_LOG_DEBUG: Data at items[0].binary.html.data is not a Buffer, string, or recognized Buffer object. Actual type:\", typeof inputHtmlContent, \"Value:\", JSON.stringify(inputHtmlContent));\n  throw new Error(\"Data at items[0].binary.html.data from 'Build HTML (Value Enhancer)' is not in a recognized format (Buffer, String, or serialized Buffer object).\");\n}\n\nconst inputMimeType = items[0].binary.html.mimeType || 'text/html';\nconst inputFileName = items[0].binary.html.fileName || 'value-enhancer.html';\n\nitems[0].binary.data = {\n  data: inputHtmlBuffer.toString('base64'),\n  mimeType: inputMimeType,\n  fileName: inputFileName\n};\n\ndelete items[0].binary.html;\n\nreturn items;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        880,
+        -1500
+      ],
+      "id": "76b280ee-ef4c-4570-8c2d-5adbe55e4c3b",
+      "name": "Binary Data1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8abb96ad-9f7e-4ad6-88e2-b4a96d475db1",
+              "name": "text",
+              "value": "=✅ Your product is ready!\n\n1. [Solution eBook (DOCX) ➜]({{ $('Convert eBook to DOCX').item.json.Files[0].Url }})\n\n2. [Value Enhancer (DOCX) ➜]({{ $json.Files[0].Url }})\n\nEdit, Upload, Sell!\n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        800,
+        -1180
+      ],
+      "id": "30ab5fa4-de4c-4c3a-ace6-30ade0c459ca",
+      "name": "Files Ready!"
+    },
+    {
+      "parameters": {
+        "curlImport": "",
+        "httpVariantWarning": "",
+        "method": "POST",
+        "url": "https://v2.convertapi.com/convert/html/to/docx",
+        "": "",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "convertApi",
+        "provideSslCertificates": false,
+        "sendQuery": false,
+        "sendHeaders": false,
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "File",
+              "inputDataFieldName": "data"
+            },
+            {
+              "parameterType": "formData",
+              "name": "StoreFile",
+              "value": "true"
+            },
+            {
+              "parameterType": "formData",
+              "name": "PageSize",
+              "value": "letter"
+            },
+            {
+              "parameterType": "formData",
+              "name": "MarginTop",
+              "value": "72"
+            },
+            {
+              "parameterType": "formData",
+              "name": "MarginBottom",
+              "value": "72"
+            },
+            {
+              "parameterType": "formData",
+              "name": "MarginLeft",
+              "value": "72"
+            },
+            {
+              "parameterType": "formData",
+              "name": "MarginRight",
+              "value": "72"
+            },
+            {
+              "parameterType": "formData",
+              "name": "DocumentOpenPassword",
+              "value": "``"
+            },
+            {
+              "parameterType": "formData",
+              "name": "DisableContentControl",
+              "value": "true"
+            },
+            {
+              "parameterType": "formData",
+              "name": "CompatibilityMode",
+              "value": "15"
+            },
+            {
+              "parameterType": "formData",
+              "name": "DocumentProtection",
+              "value": "none"
+            }
+          ]
+        },
+        "options": {},
+        "infoMessage": ""
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        400,
+        -920
+      ],
+      "id": "e66424d8-e490-40c5-83a3-badd7d1c079d",
+      "name": "Convert eBook to DOCX",
+      "extendsCredential": "convertApi",
+      "credentials": {
+        "convertApi": {
+          "id": "2dquXVo6CGOMLc57",
+          "name": "ConvertAPI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "curlImport": "",
+        "httpVariantWarning": "",
+        "method": "POST",
+        "url": "https://v2.convertapi.com/convert/html/to/docx",
+        "": "",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "convertApi",
+        "provideSslCertificates": false,
+        "sendQuery": false,
+        "sendHeaders": false,
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "File",
+              "inputDataFieldName": "data"
+            },
+            {
+              "parameterType": "formData",
+              "name": "StoreFile",
+              "value": "true"
+            }
+          ]
+        },
+        "options": {},
+        "infoMessage": ""
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        800,
+        -1340
+      ],
+      "id": "516dee9c-dda6-429d-85bd-27f5b55727c6",
+      "name": "Convert Value to DOCX",
+      "extendsCredential": "convertApi",
+      "credentials": {
+        "convertApi": {
+          "id": "2dquXVo6CGOMLc57",
+          "name": "ConvertAPI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## | PHASE 1: AI-POWERED IDEATION & STRATEGIC OFFER DESIGN\n\nPurpose: Turn a keyword into a fully-fledged digital asset! In this phase, a series of specialized AI agents collaborate:\n\n1. AI uncovers critical **customer pain points** related to your idea.\n2. Next, another AI crafts targeted **solutions** for each pain.\n3. Finally, a strategic AI applies proven marketing frameworks (like the '$100M Offer') to forge these insights into an **irresistible core offer**, complete with a compelling title, dream outcome, and unique selling propositions. \n\n**This isn't just brainstorming; it's AI-driven strategy in action!**",
+        "height": 1280,
+        "width": 420,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -280,
+        -2060
+      ],
+      "typeVersion": 1,
+      "id": "f0c76075-225e-434f-ab93-c2c816d8fa19",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## | PHASE 2: DIGITAL ASSET CREATION\n\nPurpose: Starts AI content creation! This phase takes the strategic offer and automatically produces a **high-value complete ebook with a custom-designed cover**:\n\n1. An AI copywriter generates **captivating ebook titles** and selects the optimal one.\n2. An AI architect builds a **comprehensive ebook outline**.\n3. The all-new GPT-4 Image AI designs a unique, **professional ebook cover image** based on the title and topic.\n4. Then, an AI ghostwriter drafts the **entire ebook content** in engaging, easy-to-read format, meticulously following the outline. \n\n_Making raw ideas become a tangible asset!_",
+        "height": 1280,
+        "width": 440,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        160,
+        -2060
+      ],
+      "typeVersion": 1,
+      "id": "f2cbb836-8b9b-405b-aefc-bd5d86235e6c",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## | PHASE 3: VALUE STACKING & FINAL ASSET DELIVERY\n\nPurpose: **Maximizing value is key!** Here, an AI strategist generates a 'Value Enhancer' package – creating compelling bonuses, a one-time-offer, and a workbook outline to complement your main product.\n\nThe grand finale: Both your main Ebook DOCX and the Value Enhancer DOCX are neatly packaged with their download links into a final message, ready to be sent back to you in the chat. \n\nAll this from a single keyword to two complete, ready-to-use digital products.\n\n**All orchestrated by AI and automation!**",
+        "height": 1280,
+        "width": 460,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        620,
+        -2060
+      ],
+      "typeVersion": 1,
+      "id": "b3ecbda5-b17e-447b-b814-c3edeb4934e2",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "# ⭐️ How to Set Up to Run on Your Account\n**Author:** Don Lyons from [Effortless Digital](https://www.instagram.com/effortlessdigitaldon/)  \n\nThis quick-start guide shows you how to set up your account to work with OpenAI for images and content, and ConvertAPI to get the final output in .docx format.\n\n## 🔳 Step 1: Set Up OpenAI for Content & Image Generation\n**Cost Note:** OpenAI's API will cost around 0.25 for each completed PDF product, Bonus Idea doc and Ecover Image. _Definitely beats 2hrs doing it yourself_\n\n1. Go to [OpenAI API Platform](https://platform.openai.com/api-keys)  \n2. Create an account (if you don’t have one).  \n3. Generate an API key.  \n4. Create a credential using that key.  \n**Note:** If you use the 4o image generation model, OpenAI will ask you to verify your identity. They do this to prevent misuse.\n\n## 🔳 Step 2: Set Up ConvertAPI (for DOCX Conversion)\n1.  **Go to:** [ConvertAPI Website](https://www.convertapi.com/)\n2.  **Sign Up:** Create a free account.\n3.  **Find API Secret:** After signing up, navigate to \"Authentication -> Secret Key\". You should find your \"API Secret\" (it starts with secret).\n4.  **Add to n8n:** In n8n, go to \"Credentials\" > \"New\". Search for \"ConvertAPI\" and create a new credential. Paste your API Secret into the appropriate field. Give it a name.\n\n**Note:** ConvertAPI's free tier limit is 250 runs. For extensive use, you might need a paid plan. This workflow uses it to convert HTML to DOCX. You get 250 runs for free.\n\n## 🔳 Step 3: Set Up Cloudinary (Image Uploading Tool)\n**Cost Note:** FREE (free plan lets you upload 1,000s of images each month)\n\n### 1. Create Your Free Account\n- Go to: https://cloudinary.com/users/register_free\n- Sign up for a free account\n\n### 2. Get Your Cloud Name\n- Log into your Cloudinary dashboard\n- Find your **Cloud Name** at the top of the dashboard\n- **Copy this name** - you'll need it in step 5\n\n### 3. Create an Upload Preset\n- Click the **Settings** gear icon (bottom left)\n- Navigate to the **Upload** tab\n- Click **\"+ Add upload preset\"**\n- Configure the preset:\n  - Change **Signing Mode** from \"Signed\" to **\"Unsigned\"**\n  - Set **Preset name** to: `aiasset_preset`\n  - Leave all other settings as default\n  - Click **Save**\n\n### 4. Update the n8n Workflow\nIn your n8n workflow, find the **\"Get Img Link\"** node and:\n- Replace `YOUR_CLOUD_NAME` in the URL with your actual Cloud Name from step 2\n- The URL should look like:\nhttps://api.cloudinary.com/v1_1/doryejrxy/image/upload\nBut with YOUR cloud name instead of \"doodyyrxy\"\n\n### 5. Test Your Setup\n- The workflow is now ready to upload images to your Cloudinary account\n- Each uploaded image will get a unique URL that the workflow uses for the ebook cover\n\n**Note:** Make sure your upload preset name is exactly `aiasset_preset` or the workflow won't work!",
+        "height": 1780,
+        "width": 540,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -860,
+        -2060
+      ],
+      "typeVersion": 1,
+      "id": "fd073951-91a8-4cf1-98bc-19282e338de0",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.cloudinary.com/v1_1/CLOUD_NAME/image/upload",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            },
+            {
+              "name": "upload_preset",
+              "value": "aiasset_preset"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        400,
+        -1360
+      ],
+      "id": "b00553e9-7e70-429b-b97a-ef56fb448274",
+      "name": "Get Img Link"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * Turn the HTML string coming from Build HTML into a binary\n * property called  data  (base-64) so the Drive Upload node\n * can accept it.\n */\nconst html = $node[\"Build HTML (ebook)\"].json.html;   // or Value Enhancer\nconst buffer = Buffer.from(html, \"utf8\");\n\nitems[0].binary = {\n  data: {\n    data: buffer.toString(\"base64\"),\n    mimeType: \"text/html\",\n    fileName: \"ebook-asset.html\"          // or \"value-enhancer.html\"\n  }\n};\n\nreturn items;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        -920
+      ],
+      "id": "5b1f513e-ba6b-4ff9-817e-f9b71cc95d53",
+      "name": "Binary Data"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Brainstorming Pains",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Brainstorming Pains": {
+      "main": [
+        [
+          {
+            "node": "Generate Solutions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Solutions": {
+      "main": [
+        [
+          {
+            "node": "$100M Offer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "$100M Offer": {
+      "main": [
+        [
+          {
+            "node": "Create Offer Title",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Offer Title": {
+      "main": [
+        [
+          {
+            "node": "Build Outline",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Outline": {
+      "main": [
+        [
+          {
+            "node": "Generate Image Cover",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create $100M Product": {
+      "main": [
+        [
+          {
+            "node": "Set coverLink",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Image Cover": {
+      "main": [
+        [
+          {
+            "node": "Get Img Link",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set coverLink": {
+      "main": [
+        [
+          {
+            "node": "Build HTML (ebook)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build HTML (ebook)": {
+      "main": [
+        [
+          {
+            "node": "Binary Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Value Enhancer": {
+      "main": [
+        [
+          {
+            "node": "Build HTML (Value Enhancer)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build HTML (Value Enhancer)": {
+      "main": [
+        [
+          {
+            "node": "Binary Data1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Binary Data1": {
+      "main": [
+        [
+          {
+            "node": "Convert Value to DOCX",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert eBook to DOCX": {
+      "main": [
+        [
+          {
+            "node": "Value Enhancer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert Value to DOCX": {
+      "main": [
+        [
+          {
+            "node": "Files Ready!",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Img Link": {
+      "main": [
+        [
+          {
+            "node": "Create $100M Product",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Binary Data": {
+      "main": [
+        [
+          {
+            "node": "Convert eBook to DOCX",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "02bbaa25-b490-49f2-bdfb-4993c309890f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a6a726521446e07b3509e1a4db5b10f919c40ef2cf67c34be7f5692dfa478eb6"
+  },
+  "id": "81qCcc9IZXfQDDkm",
+  "tags": [
+    {
+      "createdAt": "2025-05-20T00:20:09.300Z",
+      "updatedAt": "2025-05-20T00:20:09.300Z",
+      "id": "1tnkxfmNmUnz3Ung",
+      "name": "Shared"
+    }
+  ]
+}

@@ -18,10 +18,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -40,
-        -1640
+        832,
+        432
       ],
-      "id": "a3afebef-6292-4e2b-8697-948bb13fff13",
+      "id": "182b3751-97ec-4843-bd9a-e412fa164434",
       "name": "Edit Fields"
     },
     {
@@ -48,14 +48,14 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        -200,
-        -1480
+        672,
+        592
       ],
-      "id": "64deca01-28b3-44ce-9648-aee824101847",
+      "id": "fc0c7935-5d71-4079-93f1-a5ee4b839859",
       "name": "Brainstorming Pains",
       "credentials": {
         "openAiApi": {
-          "id": "PZfPwsui5EPhHQq2",
+          "id": "KDgyP2XuXvC5PlRq",
           "name": "OpenAi account"
         }
       }
@@ -84,14 +84,14 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        -200,
-        -1340
+        672,
+        720
       ],
-      "id": "021cc6fc-a1c3-45f1-981f-5d1837dc0d6d",
+      "id": "77d7835a-ef4f-42a0-8d55-03efc357b810",
       "name": "Generate Solutions",
       "credentials": {
         "openAiApi": {
-          "id": "PZfPwsui5EPhHQq2",
+          "id": "KDgyP2XuXvC5PlRq",
           "name": "OpenAi account"
         }
       }
@@ -103,10 +103,10 @@
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
       "typeVersion": 1.1,
       "position": [
-        -220,
-        -1640
+        640,
+        432
       ],
-      "id": "c9cd89ce-008f-4a2c-8bb5-ded12f908807",
+      "id": "32003e01-e81e-4b3e-bc79-cfb1ae6abadd",
       "name": "When chat message received",
       "webhookId": "4ffcb028-c596-4a87-913f-bb6e643a5f5a"
     },
@@ -134,14 +134,14 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        -200,
-        -1200
+        672,
+        864
       ],
-      "id": "9f4ec974-19fd-4bf2-a364-1ad70cd88f45",
+      "id": "0843ea26-2c42-4a84-8142-1e164e078913",
       "name": "$100M Offer",
       "credentials": {
         "openAiApi": {
-          "id": "PZfPwsui5EPhHQq2",
+          "id": "KDgyP2XuXvC5PlRq",
           "name": "OpenAi account"
         }
       }
@@ -171,14 +171,14 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        240,
-        -1640
+        1104,
+        432
       ],
-      "id": "1e47901f-0c17-43cd-a150-ef65400ff429",
+      "id": "4006ebb3-815b-4554-ba15-261f648f6bad",
       "name": "Create Offer Title",
       "credentials": {
         "openAiApi": {
-          "id": "PZfPwsui5EPhHQq2",
+          "id": "KDgyP2XuXvC5PlRq",
           "name": "OpenAi account"
         }
       }
@@ -207,14 +207,14 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        240,
-        -1500
+        1120,
+        624
       ],
-      "id": "a16ebaca-9a5f-4379-b601-e1d9d3412abc",
+      "id": "f31042a3-6069-475c-b23d-0ffbaddda9a1",
       "name": "Build Outline",
       "credentials": {
         "openAiApi": {
-          "id": "PZfPwsui5EPhHQq2",
+          "id": "KDgyP2XuXvC5PlRq",
           "name": "OpenAi account"
         }
       }
@@ -243,14 +243,14 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        240,
-        -1200
+        1120,
+        1008
       ],
-      "id": "21592e70-b6bf-43ef-ad02-89a902688872",
+      "id": "a2d66ac7-8053-4364-a790-33ae1bf84134",
       "name": "Create $100M Product",
       "credentials": {
         "openAiApi": {
-          "id": "PZfPwsui5EPhHQq2",
+          "id": "KDgyP2XuXvC5PlRq",
           "name": "OpenAi account"
         }
       }
@@ -260,24 +260,22 @@
         "resource": "image",
         "model": "gpt-image-1",
         "prompt": "=You are an award-winning creative director and ebook cover designer. Your job is to turn any topic, offer, and audience into a single, scroll-stopping image.\n\nWe’re publishing an ebook titled “{{ $('Create Offer Title').item.json.message.content.selectedTitle }}” for people interested in “{{ $('Edit Fields').item.json.keyword }}.”\n\n1. Infer the primary demographic most likely to buy (age range, gender, profession, vibe).\n2. Craft a detailed prompt for GPT Image 1 that includes:\n- A central figure, real person or scene representing that demographic.\n- Visual metaphors or icons tied to the core offer (e.g., toolbox for productivity, rocket for scaling, plant sprouting for growth)  \n- Bold, legible typography for the title  \n- High-contrast palette — black & white plus **one accent color, choose color based on high converting color therapy**  \n- Modern, minimalist layout  \n- **Portrait orientation at 1:1.4 aspect ratio** (e.g., 1400 × 1000 px)",
-        "options": {
-          "returnImageUrls": false
-        }
+        "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        240,
-        -1360
+        1104,
+        816
       ],
-      "id": "de292151-ed60-458e-a7f6-dc8612b71b23",
+      "id": "a9010436-183d-4291-9403-ce0e46a68acf",
       "name": "Generate Image Cover",
       "alwaysOutputData": false,
       "retryOnFail": true,
       "waitBetweenTries": 2000,
       "credentials": {
         "openAiApi": {
-          "id": "PZfPwsui5EPhHQq2",
+          "id": "KDgyP2XuXvC5PlRq",
           "name": "OpenAi account"
         }
       }
@@ -305,10 +303,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        240,
-        -1080
+        1104,
+        1200
       ],
-      "id": "586d57c0-e674-40fb-a814-a4c9e66d042c",
+      "id": "47b22dd1-b645-4d5c-aa92-63c645304238",
       "name": "Set coverLink"
     },
     {
@@ -318,10 +316,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        400,
-        -1080
+        1264,
+        1200
       ],
-      "id": "cbc08437-c8e6-4148-8af2-6113aeff9a6c",
+      "id": "617f316a-6ad3-4c57-8702-173fcdc56208",
       "name": "Build HTML (ebook)"
     },
     {
@@ -349,14 +347,14 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        720,
-        -1640
+        1584,
+        432
       ],
-      "id": "d804b152-b491-4751-9f92-f6125ae5df98",
+      "id": "c6203699-395a-4001-a3aa-214043cb1763",
       "name": "Value Enhancer",
       "credentials": {
         "openAiApi": {
-          "id": "PZfPwsui5EPhHQq2",
+          "id": "KDgyP2XuXvC5PlRq",
           "name": "OpenAi account"
         }
       }
@@ -368,24 +366,11 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        720,
-        -1500
+        1584,
+        624
       ],
-      "id": "a903db54-bc96-4bfd-8c37-231c23fc0ab8",
+      "id": "44262c8b-2fff-4752-997c-f8238ad06a00",
       "name": "Build HTML (Value Enhancer)"
-    },
-    {
-      "parameters": {
-        "jsCode": "// Revised Code for \"Binary Data1\" Node\n\n// Check if the basic path to the data exists\nif (!items[0].binary || !items[0].binary.html || !items[0].binary.html.data) {\n  console.log(\"N8N_LOG_DEBUG: Unexpected input structure in Binary Data1. Item:\", JSON.stringify(items[0]));\n  throw new Error(\"Input from 'Build HTML (Value Enhancer)' did not provide data at items[0].binary.html.data as expected.\");\n}\n\nlet inputHtmlContent = items[0].binary.html.data;\nlet inputHtmlBuffer;\n\n// Try to create a buffer intelligently\nif (inputHtmlContent instanceof Buffer) {\n  inputHtmlBuffer = inputHtmlContent;\n} else if (typeof inputHtmlContent === 'string') {\n  inputHtmlBuffer = Buffer.from(inputHtmlContent, 'utf8');\n} else if (typeof inputHtmlContent === 'object' && inputHtmlContent.type === 'Buffer' && Array.isArray(inputHtmlContent.data)) {\n  // Sometimes Buffers get serialized to objects like { type: \"Buffer\", data: [...] }\n  inputHtmlBuffer = Buffer.from(inputHtmlContent.data);\n} else {\n  console.log(\"N8N_LOG_DEBUG: Data at items[0].binary.html.data is not a Buffer, string, or recognized Buffer object. Actual type:\", typeof inputHtmlContent, \"Value:\", JSON.stringify(inputHtmlContent));\n  throw new Error(\"Data at items[0].binary.html.data from 'Build HTML (Value Enhancer)' is not in a recognized format (Buffer, String, or serialized Buffer object).\");\n}\n\nconst inputMimeType = items[0].binary.html.mimeType || 'text/html';\nconst inputFileName = items[0].binary.html.fileName || 'value-enhancer.html';\n\nitems[0].binary.data = {\n  data: inputHtmlBuffer.toString('base64'),\n  mimeType: inputMimeType,\n  fileName: inputFileName\n};\n\ndelete items[0].binary.html;\n\nreturn items;"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        880,
-        -1500
-      ],
-      "id": "76b280ee-ef4c-4570-8c2d-5adbe55e4c3b",
-      "name": "Binary Data1"
     },
     {
       "parameters": {
@@ -404,19 +389,20 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        800,
-        -1180
+        1664,
+        1024
       ],
-      "id": "30ab5fa4-de4c-4c3a-ace6-30ade0c459ca",
+      "id": "a08e5545-3edf-4a67-9494-5e547d4e148f",
       "name": "Files Ready!"
     },
     {
       "parameters": {
-        "curlImport": "",
+        "preBuiltAgentsCalloutHttpRequest": "",
         "httpVariantWarning": "",
+        "curlImport": "",
         "method": "POST",
-        "url": "https://v2.convertapi.com/convert/html/to/docx",
         "": "",
+        "url": "https://v2.convertapi.com/convert/html/to/docx",
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "convertApi",
         "provideSslCertificates": false,
@@ -489,26 +475,27 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        400,
-        -920
+        1280,
+        1392
       ],
-      "id": "e66424d8-e490-40c5-83a3-badd7d1c079d",
+      "id": "b24ba922-9f7b-44b6-b644-8082a8839c95",
       "name": "Convert eBook to DOCX",
       "extendsCredential": "convertApi",
       "credentials": {
         "convertApi": {
-          "id": "2dquXVo6CGOMLc57",
+          "id": "qu9aLGk9znybZDIH",
           "name": "ConvertAPI account"
         }
       }
     },
     {
       "parameters": {
-        "curlImport": "",
+        "preBuiltAgentsCalloutHttpRequest": "",
         "httpVariantWarning": "",
+        "curlImport": "",
         "method": "POST",
-        "url": "https://v2.convertapi.com/convert/html/to/docx",
         "": "",
+        "url": "https://v2.convertapi.com/convert/html/to/docx",
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "convertApi",
         "provideSslCertificates": false,
@@ -536,15 +523,15 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        800,
-        -1340
+        1664,
+        832
       ],
-      "id": "516dee9c-dda6-429d-85bd-27f5b55727c6",
+      "id": "e8295b89-1d79-4419-9169-418c422178a7",
       "name": "Convert Value to DOCX",
       "extendsCredential": "convertApi",
       "credentials": {
         "convertApi": {
-          "id": "2dquXVo6CGOMLc57",
+          "id": "qu9aLGk9znybZDIH",
           "name": "ConvertAPI account"
         }
       }
@@ -558,27 +545,27 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -280,
-        -2060
+        592,
+        0
       ],
       "typeVersion": 1,
-      "id": "f0c76075-225e-434f-ab93-c2c816d8fa19",
+      "id": "91bd4b93-8322-4447-adb8-7a609346fb6c",
       "name": "Sticky Note"
     },
     {
       "parameters": {
         "content": "## | PHASE 2: DIGITAL ASSET CREATION\n\nPurpose: Starts AI content creation! This phase takes the strategic offer and automatically produces a **high-value complete ebook with a custom-designed cover**:\n\n1. An AI copywriter generates **captivating ebook titles** and selects the optimal one.\n2. An AI architect builds a **comprehensive ebook outline**.\n3. The all-new GPT-4 Image AI designs a unique, **professional ebook cover image** based on the title and topic.\n4. Then, an AI ghostwriter drafts the **entire ebook content** in engaging, easy-to-read format, meticulously following the outline. \n\n_Making raw ideas become a tangible asset!_",
-        "height": 1280,
+        "height": 1536,
         "width": 440,
         "color": 4
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        160,
-        -2060
+        1024,
+        0
       ],
       "typeVersion": 1,
-      "id": "f2cbb836-8b9b-405b-aefc-bd5d86235e6c",
+      "id": "b5dd46a5-ad5a-461e-862b-bf9c0ef140e1",
       "name": "Sticky Note1"
     },
     {
@@ -590,11 +577,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        620,
-        -2060
+        1488,
+        0
       ],
       "typeVersion": 1,
-      "id": "b3ecbda5-b17e-447b-b814-c3edeb4934e2",
+      "id": "5e8d8c1a-4021-4c5b-abfd-9762b415401e",
       "name": "Sticky Note2"
     },
     {
@@ -606,17 +593,17 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -860,
-        -2060
+        0,
+        0
       ],
       "typeVersion": 1,
-      "id": "fd073951-91a8-4cf1-98bc-19282e338de0",
+      "id": "feb4fdd7-d63e-4adf-b60b-a01aa3b0a1de",
       "name": "Sticky Note3"
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.cloudinary.com/v1_1/CLOUD_NAME/image/upload",
+        "url": "https://api.cloudinary.com/v1_1/dhicww4gk/image/upload",
         "sendBody": true,
         "contentType": "multipart-form-data",
         "bodyParameters": {
@@ -637,10 +624,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        400,
-        -1360
+        1264,
+        816
       ],
-      "id": "b00553e9-7e70-429b-b97a-ef56fb448274",
+      "id": "40718b93-8d97-4995-922e-1ce5994caf5a",
       "name": "Get Img Link"
     },
     {
@@ -650,11 +637,24 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        240,
-        -920
+        1120,
+        1392
       ],
-      "id": "5b1f513e-ba6b-4ff9-817e-f9b71cc95d53",
+      "id": "8083c377-d4ef-44e3-932d-777da36bc307",
       "name": "Binary Data"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Revised Code for \"Binary Data1\" Node\n\n// Check if the basic path to the data exists\nif (!items[0].binary || !items[0].binary.html || !items[0].binary.html.data) {\n  console.log(\"N8N_LOG_DEBUG: Unexpected input structure in Binary Data1. Item:\", JSON.stringify(items[0]));\n  throw new Error(\"Input from 'Build HTML (Value Enhancer)' did not provide data at items[0].binary.html.data as expected.\");\n}\n\nlet inputHtmlContent = items[0].binary.html.data;\nlet inputHtmlBuffer;\n\n// Try to create a buffer intelligently\nif (inputHtmlContent instanceof Buffer) {\n  inputHtmlBuffer = inputHtmlContent;\n} else if (typeof inputHtmlContent === 'string') {\n  inputHtmlBuffer = Buffer.from(inputHtmlContent, 'utf8');\n} else if (typeof inputHtmlContent === 'object' && inputHtmlContent.type === 'Buffer' && Array.isArray(inputHtmlContent.data)) {\n  // Sometimes Buffers get serialized to objects like { type: \"Buffer\", data: [...] }\n  inputHtmlBuffer = Buffer.from(inputHtmlContent.data);\n} else {\n  console.log(\"N8N_LOG_DEBUG: Data at items[0].binary.html.data is not a Buffer, string, or recognized Buffer object. Actual type:\", typeof inputHtmlContent, \"Value:\", JSON.stringify(inputHtmlContent));\n  throw new Error(\"Data at items[0].binary.html.data from 'Build HTML (Value Enhancer)' is not in a recognized format (Buffer, String, or serialized Buffer object).\");\n}\n\nconst inputMimeType = items[0].binary.html.mimeType || 'text/html';\nconst inputFileName = items[0].binary.html.fileName || 'value-enhancer.html';\n\nitems[0].binary.data = {\n  data: inputHtmlBuffer.toString('base64'),\n  mimeType: inputMimeType,\n  fileName: inputFileName\n};\n\ndelete items[0].binary.html;\n\nreturn items;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1744,
+        624
+      ],
+      "id": "532feb37-2c30-4a6e-8636-988c7edf723d",
+      "name": "Binary Data (Value Enhancer)"
     }
   ],
   "pinData": {},
@@ -795,18 +795,7 @@
       "main": [
         [
           {
-            "node": "Binary Data1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Binary Data1": {
-      "main": [
-        [
-          {
-            "node": "Convert Value to DOCX",
+            "node": "Binary Data (Value Enhancer)",
             "type": "main",
             "index": 0
           }
@@ -856,24 +845,35 @@
           }
         ]
       ]
+    },
+    "Binary Data (Value Enhancer)": {
+      "main": [
+        [
+          {
+            "node": "Convert Value to DOCX",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
-  "active": false,
+  "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "02bbaa25-b490-49f2-bdfb-4993c309890f",
+  "versionId": "78496a52-654d-4d40-8636-b8faea67289e",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "a6a726521446e07b3509e1a4db5b10f919c40ef2cf67c34be7f5692dfa478eb6"
+    "instanceId": "6910c6c2fc8c063d5c1ed14d7a7b2e9404e402a221682ba5e944d64a25bc5aa4"
   },
-  "id": "81qCcc9IZXfQDDkm",
+  "id": "21viw58JZ3up3PWo",
   "tags": [
     {
-      "createdAt": "2025-05-20T00:20:09.300Z",
-      "updatedAt": "2025-05-20T00:20:09.300Z",
-      "id": "1tnkxfmNmUnz3Ung",
-      "name": "Shared"
+      "name": "Shared",
+      "id": "nC9yhGiCMMD43yvh",
+      "createdAt": "2025-09-03T02:42:25.128Z",
+      "updatedAt": "2025-09-03T02:42:25.128Z"
     }
   ]
 }

@@ -3,29 +3,6 @@
   "nodes": [
     {
       "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "c6285251-90c9-49c8-86d9-3f701d956b0d",
-              "name": "keyword",
-              "value": "={{ $json.chatInput }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        832,
-        432
-      ],
-      "id": "182b3751-97ec-4843-bd9a-e412fa164434",
-      "name": "Edit Fields"
-    },
-    {
-      "parameters": {
         "modelId": {
           "__rl": true,
           "value": "gpt-4.1",
@@ -48,8 +25,8 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        672,
-        624
+        1088,
+        -1296
       ],
       "id": "fc0c7935-5d71-4079-93f1-a5ee4b839859",
       "name": "Brainstorming Pains",
@@ -75,7 +52,7 @@
               "role": "system"
             },
             {
-              "content": "=Below are the top pains and frustrations people face around “{{ $('Edit Fields').item.json.keyword }}”:\n\n{{ $json.message.content }}\n\nFor each pain, write one concise solution that directly addresses it. \n\nReturn the solutions as a numbered list, keeping each item to one sentence.\n"
+              "content": "=Below are the top pains and frustrations people face around “{{ $('Map Chat Input').item.json.keyword }}”:\n\n{{ $json.message.content }}\n\nFor each pain, write one concise solution that directly addresses it. \n\nReturn the solutions as a numbered list, keeping each item to one sentence.\n"
             }
           ]
         },
@@ -84,8 +61,8 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        672,
-        816
+        1360,
+        -1296
       ],
       "id": "77d7835a-ef4f-42a0-8d55-03efc357b810",
       "name": "Generate Solutions",
@@ -103,8 +80,8 @@
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
       "typeVersion": 1.1,
       "position": [
-        640,
-        432
+        592,
+        -1488
       ],
       "id": "32003e01-e81e-4b3e-bc79-cfb1ae6abadd",
       "name": "When chat message received",
@@ -126,7 +103,7 @@
               "role": "system"
             },
             {
-              "content": "=Topic / niche: “{{ $('Edit Fields').item.json.keyword }}”\n\nTop customer pains:\n{{ $('Brainstorming Pains').item.json.message.content }}\n\nYour task:\n1. Apply Alex Hormozi’s $100M Offers framework (Dream Outcome, Perceived Likelihood, Time Delay, Effort & Sacrifice).\n2. Craft a single, compelling offer that eliminates those pains.\n\nReturn in this exact format:\n\n• **Offer Title:** …\n• **Dream Outcome:** …\n• **Perceived Likelihood:** …\n• **Time Delay:** …\n• **Effort & Sacrifice:** …\n• **Key Features & Bonuses:** (3–5 bullets)\n"
+              "content": "=Topic / niche: “{{ $('Map Chat Input').item.json.keyword }}”\n\nTop customer pains:\n{{ $('Brainstorming Pains').item.json.message.content }}\n\nYour task:\n1. Apply Alex Hormozi’s $100M Offers framework (Dream Outcome, Perceived Likelihood, Time Delay, Effort & Sacrifice).\n2. Craft a single, compelling offer that eliminates those pains.\n\nReturn in this exact format:\n\n• **Offer Title:** …\n• **Dream Outcome:** …\n• **Perceived Likelihood:** …\n• **Time Delay:** …\n• **Effort & Sacrifice:** …\n• **Key Features & Bonuses:** (3–5 bullets)\n"
             }
           ]
         },
@@ -135,8 +112,8 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        672,
-        1008
+        1632,
+        -1296
       ],
       "id": "0843ea26-2c42-4a84-8142-1e164e078913",
       "name": "$100M Offer",
@@ -173,7 +150,7 @@
       "typeVersion": 1.8,
       "position": [
         1040,
-        368
+        -800
       ],
       "id": "4006ebb3-815b-4554-ba15-261f648f6bad",
       "name": "Create Offer Title",
@@ -199,7 +176,7 @@
               "role": "system"
             },
             {
-              "content": "=We’re writing an ebook titled “{{ $json.message.content.selectedTitle }}”.\n\nCreate a detailed outline that includes:\n\n1. **Introduction**  \n   • Hook readers with the core promise  \n   • Explain why this book matters for the {{ $('Edit Fields').item.json.keyword }} niche  \n\n2. **Section 1 – Section 6**  \n   • Give each section a bold, benefit-driven heading  \n   • Under every heading list 3–5 bullet points covering the sub-topics or steps  \n   • The finished book will expand each section to roughly 300–500 words  \n\n3. **Conclusion & 3-Step Action Plan**  \n   • Summarize key lessons  \n   • Provide three specific next steps readers can implement immediately  \n\nReturn the outline as a numbered list with sub-bullets under each heading.\n"
+              "content": "=We’re writing an ebook titled “{{ $json.message.content.selectedTitle }}”.\n\nCreate a detailed outline that includes:\n\n1. **Introduction**  \n   • Hook readers with the core promise  \n   • Explain why this book matters for the {{ $('Map Chat Input').item.json.keyword }} niche  \n\n2. **Section 1 – Section 6**  \n   • Give each section a bold, benefit-driven heading  \n   • Under every heading list 3–5 bullet points covering the sub-topics or steps  \n   • The finished book will expand each section to roughly 300–500 words  \n\n3. **Conclusion & 3-Step Action Plan**  \n   • Summarize key lessons  \n   • Provide three specific next steps readers can implement immediately  \n\nReturn the outline as a numbered list with sub-bullets under each heading.\n"
             }
           ]
         },
@@ -208,8 +185,8 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        1184,
-        560
+        1648,
+        -800
       ],
       "id": "f31042a3-6069-475c-b23d-0ffbaddda9a1",
       "name": "Build Outline",
@@ -235,7 +212,7 @@
               "role": "system"
             },
             {
-              "content": "=Title: “{{ $('Create Offer Title').item.json.message.content.selectedTitle }}”\n\nTarget niche: “{{ $('Edit Fields').item.json.keyword }}”\n\nBelow is the approved outline object:\n\n{{ $('Build Outline').item.json.message.content }}\n\nWrite the full ebook using that structure:\n\n• Keep every heading exactly as listed.  \n• For each section, expand its bullet points into 300–500 words of clear prose.  \n• Tone: friendly, confident, action-oriented (6th-grade reading level).  \n• Use short paragraphs and add the occasional bold phrase for emphasis.  \n• After the Conclusion, include the 3-step action plan as a numbered list.  \n\nReturn the completed manuscript as plain text—no additional commentary or JSON.\n"
+              "content": "=Title: “{{ $('Create Offer Title').item.json.message.content.selectedTitle }}”\n\nTarget niche: “{{ $('Map Chat Input').item.json.keyword }}”\n\nBelow is the approved outline object:\n\n{{ $('Build Outline').item.json.message.content }}\n\nWrite the full ebook using that structure:\n\n• Keep every heading exactly as listed.  \n• For each section, expand its bullet points into 300–500 words of clear prose.  \n• Tone: friendly, confident, action-oriented (6th-grade reading level).  \n• Use short paragraphs and add the occasional bold phrase for emphasis.  \n• After the Conclusion, include the 3-step action plan as a numbered list.  \n\nReturn the completed manuscript as plain text—no additional commentary or JSON.\n"
             }
           ]
         },
@@ -245,7 +222,7 @@
       "typeVersion": 1.8,
       "position": [
         1200,
-        944
+        -608
       ],
       "id": "a2d66ac7-8053-4364-a790-33ae1bf84134",
       "name": "Create $100M Product",
@@ -260,14 +237,14 @@
       "parameters": {
         "resource": "image",
         "model": "gpt-image-1",
-        "prompt": "=You are an award-winning creative director and ebook cover designer. Your job is to turn any topic, offer, and audience into a single, scroll-stopping image.\n\nWe’re publishing an ebook titled “{{ $('Create Offer Title').item.json.message.content.selectedTitle }}” for people interested in “{{ $('Edit Fields').item.json.keyword }}.”\n\n1. Infer the primary demographic most likely to buy (age range, gender, profession, vibe).\n2. Craft a detailed prompt for GPT Image 1 that includes:\n- A central figure, real person or scene representing that demographic.\n- Visual metaphors or icons tied to the core offer (e.g., toolbox for productivity, rocket for scaling, plant sprouting for growth)  \n- Bold, legible typography for the title  \n- High-contrast palette — black & white plus **one accent color, choose color based on high converting color therapy**  \n- Modern, minimalist layout  \n- **Portrait orientation at 1:1.4 aspect ratio** (e.g., 1400 × 1000 px)",
+        "prompt": "=You are an award-winning creative director and ebook cover designer. Your job is to turn any topic, offer, and audience into a single, scroll-stopping image.\n\nWe’re publishing an ebook titled “{{ $('Create Offer Title').item.json.message.content.selectedTitle }}” for people interested in “{{ $('Map Chat Input').item.json.keyword }}.”\n\n1. Infer the primary demographic most likely to buy (age range, gender, profession, vibe).\n2. Craft a detailed prompt for GPT Image 1 that includes:\n- A central figure, real person or scene representing that demographic.\n- Visual metaphors or icons tied to the core offer (e.g., toolbox for productivity, rocket for scaling, plant sprouting for growth)  \n- Bold, legible typography for the title  \n- High-contrast palette — black & white plus **one accent color, choose color based on high converting color therapy**  \n- Modern, minimalist layout  \n- **Portrait orientation at 1:1.4 aspect ratio** (e.g., 1400 × 1000 px)",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        1072,
-        752
+        1936,
+        -800
       ],
       "id": "a9010436-183d-4291-9403-ce0e46a68acf",
       "name": "Generate Image Cover",
@@ -304,8 +281,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1072,
-        1152
+        1488,
+        -608
       ],
       "id": "47b22dd1-b645-4d5c-aa92-63c645304238",
       "name": "Set coverLink"
@@ -317,8 +294,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1312,
-        1152
+        1648,
+        -608
       ],
       "id": "617f316a-6ad3-4c57-8702-173fcdc56208",
       "name": "Build HTML (ebook)"
@@ -338,7 +315,7 @@
               "role": "system"
             },
             {
-              "content": "=Title: “{{ $('Create Offer Title').item.json.message.content.selectedTitle }}”\nTopic: “{{ $('Edit Fields').item.json.keyword }}”\nOffer summary:\n{{ $('$100M Offer').item.json.message.content }}\n\n1. Propose 5 high-value bonuses. For each:\n- name\n- format (template, checklist, etc.)\n- benefit (under 20 words)\n\n2. Suggest a paid One-Time Offer (price: $97–$297) that amplifies results. Include:\n- name\n- description\n- deliverables (3–5 bullets)\n\nReturn JSON:\n\n{\n  \"bonuses\": [ { \"name\": \"\", \"format\": \"\", \"benefit\": \"\" }, … ],\n  \"oto\": {\n    \"name\": \"\", \"price\": 97, \"description\": \"\", \"deliverables\": []\n  },\n  \"workbookOutline\": [\n    { \"section\": \"\", \"description\": \"\" }\n  ]\n}\n"
+              "content": "=Title: “{{ $('Create Offer Title').item.json.message.content.selectedTitle }}”\nTopic: “{{ $('Map Chat Input').item.json.keyword }}”\nOffer summary:\n{{ $('$100M Offer').item.json.message.content }}\n\n1. Propose 5 high-value bonuses. For each:\n- name\n- format (template, checklist, etc.)\n- benefit (under 20 words)\n\n2. Suggest a paid One-Time Offer (price: $97–$297) that amplifies results. Include:\n- name\n- description\n- deliverables (3–5 bullets)\n\nReturn JSON:\n\n{\n  \"bonuses\": [ { \"name\": \"\", \"format\": \"\", \"benefit\": \"\" }, … ],\n  \"oto\": {\n    \"name\": \"\", \"price\": 97, \"description\": \"\", \"deliverables\": []\n  },\n  \"workbookOutline\": [\n    { \"section\": \"\", \"description\": \"\" }\n  ]\n}\n"
             }
           ]
         },
@@ -348,8 +325,8 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        1600,
-        368
+        1040,
+        -192
       ],
       "id": "c6203699-395a-4001-a3aa-214043cb1763",
       "name": "Value Enhancer",
@@ -367,8 +344,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1552,
-        560
+        1328,
+        -192
       ],
       "id": "44262c8b-2fff-4752-997c-f8238ad06a00",
       "name": "Build HTML (Value Enhancer)"
@@ -390,8 +367,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1808,
-        1152
+        3136,
+        -256
       ],
       "id": "a08e5545-3edf-4a67-9494-5e547d4e148f",
       "name": "Files Ready!"
@@ -476,8 +453,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1312,
-        1536
+        2048,
+        -416
       ],
       "id": "b24ba922-9f7b-44b6-b644-8082a8839c95",
       "name": "Convert eBook to DOCX",
@@ -524,8 +501,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1552,
-        752
+        1680,
+        -192
       ],
       "id": "e8295b89-1d79-4419-9169-418c422178a7",
       "name": "Convert Value to DOCX",
@@ -539,15 +516,15 @@
     },
     {
       "parameters": {
-        "content": "## | PHASE 1: AI-POWERED IDEATION & STRATEGIC OFFER DESIGN\n\nPurpose: Turn a keyword into a fully-fledged digital asset! In this phase, a series of specialized AI agents collaborate:\n\n1. AI uncovers critical **customer pain points** related to your idea.\n2. Next, another AI crafts targeted **solutions** for each pain.\n3. Finally, a strategic AI applies proven marketing frameworks (like the '$100M Offer') to forge these insights into an **irresistible core offer**, complete with a compelling title, dream outcome, and unique selling propositions. \n\n**This isn't just brainstorming; it's AI-driven strategy in action!**",
-        "height": 1280,
-        "width": 420,
+        "content": "",
+        "height": 464,
+        "width": 1348,
         "color": 5
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        592,
-        0
+        576,
+        -1328
       ],
       "typeVersion": 1,
       "id": "91bd4b93-8322-4447-adb8-7a609346fb6c",
@@ -555,47 +532,15 @@
     },
     {
       "parameters": {
-        "content": "## | PHASE 2: DIGITAL ASSET CREATION\n\nPurpose: Starts AI content creation! This phase takes the strategic offer and automatically produces a **high-value complete ebook with a custom-designed cover**:\n\n1. An AI copywriter generates **captivating ebook titles** and selects the optimal one.\n2. An AI architect builds a **comprehensive ebook outline**.\n3. The all-new GPT-4 Image AI designs a unique, **professional ebook cover image** based on the title and topic.\n4. Then, an AI ghostwriter drafts the **entire ebook content** in engaging, easy-to-read format, meticulously following the outline. \n\n_Making raw ideas become a tangible asset!_",
-        "height": 1904,
-        "width": 440,
-        "color": 4
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "position": [
-        1024,
-        0
-      ],
-      "typeVersion": 1,
-      "id": "b5dd46a5-ad5a-461e-862b-bf9c0ef140e1",
-      "name": "Sticky Note1"
-    },
-    {
-      "parameters": {
-        "content": "## | PHASE 3: VALUE STACKING & FINAL ASSET DELIVERY\n\nPurpose: **Maximizing value is key!** Here, an AI strategist generates a 'Value Enhancer' package – creating compelling bonuses, a one-time-offer, and a workbook outline to complement your main product.\n\nThe grand finale: Both your main Ebook DOCX and the Value Enhancer DOCX are neatly packaged with their download links into a final message, ready to be sent back to you in the chat. \n\nAll this from a single keyword to two complete, ready-to-use digital products.\n\n**All orchestrated by AI and automation!**",
-        "height": 1904,
-        "width": 460,
-        "color": 6
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "position": [
-        1488,
-        0
-      ],
-      "typeVersion": 1,
-      "id": "5e8d8c1a-4021-4c5b-abfd-9762b415401e",
-      "name": "Sticky Note2"
-    },
-    {
-      "parameters": {
         "content": "# ⭐️ How to Set Up to Run on Your Account\n**Author:** Don Lyons from [Effortless Digital](https://www.instagram.com/effortlessdigitaldon/)  \n\nThis quick-start guide shows you how to set up your account to work with OpenAI for images and content, and ConvertAPI to get the final output in .docx format.\n\n## 🔳 Step 1: Set Up OpenAI for Content & Image Generation\n**Cost Note:** OpenAI's API will cost around 0.25 for each completed PDF product, Bonus Idea doc and Ecover Image. _Definitely beats 2hrs doing it yourself_\n\n1. Go to [OpenAI API Platform](https://platform.openai.com/api-keys)  \n2. Create an account (if you don’t have one).  \n3. Generate an API key.  \n4. Create a credential using that key.  \n**Note:** If you use the 4o image generation model, OpenAI will ask you to verify your identity. They do this to prevent misuse.\n\n## 🔳 Step 2: Set Up ConvertAPI (for DOCX Conversion)\n1.  **Go to:** [ConvertAPI Website](https://www.convertapi.com/)\n2.  **Sign Up:** Create a free account.\n3.  **Find API Secret:** After signing up, navigate to \"Authentication -> Secret Key\". You should find your \"API Secret\" (it starts with secret).\n4.  **Add to n8n:** In n8n, go to \"Credentials\" > \"New\". Search for \"ConvertAPI\" and create a new credential. Paste your API Secret into the appropriate field. Give it a name.\n\n**Note:** ConvertAPI's free tier limit is 250 runs. For extensive use, you might need a paid plan. This workflow uses it to convert HTML to DOCX. You get 250 runs for free.\n\n## 🔳 Step 3: Set Up Cloudinary (Image Uploading Tool)\n**Cost Note:** FREE (free plan lets you upload 1,000s of images each month)\n\n### 1. Create Your Free Account\n- Go to: https://cloudinary.com/users/register_free\n- Sign up for a free account\n\n### 2. Get Your Cloud Name\n- Log into your Cloudinary dashboard\n- Find your **Cloud Name** at the top of the dashboard\n- **Copy this name** - you'll need it in step 5\n\n### 3. Create an Upload Preset\n- Click the **Settings** gear icon (bottom left)\n- Navigate to the **Upload** tab\n- Click **\"+ Add upload preset\"**\n- Configure the preset:\n  - Change **Signing Mode** from \"Signed\" to **\"Unsigned\"**\n  - Set **Preset name** to: `aiasset_preset`\n  - Leave all other settings as default\n  - Click **Save**\n\n### 4. Update the n8n Workflow\nIn your n8n workflow, find the **\"Get Img Link\"** node and:\n- Replace `YOUR_CLOUD_NAME` in the URL with your actual Cloud Name from step 2\n- The URL should look like:\nhttps://api.cloudinary.com/v1_1/doryejrxy/image/upload\nBut with YOUR cloud name instead of \"doodyyrxy\"\n\n### 5. Test Your Setup\n- The workflow is now ready to upload images to your Cloudinary account\n- Each uploaded image will get a unique URL that the workflow uses for the ebook cover\n\n**Note:** Make sure your upload preset name is exactly `aiasset_preset` or the workflow won't work!",
-        "height": 1780,
+        "height": 1700,
         "width": 540,
         "color": 7
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         0,
-        0
+        -1504
       ],
       "typeVersion": 1,
       "id": "feb4fdd7-d63e-4adf-b60b-a01aa3b0a1de",
@@ -625,8 +570,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1072,
-        944
+        1040,
+        -608
       ],
       "id": "40718b93-8d97-4995-922e-1ce5994caf5a",
       "name": "Get Img Link"
@@ -638,8 +583,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1072,
-        1424
+        1808,
+        -608
       ],
       "id": "8083c377-d4ef-44e3-932d-777da36bc307",
       "name": "Binary Data"
@@ -651,8 +596,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1792,
-        560
+        1504,
+        -192
       ],
       "id": "532feb37-2c30-4a6e-8636-988c7edf723d",
       "name": "Binary Data (Value Enhancer)"
@@ -665,8 +610,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1312,
-        368
+        1328,
+        -800
       ],
       "id": "a82f959a-3904-4c0d-8a16-6c0204440439",
       "name": "Slugify Title"
@@ -691,8 +636,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        1296,
-        1728
+        2368,
+        -416
       ],
       "id": "3459d7ab-1c75-4b71-90c3-de296e41ac86",
       "name": "Upload ebook",
@@ -723,8 +668,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        1552,
-        1152
+        2368,
+        -32
       ],
       "id": "2abe6ec2-7ec3-4c36-a51f-ba472d61afda",
       "name": "Upload enhancer",
@@ -743,8 +688,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1088,
-        1728
+        2208,
+        -416
       ],
       "id": "0417ebc6-ed6d-4926-b71f-a93c64566e73",
       "name": "HTTP Request"
@@ -757,8 +702,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1552,
-        960
+        2208,
+        -32
       ],
       "id": "096a1d44-d395-4a6c-9f06-ae8d2d56ee04",
       "name": "HTTP Request1"
@@ -770,8 +715,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        1552,
-        1376
+        2768,
+        -416
       ],
       "id": "f8dc8f97-e4ad-4c89-95fe-3968f9749eb3",
       "name": "File Uploads"
@@ -783,8 +728,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        1792,
-        768
+        2960,
+        -256
       ],
       "id": "7a2267ba-8d27-4dcc-8a59-24b05168f35c",
       "name": "Merge"
@@ -809,8 +754,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        1312,
-        752
+        2368,
+        -800
       ],
       "id": "548ed3b2-a4b3-4c68-8274-f47dc01bb02a",
       "name": "Upload cover image",
@@ -841,8 +786,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        1312,
-        1360
+        2368,
+        -608
       ],
       "id": "b2bc20cc-d88f-498c-8485-4cf64eea765e",
       "name": "Upload HTML",
@@ -874,8 +819,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        1072,
-        560
+        1488,
+        -800
       ],
       "id": "99e3b9b8-ea3a-4775-b39f-295ca4871803",
       "name": "Create folder",
@@ -885,21 +830,113 @@
           "name": "Google Drive account"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "## | PHASE 1: AI-POWERED IDEATION & STRATEGIC OFFER DESIGN\n\nPurpose: Turn a keyword into a fully-fledged digital asset! In this phase, a series of specialized AI agents collaborate:\n\n1. AI uncovers critical **customer pain points** related to your idea.\n2. Next, another AI crafts targeted **solutions** for each pain.\n3. Finally, a strategic AI applies proven marketing frameworks (like the '$100M Offer') to forge these insights into an **irresistible core offer**, complete with a compelling title, dream outcome, and unique selling propositions. \n\n**This isn't just brainstorming; it's AI-driven strategy in action!**",
+        "height": 432,
+        "width": 384,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        592,
+        -1312
+      ],
+      "typeVersion": 1,
+      "id": "68719efb-3854-4b34-a747-169822343ae6",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c6285251-90c9-49c8-86d9-3f701d956b0d",
+              "name": "keyword",
+              "value": "={{ $json.chatInput }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        752,
+        -1488
+      ],
+      "id": "182b3751-97ec-4843-bd9a-e412fa164434",
+      "name": "Map Chat Input"
+    },
+    {
+      "parameters": {
+        "content": "",
+        "height": 576,
+        "width": 1972,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        576,
+        -832
+      ],
+      "typeVersion": 1,
+      "id": "7511db06-dc87-408d-b90e-96e253ce3287",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "## | PHASE 2: DIGITAL ASSET CREATION\n\nPurpose: Starts AI content creation! This phase takes the strategic offer and automatically produces a **high-value complete ebook with a custom-designed cover**:\n\n1. An AI copywriter generates **captivating ebook titles** and selects the optimal one.\n2. An AI architect builds a **comprehensive ebook outline**.\n3. The all-new GPT-4 Image AI designs a unique, **professional ebook cover image** based on the title and topic.\n4. Then, an AI ghostwriter drafts the **entire ebook content** in engaging, easy-to-read format, meticulously following the outline. \n\n_Making raw ideas become a tangible asset!_",
+        "height": 432,
+        "width": 384,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        592,
+        -816
+      ],
+      "typeVersion": 1,
+      "id": "da09d0df-98a5-4845-82da-25671ea051bc",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "",
+        "height": 416,
+        "width": 1968,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        576,
+        -224
+      ],
+      "typeVersion": 1,
+      "id": "02895b80-1f0c-4ec5-a07e-0aa7c5614ca6",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## | PHASE 3: VALUE STACKING & FINAL ASSET DELIVERY\n\nPurpose: **Maximizing value is key!** Here, an AI strategist generates a 'Value Enhancer' package – creating compelling bonuses, a one-time-offer, and a workbook outline to complement your main product.\n\nThe grand finale: Both your main Ebook DOCX and the Value Enhancer DOCX are neatly packaged with their download links into a final message, ready to be sent back to you in the chat. \n\nAll this from a single keyword to two complete, ready-to-use digital products.\n\n**All orchestrated by AI and automation!**",
+        "height": 384,
+        "width": 384,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        592,
+        -208
+      ],
+      "typeVersion": 1,
+      "id": "dff41b45-02a4-4d8d-9ea1-f0dbbb43c4f0",
+      "name": "Sticky Note7"
     }
   ],
   "pinData": {},
   "connections": {
-    "Edit Fields": {
-      "main": [
-        [
-          {
-            "node": "Brainstorming Pains",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Brainstorming Pains": {
       "main": [
         [
@@ -926,7 +963,7 @@
       "main": [
         [
           {
-            "node": "Edit Fields",
+            "node": "Map Chat Input",
             "type": "main",
             "index": 0
           }
@@ -1064,7 +1101,7 @@
           {
             "node": "Merge",
             "type": "main",
-            "index": 0
+            "index": 1
           }
         ]
       ]
@@ -1173,7 +1210,7 @@
           {
             "node": "Merge",
             "type": "main",
-            "index": 1
+            "index": 0
           }
         ]
       ]
@@ -1221,13 +1258,24 @@
           }
         ]
       ]
+    },
+    "Map Chat Input": {
+      "main": [
+        [
+          {
+            "node": "Brainstorming Pains",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "dee69824-2503-49f8-a36b-2ed6ffb686a2",
+  "versionId": "991dca1f-be66-4d37-a9a7-3b9eff3d4746",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "6910c6c2fc8c063d5c1ed14d7a7b2e9404e402a221682ba5e944d64a25bc5aa4"

@@ -49,7 +49,7 @@
       "typeVersion": 1.8,
       "position": [
         672,
-        592
+        624
       ],
       "id": "fc0c7935-5d71-4079-93f1-a5ee4b839859",
       "name": "Brainstorming Pains",
@@ -85,7 +85,7 @@
       "typeVersion": 1.8,
       "position": [
         672,
-        720
+        816
       ],
       "id": "77d7835a-ef4f-42a0-8d55-03efc357b810",
       "name": "Generate Solutions",
@@ -108,7 +108,8 @@
       ],
       "id": "32003e01-e81e-4b3e-bc79-cfb1ae6abadd",
       "name": "When chat message received",
-      "webhookId": "4ffcb028-c596-4a87-913f-bb6e643a5f5a"
+      "webhookId": "4ffcb028-c596-4a87-913f-bb6e643a5f5a",
+      "alwaysOutputData": false
     },
     {
       "parameters": {
@@ -135,7 +136,7 @@
       "typeVersion": 1.8,
       "position": [
         672,
-        864
+        1008
       ],
       "id": "0843ea26-2c42-4a84-8142-1e164e078913",
       "name": "$100M Offer",
@@ -171,8 +172,8 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        1104,
-        432
+        1040,
+        368
       ],
       "id": "4006ebb3-815b-4554-ba15-261f648f6bad",
       "name": "Create Offer Title",
@@ -207,8 +208,8 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        1120,
-        624
+        1184,
+        560
       ],
       "id": "f31042a3-6069-475c-b23d-0ffbaddda9a1",
       "name": "Build Outline",
@@ -243,8 +244,8 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        1120,
-        1008
+        1200,
+        944
       ],
       "id": "a2d66ac7-8053-4364-a790-33ae1bf84134",
       "name": "Create $100M Product",
@@ -265,8 +266,8 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        1104,
-        816
+        1072,
+        752
       ],
       "id": "a9010436-183d-4291-9403-ce0e46a68acf",
       "name": "Generate Image Cover",
@@ -303,8 +304,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1104,
-        1200
+        1072,
+        1152
       ],
       "id": "47b22dd1-b645-4d5c-aa92-63c645304238",
       "name": "Set coverLink"
@@ -316,8 +317,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1264,
-        1200
+        1312,
+        1152
       ],
       "id": "617f316a-6ad3-4c57-8702-173fcdc56208",
       "name": "Build HTML (ebook)"
@@ -347,8 +348,8 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        1584,
-        432
+        1600,
+        368
       ],
       "id": "c6203699-395a-4001-a3aa-214043cb1763",
       "name": "Value Enhancer",
@@ -361,13 +362,13 @@
     },
     {
       "parameters": {
-        "jsCode": "/**\n * Build HTML (Value Enhancer) for DOCX conversion.\n * Returns binary HTML for the next \"Binary Data1\" node.\n */\n\n// 1) Grab and parse VE JSON from the correct path\nconst rawOpenAiOutput = $node[\"Value Enhancer\"].json;\nlet veData = {}; // This will hold the object {bonuses, workbookOutline, oto}\n\nif (rawOpenAiOutput && rawOpenAiOutput.message && rawOpenAiOutput.message.content) {\n    const contentField = rawOpenAiOutput.message.content;\n    if (typeof contentField === 'string' && contentField.trim().startsWith('{')) {\n        try {\n            veData = JSON.parse(contentField);\n        } catch (e) {\n            console.log(\"N8N_LOG_ERROR (Build HTML Value Enhancer): Failed to parse AI content as JSON. Content:\", contentField, \"Error:\", e);\n            // veData remains {}\n        }\n    } else if (typeof contentField === 'object' && contentField !== null) {\n        veData = contentField; // It's already an object\n    } else {\n        console.log(\"N8N_LOG_ERROR (Build HTML Value Enhancer): AI content is not a string or object. Content:\", contentField);\n        // veData remains {}\n    }\n} else {\n    console.log(\"N8N_LOG_ERROR (Build HTML Value Enhancer): Expected path .message.content not found in Value Enhancer output. Raw Output:\", JSON.stringify(rawOpenAiOutput));\n    // veData remains {}\n}\n\n// 2) Safe-default arrays/objects using the extracted veData\nconst bonuses  = Array.isArray(veData.bonuses) ? veData.bonuses : [];\nconst workbook = Array.isArray(veData.workbookOutline) ? veData.workbookOutline : []; // Check AI prompt for exact key name\nconst oto      = (veData.oto && typeof veData.oto === 'object') ? veData.oto : { name:\"\", price:\"\", description:\"\", deliverables:[] };\n\n// 3) Helpers → build inner HTML lists\nconst listItems = (arr, templateFn) => {\n  if (!Array.isArray(arr)) return '';\n  return arr.map(item => item ? templateFn(item) : '').join(\"\"); // Added check for item\n};\n\nconst bonusHtml = `<ul>${listItems(bonuses, b =>\n  `<li><strong>${b.name || \"N/A\"}</strong> (${b.format || \"N/A\"}) – ${b.benefit || \"N/A\"}</li>`\n)}</ul>`;\n\nconst workbookHtml = `<ol>${listItems(workbook, w =>\n  `<li><strong>${w.section || \"N/A\"}</strong>: ${w.description || \"N/A\"}</li>`\n)}</ol>`;\n\n// Ensure oto.deliverables is an array before mapping\nconst otoDeliverables = Array.isArray(oto.deliverables) ? oto.deliverables : [];\nconst otoHtml = `\n  <h2>One-Time Offer — ${oto.name || \"N/A\"} ($${oto.price || \"N/A\"})</h2>\n  <p>${oto.description || \"N/A\"}</p>\n  <ul>${listItems(otoDeliverables, d => `<li>${d || \"N/A\"}</li>`)}</ul>\n`;\n\n// 4) Assemble full HTML document with DOCX-friendly styles\nconst fullHtml = `<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\"/>\n  <title>Value Enhancer</title>\n  <style>\n    /* Styles optimized for HTML to DOCX conversion */\n    body {\n      font-family: Arial, Helvetica, sans-serif;\n      font-size: 12pt; /* Approx 16px - standard for documents */\n      line-height: 1.4;\n      color: #000000;\n      margin: 2cm 1.5cm; /* Page Margins: Top/Bottom Left/Right. Adjust as needed. */\n    }\n    h1 {\n      font-size: 18pt; /* Larger for main title */\n      font-weight: bold;\n      color: #000000;\n      margin-top: 0; /* Main title often at the very top */\n      margin-bottom: 0.8em;\n      text-align: center; /* Optional: Center main title */\n    }\n    h2 {\n      font-size: 14pt; /* Sub-headings slightly smaller */\n      font-weight: bold;\n      color: #000000;\n      margin-top: 1.2em;\n      margin-bottom: 0.4em;\n      page-break-after: avoid;\n    }\n    p {\n      margin-top: 0;\n      margin-bottom: 0.6em;\n    }\n    ul, ol {\n      margin-top: 0.2em;\n      margin-bottom: 0.8em;\n      padding-left: 1.5em; /* Standard list indentation */\n    }\n    li {\n      margin-bottom: 0.2em;\n    }\n    strong {\n      font-weight: bold;\n    }\n  </style>\n</head>\n<body>\n  <h1>Bonus Vault &amp; Value Enhancer</h1>\n  \n  <h2>Bonus Bundle</h2>\n  ${bonusHtml}\n  \n  <h2>Workbook Outline</h2>\n  ${workbookHtml}\n  \n  ${otoHtml}\n</body>\n</html>`;\n\n// 5) Return as an object with a binary property 'html',\n//    which itself is an object containing the data Buffer.\n//    This is what \"Binary Data1\" node expects as input.\nreturn [{\n  json: {}, // Keep json part minimal or add useful metadata if needed\n  binary: {\n    html: { // This is the binary property name \"Binary Data1\" will look for\n      data: Buffer.from(fullHtml, \"utf8\"), // The HTML content as a Buffer\n      mimeType: \"text/html\",\n      fileName: \"value-enhancer.html\"\n    }\n  }\n}];"
+        "jsCode": "/**\n * Build HTML (Value Enhancer) for DOCX conversion.\n * Returns binary HTML for the next \"Binary Data1\" node.\n */\n\n// 1) Grab and parse VE JSON from the correct path\nconst rawOpenAiOutput = $node[\"Value Enhancer\"].json;\nlet veData = {}; // This will hold the object {bonuses, workbookOutline, oto}\n\nif (rawOpenAiOutput && rawOpenAiOutput.message && rawOpenAiOutput.message.content) {\n    const contentField = rawOpenAiOutput.message.content;\n    if (typeof contentField === 'string' && contentField.trim().startsWith('{')) {\n        try {\n            veData = JSON.parse(contentField);\n        } catch (e) {\n            console.log(\"N8N_LOG_ERROR (Build HTML Value Enhancer): Failed to parse AI content as JSON. Content:\", contentField, \"Error:\", e);\n            // veData remains {}\n        }\n    } else if (typeof contentField === 'object' && contentField !== null) {\n        veData = contentField; // It's already an object\n    } else {\n        console.log(\"N8N_LOG_ERROR (Build HTML Value Enhancer): AI content is not a string or object. Content:\", contentField);\n        // veData remains {}\n    }\n} else {\n    console.log(\"N8N_LOG_ERROR (Build HTML Value Enhancer): Expected path .message.content not found in Value Enhancer output. Raw Output:\", JSON.stringify(rawOpenAiOutput));\n    // veData remains {}\n}\n\n// 2) Safe-default arrays/objects using the extracted veData\nconst bonuses  = Array.isArray(veData.bonuses) ? veData.bonuses : [];\nconst workbook = Array.isArray(veData.workbookOutline) ? veData.workbookOutline : []; // Check AI prompt for exact key name\nconst oto      = (veData.oto && typeof veData.oto === 'object') ? veData.oto : { name:\"\", price:\"\", description:\"\", deliverables:[] };\n\n// 3) Helpers → build inner HTML lists\nconst listItems = (arr, templateFn) => {\n  if (!Array.isArray(arr)) return '';\n  return arr.map(item => item ? templateFn(item) : '').join(\"\"); // Added check for item\n};\n\nconst bonusHtml = `<ul>${listItems(bonuses, b =>\n  `<li><strong>${b.name || \"N/A\"}</strong> (${b.format || \"N/A\"}) – ${b.benefit || \"N/A\"}</li>`\n)}</ul>`;\n\nconst workbookHtml = `<ol>${listItems(workbook, w =>\n  `<li><strong>${w.section || \"N/A\"}</strong>: ${w.description || \"N/A\"}</li>`\n)}</ol>`;\n\n// Ensure oto.deliverables is an array before mapping\nconst otoDeliverables = Array.isArray(oto.deliverables) ? oto.deliverables : [];\nconst otoHtml = `\n  <h2>One-Time Offer — ${oto.name || \"N/A\"} ($${oto.price || \"N/A\"})</h2>\n  <p>${oto.description || \"N/A\"}</p>\n  <ul>${listItems(otoDeliverables, d => `<li>${d || \"N/A\"}</li>`)}</ul>\n`;\n\n// 4) Assemble full HTML document with DOCX-friendly styles\nconst fullHtml = `<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\"/>\n  <title>Value Enhancer</title>\n  <style>\n    /* Styles optimized for HTML to DOCX conversion */\n    body {\n      font-family: Arial, Helvetica, sans-serif;\n      font-size: 12pt; /* Approx 16px - standard for documents */\n      line-height: 1.4;\n      color: #000000;\n      margin: 2cm 1.5cm; /* Page Margins: Top/Bottom Left/Right. Adjust as needed. */\n    }\n    h1 {\n      font-size: 18pt; /* Larger for main title */\n      font-weight: bold;\n      color: #000000;\n      margin-top: 0; /* Main title often at the very top */\n      margin-bottom: 0.8em;\n      text-align: center; /* Optional: Center main title */\n    }\n    h2 {\n      font-size: 14pt; /* Sub-headings slightly smaller */\n      font-weight: bold;\n      color: #000000;\n      margin-top: 1.2em;\n      margin-bottom: 0.4em;\n      page-break-after: avoid;\n    }\n    p {\n      margin-top: 0;\n      margin-bottom: 0.6em;\n    }\n    ul, ol {\n      margin-top: 0.2em;\n      margin-bottom: 0.8em;\n      padding-left: 1.5em; /* Standard list indentation */\n    }\n    li {\n      margin-bottom: 0.2em;\n    }\n    strong {\n      font-weight: bold;\n    }\n  </style>\n</head>\n<body>\n  <h1>Bonus Vault &amp; Value Enhancer</h1>\n  \n  <h2>Bonus Bundle</h2>\n  ${bonusHtml}\n  \n  <h2>Workbook Outline</h2>\n  ${workbookHtml}\n  \n  ${otoHtml}\n</body>\n</html>`;\n\n// 5) Return as an object with a binary property 'html',\n//    which itself is an object containing the data Buffer.\n//    This is what \"Binary Data1\" node expects as input.\nreturn [{\n  json: {}, // Keep json part minimal or add useful metadata if needed\n  binary: {\n    html: { // This is the binary property name \"Binary Data1\" will look for\n      data: Buffer.from(fullHtml, \"utf8\"), // The HTML content as a Buffer\n      mimeType: \"text/html\",\n      fileName: $node[\"Slugify Title\"].json.slug + \"_value-enhancer.html\"\n    }\n  }\n}];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1584,
-        624
+        1552,
+        560
       ],
       "id": "44262c8b-2fff-4752-997c-f8238ad06a00",
       "name": "Build HTML (Value Enhancer)"
@@ -379,7 +380,7 @@
             {
               "id": "8abb96ad-9f7e-4ad6-88e2-b4a96d475db1",
               "name": "text",
-              "value": "=✅ Your product is ready!\n\n1. [Solution eBook (DOCX) ➜]({{ $('Convert eBook to DOCX').item.json.Files[0].Url }})\n\n2. [Value Enhancer (DOCX) ➜]({{ $json.Files[0].Url }})\n\nEdit, Upload, Sell!\n",
+              "value": "=✅ Your product is ready!\n\n1. [Solution eBook (DOCX) ➜]({{ $('Convert eBook to DOCX').item.json.Files.first().Url }})\n\n2. [Value Enhancer (DOCX) ➜]({{ $('Convert Value to DOCX').item.json.Files.first().Url }})\n\n3. Google Drive Links [eBook ➜]({{ $('Upload ebook').first().json.webViewLink }}), [Value Enhancer ➜]({{ $('Upload enhancer').first().json.webViewLink }}), and [cover image ➜]({{ $('Upload cover image').first().json.webViewLink }})\n\nEdit, Upload, Sell!\n",
               "type": "string"
             }
           ]
@@ -389,8 +390,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1664,
-        1024
+        1808,
+        1152
       ],
       "id": "a08e5545-3edf-4a67-9494-5e547d4e148f",
       "name": "Files Ready!"
@@ -475,8 +476,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1280,
-        1392
+        1312,
+        1536
       ],
       "id": "b24ba922-9f7b-44b6-b644-8082a8839c95",
       "name": "Convert eBook to DOCX",
@@ -523,8 +524,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1664,
-        832
+        1552,
+        752
       ],
       "id": "e8295b89-1d79-4419-9169-418c422178a7",
       "name": "Convert Value to DOCX",
@@ -555,7 +556,7 @@
     {
       "parameters": {
         "content": "## | PHASE 2: DIGITAL ASSET CREATION\n\nPurpose: Starts AI content creation! This phase takes the strategic offer and automatically produces a **high-value complete ebook with a custom-designed cover**:\n\n1. An AI copywriter generates **captivating ebook titles** and selects the optimal one.\n2. An AI architect builds a **comprehensive ebook outline**.\n3. The all-new GPT-4 Image AI designs a unique, **professional ebook cover image** based on the title and topic.\n4. Then, an AI ghostwriter drafts the **entire ebook content** in engaging, easy-to-read format, meticulously following the outline. \n\n_Making raw ideas become a tangible asset!_",
-        "height": 1536,
+        "height": 1904,
         "width": 440,
         "color": 4
       },
@@ -571,7 +572,7 @@
     {
       "parameters": {
         "content": "## | PHASE 3: VALUE STACKING & FINAL ASSET DELIVERY\n\nPurpose: **Maximizing value is key!** Here, an AI strategist generates a 'Value Enhancer' package – creating compelling bonuses, a one-time-offer, and a workbook outline to complement your main product.\n\nThe grand finale: Both your main Ebook DOCX and the Value Enhancer DOCX are neatly packaged with their download links into a final message, ready to be sent back to you in the chat. \n\nAll this from a single keyword to two complete, ready-to-use digital products.\n\n**All orchestrated by AI and automation!**",
-        "height": 1280,
+        "height": 1904,
         "width": 460,
         "color": 6
       },
@@ -624,21 +625,21 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1264,
-        816
+        1072,
+        944
       ],
       "id": "40718b93-8d97-4995-922e-1ce5994caf5a",
       "name": "Get Img Link"
     },
     {
       "parameters": {
-        "jsCode": "/**\n * Turn the HTML string coming from Build HTML into a binary\n * property called  data  (base-64) so the Drive Upload node\n * can accept it.\n */\nconst html = $node[\"Build HTML (ebook)\"].json.html;   // or Value Enhancer\nconst buffer = Buffer.from(html, \"utf8\");\n\nitems[0].binary = {\n  data: {\n    data: buffer.toString(\"base64\"),\n    mimeType: \"text/html\",\n    fileName: \"ebook-asset.html\"          // or \"value-enhancer.html\"\n  }\n};\n\nreturn items;\n"
+        "jsCode": "/**\n * Turn the HTML string coming from Build HTML into a binary\n * property called  data  (base-64) so the Drive Upload node\n * can accept it.\n */\nconst html = $node[\"Build HTML (ebook)\"].json.html;   // or Value Enhancer\nconst buffer = Buffer.from(html, \"utf8\");\n\nitems[0].binary = {\n  data: {\n    data: buffer.toString(\"base64\"),\n    mimeType: \"text/html\",\n    fileName: $node[\"Slugify Title\"].json.slug + \".html\"          // or \"value-enhancer.html\"\n  }\n};\n\nreturn items;\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1120,
-        1392
+        1072,
+        1424
       ],
       "id": "8083c377-d4ef-44e3-932d-777da36bc307",
       "name": "Binary Data"
@@ -650,11 +651,240 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1744,
-        624
+        1792,
+        560
       ],
       "id": "532feb37-2c30-4a6e-8636-988c7edf723d",
       "name": "Binary Data (Value Enhancer)"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "function stringToSlug(str) {\n  return str\n    .toLowerCase()                  // convert to lowercase\n    .trim()                         // remove leading/trailing spaces\n    .replace(/\\:\\s+/g, '_')          // replace colon plus space with underscore\n    .replace(/[^a-z0-9\\s-_]/g, '')   // remove special characters\n    .replace(/\\s+/g, '-')           // replace spaces with dashes\n    .replace(/-+/g, '-');           // collapse multiple dashes\n}\nconst slug = stringToSlug($json.message.content.selectedTitle);\nreturn {\n  slug: slug,\n  cover_image_slug: slug + \"_cover\",\n  enhancement_slug: slug + \"_enhancement\"\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1312,
+        368
+      ],
+      "id": "a82f959a-3904-4c0d-8a16-6c0204440439",
+      "name": "Slugify Title"
+    },
+    {
+      "parameters": {
+        "name": "={{ $('Slugify Title').first().json.slug }}.docx",
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $('Create folder').item.json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1296,
+        1728
+      ],
+      "id": "3459d7ab-1c75-4b71-90c3-de296e41ac86",
+      "name": "Upload ebook",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "qWygDbp8o8iGWlrc",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "={{ $('Slugify Title').first().json.enhancement_slug }}.docx",
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $('Create folder').item.json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1552,
+        1152
+      ],
+      "id": "2abe6ec2-7ec3-4c36-a51f-ba472d61afda",
+      "name": "Upload enhancer",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "qWygDbp8o8iGWlrc",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.Files[0].Url }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1088,
+        1728
+      ],
+      "id": "0417ebc6-ed6d-4926-b71f-a93c64566e73",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.Files[0].Url }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1552,
+        960
+      ],
+      "id": "096a1d44-d395-4a6c-9f06-ae8d2d56ee04",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "numberInputs": 4
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1552,
+        1376
+      ],
+      "id": "f8dc8f97-e4ad-4c89-95fe-3968f9749eb3",
+      "name": "File Uploads"
+    },
+    {
+      "parameters": {
+        "mode": "chooseBranch"
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1792,
+        768
+      ],
+      "id": "7a2267ba-8d27-4dcc-8a59-24b05168f35c",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "name": "={{ $('Slugify Title').first().json.cover_image_slug }}.{{ $('Generate Image Cover').item.json.fileExtension }}",
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $('Create folder').item.json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1312,
+        752
+      ],
+      "id": "548ed3b2-a4b3-4c68-8274-f47dc01bb02a",
+      "name": "Upload cover image",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "qWygDbp8o8iGWlrc",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "={{ $('Slugify Title').first().json.slug }}.html",
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $('Create folder').item.json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1312,
+        1360
+      ],
+      "id": "b2bc20cc-d88f-498c-8485-4cf64eea765e",
+      "name": "Upload HTML",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "qWygDbp8o8iGWlrc",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "name": "={{ $json.slug }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1RqBjIPuKKA89Vgcs25_HbnrmQe5fyPog",
+          "mode": "list",
+          "cachedResultName": "DSD-ebooks",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1RqBjIPuKKA89Vgcs25_HbnrmQe5fyPog"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1072,
+        560
+      ],
+      "id": "99e3b9b8-ea3a-4775-b39f-295ca4871803",
+      "name": "Create folder",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "qWygDbp8o8iGWlrc",
+          "name": "Google Drive account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -718,7 +948,7 @@
       "main": [
         [
           {
-            "node": "Build Outline",
+            "node": "Slugify Title",
             "type": "main",
             "index": 0
           }
@@ -743,6 +973,11 @@
             "node": "Set coverLink",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Value Enhancer",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -752,6 +987,11 @@
         [
           {
             "node": "Get Img Link",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Upload cover image",
             "type": "main",
             "index": 0
           }
@@ -806,7 +1046,7 @@
       "main": [
         [
           {
-            "node": "Value Enhancer",
+            "node": "HTTP Request",
             "type": "main",
             "index": 0
           }
@@ -817,7 +1057,12 @@
       "main": [
         [
           {
-            "node": "Files Ready!",
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
             "type": "main",
             "index": 0
           }
@@ -842,6 +1087,11 @@
             "node": "Convert eBook to DOCX",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Upload HTML",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -856,13 +1106,128 @@
           }
         ]
       ]
+    },
+    "Slugify Title": {
+      "main": [
+        [
+          {
+            "node": "Create folder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Files Ready!": {
+      "main": [
+        []
+      ]
+    },
+    "Upload ebook": {
+      "main": [
+        [
+          {
+            "node": "File Uploads",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Upload ebook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Upload enhancer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload enhancer": {
+      "main": [
+        [
+          {
+            "node": "File Uploads",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "File Uploads": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Files Ready!",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload cover image": {
+      "main": [
+        [
+          {
+            "node": "File Uploads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload HTML": {
+      "main": [
+        [
+          {
+            "node": "File Uploads",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Create folder": {
+      "main": [
+        [
+          {
+            "node": "Build Outline",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "78496a52-654d-4d40-8636-b8faea67289e",
+  "versionId": "dee69824-2503-49f8-a36b-2ed6ffb686a2",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "6910c6c2fc8c063d5c1ed14d7a7b2e9404e402a221682ba5e944d64a25bc5aa4"

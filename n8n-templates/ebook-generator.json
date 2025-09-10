@@ -150,7 +150,7 @@
       "typeVersion": 1.8,
       "position": [
         1040,
-        -800
+        -816
       ],
       "id": "4006ebb3-815b-4554-ba15-261f648f6bad",
       "name": "Create Offer Title",
@@ -186,7 +186,7 @@
       "typeVersion": 1.8,
       "position": [
         1648,
-        -800
+        -816
       ],
       "id": "f31042a3-6069-475c-b23d-0ffbaddda9a1",
       "name": "Build Outline",
@@ -221,8 +221,8 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        1200,
-        -608
+        1040,
+        -512
       ],
       "id": "a2d66ac7-8053-4364-a790-33ae1bf84134",
       "name": "Create $100M Product",
@@ -244,13 +244,14 @@
       "typeVersion": 1.8,
       "position": [
         1936,
-        -800
+        -816
       ],
       "id": "a9010436-183d-4291-9403-ce0e46a68acf",
       "name": "Generate Image Cover",
       "alwaysOutputData": false,
       "retryOnFail": true,
       "waitBetweenTries": 2000,
+      "notesInFlow": false,
       "credentials": {
         "openAiApi": {
           "id": "KDgyP2XuXvC5PlRq",
@@ -265,7 +266,7 @@
             {
               "id": "917f1051-7fa7-49fe-a82d-1166bdb75e9a",
               "name": "coverLink",
-              "value": "={{ $('Get Img Link').item.json.secure_url }}?v={{ $now.toMillis() }}",
+              "value": "={{ $('Get Img Link').first().json.secure_url }}?v={{ $now.toMillis() }}",
               "type": "string"
             },
             {
@@ -281,8 +282,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1488,
-        -608
+        1328,
+        -512
       ],
       "id": "47b22dd1-b645-4d5c-aa92-63c645304238",
       "name": "Set coverLink"
@@ -294,8 +295,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1648,
-        -608
+        1488,
+        -512
       ],
       "id": "617f316a-6ad3-4c57-8702-173fcdc56208",
       "name": "Build HTML (ebook)"
@@ -315,7 +316,7 @@
               "role": "system"
             },
             {
-              "content": "=Title: “{{ $('Create Offer Title').item.json.message.content.selectedTitle }}”\nTopic: “{{ $('Map Chat Input').item.json.keyword }}”\nOffer summary:\n{{ $('$100M Offer').item.json.message.content }}\n\n1. Propose 5 high-value bonuses. For each:\n- name\n- format (template, checklist, etc.)\n- benefit (under 20 words)\n\n2. Suggest a paid One-Time Offer (price: $97–$297) that amplifies results. Include:\n- name\n- description\n- deliverables (3–5 bullets)\n\nReturn JSON:\n\n{\n  \"bonuses\": [ { \"name\": \"\", \"format\": \"\", \"benefit\": \"\" }, … ],\n  \"oto\": {\n    \"name\": \"\", \"price\": 97, \"description\": \"\", \"deliverables\": []\n  },\n  \"workbookOutline\": [\n    { \"section\": \"\", \"description\": \"\" }\n  ]\n}\n"
+              "content": "=Title: “{{ $('Create Offer Title').first().json.message.content.selectedTitle }}”\nTopic: “{{ $('Map Chat Input').first().json.keyword }}”\nOffer summary:\n{{ $('$100M Offer').first().json.message.content }}\n\n1. Propose 5 high-value bonuses. For each:\n- name\n- format (template, checklist, etc.)\n- benefit (under 20 words)\n\n2. Suggest a paid One-Time Offer (price: $97–$297) that amplifies results. Include:\n- name\n- description\n- deliverables (3–5 bullets)\n\nReturn JSON:\n\n{\n  \"bonuses\": [ { \"name\": \"\", \"format\": \"\", \"benefit\": \"\" }, … ],\n  \"oto\": {\n    \"name\": \"\", \"price\": 97, \"description\": \"\", \"deliverables\": []\n  },\n  \"workbookOutline\": [\n    { \"section\": \"\", \"description\": \"\" }\n  ]\n}\n"
             }
           ]
         },
@@ -326,7 +327,7 @@
       "typeVersion": 1.8,
       "position": [
         1040,
-        -192
+        -144
       ],
       "id": "c6203699-395a-4001-a3aa-214043cb1763",
       "name": "Value Enhancer",
@@ -345,7 +346,7 @@
       "typeVersion": 2,
       "position": [
         1328,
-        -192
+        -144
       ],
       "id": "44262c8b-2fff-4752-997c-f8238ad06a00",
       "name": "Build HTML (Value Enhancer)"
@@ -367,11 +368,12 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        3136,
-        -256
+        2208,
+        -144
       ],
       "id": "a08e5545-3edf-4a67-9494-5e547d4e148f",
-      "name": "Files Ready!"
+      "name": "Files Ready!",
+      "executeOnce": false
     },
     {
       "parameters": {
@@ -398,7 +400,7 @@
             {
               "parameterType": "formData",
               "name": "StoreFile",
-              "value": "true"
+              "value": "false"
             },
             {
               "parameterType": "formData",
@@ -453,8 +455,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2048,
-        -416
+        1808,
+        -512
       ],
       "id": "b24ba922-9f7b-44b6-b644-8082a8839c95",
       "name": "Convert eBook to DOCX",
@@ -491,7 +493,7 @@
             {
               "parameterType": "formData",
               "name": "StoreFile",
-              "value": "true"
+              "value": "false"
             }
           ]
         },
@@ -501,8 +503,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1680,
-        -192
+        1664,
+        -144
       ],
       "id": "e8295b89-1d79-4419-9169-418c422178a7",
       "name": "Convert Value to DOCX",
@@ -570,24 +572,11 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1040,
-        -608
+        2112,
+        -672
       ],
       "id": "40718b93-8d97-4995-922e-1ce5994caf5a",
       "name": "Get Img Link"
-    },
-    {
-      "parameters": {
-        "jsCode": "/**\n * Turn the HTML string coming from Build HTML into a binary\n * property called  data  (base-64) so the Drive Upload node\n * can accept it.\n */\nconst html = $node[\"Build HTML (ebook)\"].json.html;   // or Value Enhancer\nconst buffer = Buffer.from(html, \"utf8\");\n\nitems[0].binary = {\n  data: {\n    data: buffer.toString(\"base64\"),\n    mimeType: \"text/html\",\n    fileName: $node[\"Slugify Title\"].json.slug + \".html\"          // or \"value-enhancer.html\"\n  }\n};\n\nreturn items;\n"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        1808,
-        -608
-      ],
-      "id": "8083c377-d4ef-44e3-932d-777da36bc307",
-      "name": "Binary Data"
     },
     {
       "parameters": {
@@ -597,7 +586,7 @@
       "typeVersion": 2,
       "position": [
         1504,
-        -192
+        -144
       ],
       "id": "532feb37-2c30-4a6e-8636-988c7edf723d",
       "name": "Binary Data (Value Enhancer)"
@@ -611,14 +600,14 @@
       "typeVersion": 2,
       "position": [
         1328,
-        -800
+        -816
       ],
       "id": "a82f959a-3904-4c0d-8a16-6c0204440439",
       "name": "Slugify Title"
     },
     {
       "parameters": {
-        "name": "={{ $('Slugify Title').first().json.slug }}.docx",
+        "name": "={{ $data.Files.last().FileName }}",
         "driveId": {
           "__rl": true,
           "value": "My Drive",
@@ -628,7 +617,7 @@
         },
         "folderId": {
           "__rl": true,
-          "value": "={{ $('Create folder').item.json.id }}",
+          "value": "={{ $('Create folder').first().json.id }}",
           "mode": "id"
         },
         "options": {}
@@ -636,8 +625,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        2368,
-        -416
+        2304,
+        -512
       ],
       "id": "3459d7ab-1c75-4b71-90c3-de296e41ac86",
       "name": "Upload ebook",
@@ -650,7 +639,7 @@
     },
     {
       "parameters": {
-        "name": "={{ $('Slugify Title').first().json.enhancement_slug }}.docx",
+        "name": "={{ $data.Files.last().FileName }}",
         "driveId": {
           "__rl": true,
           "value": "My Drive",
@@ -660,7 +649,7 @@
         },
         "folderId": {
           "__rl": true,
-          "value": "={{ $('Create folder').item.json.id }}",
+          "value": "={{ $('Create folder').first().json.id }}",
           "mode": "id"
         },
         "options": {}
@@ -668,8 +657,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        2368,
-        -32
+        2032,
+        -144
       ],
       "id": "2abe6ec2-7ec3-4c36-a51f-ba472d61afda",
       "name": "Upload enhancer",
@@ -679,60 +668,6 @@
           "name": "Google Drive account"
         }
       }
-    },
-    {
-      "parameters": {
-        "url": "={{ $json.Files[0].Url }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        2208,
-        -416
-      ],
-      "id": "0417ebc6-ed6d-4926-b71f-a93c64566e73",
-      "name": "HTTP Request"
-    },
-    {
-      "parameters": {
-        "url": "={{ $json.Files[0].Url }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        2208,
-        -32
-      ],
-      "id": "096a1d44-d395-4a6c-9f06-ae8d2d56ee04",
-      "name": "HTTP Request1"
-    },
-    {
-      "parameters": {
-        "numberInputs": 4
-      },
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 3.2,
-      "position": [
-        2768,
-        -416
-      ],
-      "id": "f8dc8f97-e4ad-4c89-95fe-3968f9749eb3",
-      "name": "File Uploads"
-    },
-    {
-      "parameters": {
-        "mode": "chooseBranch"
-      },
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 3.2,
-      "position": [
-        2960,
-        -256
-      ],
-      "id": "7a2267ba-8d27-4dcc-8a59-24b05168f35c",
-      "name": "Merge"
     },
     {
       "parameters": {
@@ -754,8 +689,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        2368,
-        -800
+        2112,
+        -816
       ],
       "id": "548ed3b2-a4b3-4c68-8274-f47dc01bb02a",
       "name": "Upload cover image",
@@ -778,7 +713,7 @@
         },
         "folderId": {
           "__rl": true,
-          "value": "={{ $('Create folder').item.json.id }}",
+          "value": "={{ $('Create folder').first().json.id }}",
           "mode": "id"
         },
         "options": {}
@@ -786,8 +721,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        2368,
-        -608
+        1808,
+        -352
       ],
       "id": "b2bc20cc-d88f-498c-8485-4cf64eea765e",
       "name": "Upload HTML",
@@ -820,7 +755,7 @@
       "typeVersion": 3,
       "position": [
         1488,
-        -800
+        -816
       ],
       "id": "99e3b9b8-ea3a-4775-b39f-295ca4871803",
       "name": "Create folder",
@@ -873,7 +808,7 @@
     {
       "parameters": {
         "content": "",
-        "height": 576,
+        "height": 624,
         "width": 1972,
         "color": 4
       },
@@ -912,7 +847,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         576,
-        -224
+        -176
       ],
       "typeVersion": 1,
       "id": "02895b80-1f0c-4ec5-a07e-0aa7c5614ca6",
@@ -928,11 +863,74 @@
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         592,
-        -208
+        -160
       ],
       "typeVersion": 1,
       "id": "dff41b45-02a4-4d8d-9ea1-f0dbbb43c4f0",
       "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * Turn the HTML string coming from Build HTML into a binary\n * property called  data  (base-64) so the Drive Upload node\n * can accept it.\n */\n\nconst file = $input.first().json.Files.pop();\n\nitems[0].binary = {\n  data: {\n    data: file.FileData,\n    mimeType: \"text/html\",\n    fileName: file.FileName\n  }\n};\n\nreturn items;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2144,
+        -512
+      ],
+      "id": "c84ccdcd-2dea-4a1e-b5c3-73cf742f8aea",
+      "name": "Binary Data (ebook)"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * Turn the HTML string coming from Build HTML into a binary\n * property called  data  (base-64) so the Drive Upload node\n * can accept it.\n */\n\nconst file = $input.first().json.Files.pop();\n\nitems[0].binary = {\n  data: {\n    data: file.FileData,\n    mimeType: \"text/html\",\n    fileName: file.FileName\n  }\n};\n\nreturn items;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1840,
+        -144
+      ],
+      "id": "aac163ab-62ad-4dfc-b95a-539afe9ce609",
+      "name": "Binary Data (enhancer)"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * Turn the HTML string coming from Build HTML into a binary\n * property called  data  (base-64) so the Drive Upload node\n * can accept it.\n */\nconst html = $node[\"Build HTML (ebook)\"].json.html;   // or Value Enhancer\nconst buffer = Buffer.from(html, \"utf8\");\n\nitems[0].binary = {\n  data: {\n    data: buffer.toString(\"base64\"),\n    mimeType: \"text/html\",\n    fileName: $node[\"Slugify Title\"].json.slug + \".html\"          // or \"value-enhancer.html\"\n  }\n};\n\nreturn items;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1648,
+        -512
+      ],
+      "id": "8083c377-d4ef-44e3-932d-777da36bc307",
+      "name": "Binary Data (HTML ebook)"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        2368,
+        -736
+      ],
+      "id": "4dded790-bf14-4e49-a18b-d2d74d44b595",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "mode": "chooseBranch"
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1984,
+        -512
+      ],
+      "id": "78fa6481-2a08-4085-87f9-df34d64a2035",
+      "name": "Merge ebook"
     }
   ],
   "pinData": {},
@@ -1010,11 +1008,6 @@
             "node": "Set coverLink",
             "type": "main",
             "index": 0
-          },
-          {
-            "node": "Value Enhancer",
-            "type": "main",
-            "index": 0
           }
         ]
       ]
@@ -1023,12 +1016,12 @@
       "main": [
         [
           {
-            "node": "Get Img Link",
+            "node": "Upload cover image",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Upload cover image",
+            "node": "Get Img Link",
             "type": "main",
             "index": 0
           }
@@ -1050,7 +1043,7 @@
       "main": [
         [
           {
-            "node": "Binary Data",
+            "node": "Binary Data (HTML ebook)",
             "type": "main",
             "index": 0
           }
@@ -1083,7 +1076,7 @@
       "main": [
         [
           {
-            "node": "HTTP Request",
+            "node": "Merge ebook",
             "type": "main",
             "index": 0
           }
@@ -1094,14 +1087,9 @@
       "main": [
         [
           {
-            "node": "HTTP Request1",
+            "node": "Binary Data (enhancer)",
             "type": "main",
             "index": 0
-          },
-          {
-            "node": "Merge",
-            "type": "main",
-            "index": 1
           }
         ]
       ]
@@ -1110,25 +1098,9 @@
       "main": [
         [
           {
-            "node": "Create $100M Product",
+            "node": "Merge",
             "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Binary Data": {
-      "main": [
-        [
-          {
-            "node": "Convert eBook to DOCX",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Upload HTML",
-            "type": "main",
-            "index": 0
+            "index": 1
           }
         ]
       ]
@@ -1164,29 +1136,7 @@
       "main": [
         [
           {
-            "node": "File Uploads",
-            "type": "main",
-            "index": 2
-          }
-        ]
-      ]
-    },
-    "HTTP Request": {
-      "main": [
-        [
-          {
-            "node": "Upload ebook",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request1": {
-      "main": [
-        [
-          {
-            "node": "Upload enhancer",
+            "node": "Value Enhancer",
             "type": "main",
             "index": 0
           }
@@ -1194,28 +1144,6 @@
       ]
     },
     "Upload enhancer": {
-      "main": [
-        [
-          {
-            "node": "File Uploads",
-            "type": "main",
-            "index": 3
-          }
-        ]
-      ]
-    },
-    "File Uploads": {
-      "main": [
-        [
-          {
-            "node": "Merge",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Merge": {
       "main": [
         [
           {
@@ -1230,7 +1158,7 @@
       "main": [
         [
           {
-            "node": "File Uploads",
+            "node": "Merge",
             "type": "main",
             "index": 0
           }
@@ -1241,7 +1169,7 @@
       "main": [
         [
           {
-            "node": "File Uploads",
+            "node": "Merge ebook",
             "type": "main",
             "index": 1
           }
@@ -1269,13 +1197,73 @@
           }
         ]
       ]
+    },
+    "Binary Data (ebook)": {
+      "main": [
+        [
+          {
+            "node": "Upload ebook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Binary Data (enhancer)": {
+      "main": [
+        [
+          {
+            "node": "Upload enhancer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Binary Data (HTML ebook)": {
+      "main": [
+        [
+          {
+            "node": "Upload HTML",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Convert eBook to DOCX",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Create $100M Product",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge ebook": {
+      "main": [
+        [
+          {
+            "node": "Binary Data (ebook)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "991dca1f-be66-4d37-a9a7-3b9eff3d4746",
+  "versionId": "519c8b7a-38a1-4eb0-aed4-b5c67615d515",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "6910c6c2fc8c063d5c1ed14d7a7b2e9404e402a221682ba5e944d64a25bc5aa4"

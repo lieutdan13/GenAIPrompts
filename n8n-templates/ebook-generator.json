@@ -5,9 +5,9 @@
       "parameters": {
         "modelId": {
           "__rl": true,
-          "value": "gpt-4.1",
+          "value": "gpt-5",
           "mode": "list",
-          "cachedResultName": "GPT-4.1"
+          "cachedResultName": "GPT-5"
         },
         "messages": {
           "values": [
@@ -41,9 +41,9 @@
       "parameters": {
         "modelId": {
           "__rl": true,
-          "value": "gpt-4.1",
+          "value": "gpt-5",
           "mode": "list",
-          "cachedResultName": "GPT-4.1"
+          "cachedResultName": "GPT-5"
         },
         "messages": {
           "values": [
@@ -92,9 +92,9 @@
       "parameters": {
         "modelId": {
           "__rl": true,
-          "value": "gpt-4.1",
+          "value": "gpt-5",
           "mode": "list",
-          "cachedResultName": "GPT-4.1"
+          "cachedResultName": "GPT-5"
         },
         "messages": {
           "values": [
@@ -128,9 +128,9 @@
       "parameters": {
         "modelId": {
           "__rl": true,
-          "value": "gpt-4.1",
+          "value": "gpt-5",
           "mode": "list",
-          "cachedResultName": "GPT-4.1"
+          "cachedResultName": "GPT-5"
         },
         "messages": {
           "values": [
@@ -165,9 +165,9 @@
       "parameters": {
         "modelId": {
           "__rl": true,
-          "value": "gpt-4.1",
+          "value": "gpt-5",
           "mode": "list",
-          "cachedResultName": "GPT-4.1"
+          "cachedResultName": "GPT-5"
         },
         "messages": {
           "values": [
@@ -201,9 +201,9 @@
       "parameters": {
         "modelId": {
           "__rl": true,
-          "value": "gpt-4.1",
+          "value": "gpt-5",
           "mode": "list",
-          "cachedResultName": "GPT-4.1"
+          "cachedResultName": "GPT-5"
         },
         "messages": {
           "values": [
@@ -305,9 +305,9 @@
       "parameters": {
         "modelId": {
           "__rl": true,
-          "value": "gpt-4.1",
+          "value": "gpt-5",
           "mode": "list",
-          "cachedResultName": "GPT-4.1"
+          "cachedResultName": "GPT-5"
         },
         "messages": {
           "values": [
@@ -823,7 +823,7 @@
     },
     {
       "parameters": {
-        "content": "## | PHASE 2: DIGITAL ASSET CREATION\n\nPurpose: Starts AI content creation! This phase takes the strategic offer and automatically produces a **high-value complete ebook with a custom-designed cover**:\n\n1. An AI copywriter generates **captivating ebook titles** and selects the optimal one.\n2. An AI architect builds a **comprehensive ebook outline**.\n3. The all-new GPT-4 Image AI designs a unique, **professional ebook cover image** based on the title and topic.\n4. Then, an AI ghostwriter drafts the **entire ebook content** in engaging, easy-to-read format, meticulously following the outline. \n\n_Making raw ideas become a tangible asset!_",
+        "content": "## | PHASE 2: DIGITAL ASSET CREATION\n\nPurpose: Starts AI content creation! This phase takes the strategic offer and automatically produces a **high-value complete ebook with a custom-designed cover**:\n\n1. An AI copywriter generates **captivating ebook titles** and selects the optimal one.\n2. An AI architect builds a **comprehensive ebook outline**.\n3. The all-new GPT-5 Image AI designs a unique, **professional ebook cover image** based on the title and topic.\n4. Then, an AI ghostwriter drafts the **entire ebook content** in engaging, easy-to-read format, meticulously following the outline. \n\n_Making raw ideas become a tangible asset!_",
         "height": 432,
         "width": 384,
         "color": 4
@@ -1263,7 +1263,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "519c8b7a-38a1-4eb0-aed4-b5c67615d515",
+  "versionId": "ac1c5e5a-0fad-4d75-9428-9707430db89e",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "6910c6c2fc8c063d5c1ed14d7a7b2e9404e402a221682ba5e944d64a25bc5aa4"

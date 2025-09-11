@@ -358,7 +358,7 @@
             {
               "id": "8abb96ad-9f7e-4ad6-88e2-b4a96d475db1",
               "name": "text",
-              "value": "=✅ Your product is ready!\n\n1. [Solution eBook (DOCX) ➜]({{ $('Convert eBook to DOCX').item.json.Files.first().Url }})\n\n2. [Value Enhancer (DOCX) ➜]({{ $('Convert Value to DOCX').item.json.Files.first().Url }})\n\n3. Google Drive Links [eBook ➜]({{ $('Upload ebook').first().json.webViewLink }}), [Value Enhancer ➜]({{ $('Upload enhancer').first().json.webViewLink }}), and [cover image ➜]({{ $('Upload cover image').first().json.webViewLink }})\n\nEdit, Upload, Sell!\n",
+              "value": "=✅ Your product is ready!\n\n1. [Solution eBook (DOCX) ➜]({{ $('Upload ebook').first().json.webViewLink }})\n\n2. [Value Enhancer (DOCX) ➜]({{ $('Upload enhancer').first().json.webViewLink }})\n\n3. [Cover Image ➜]({{ $('Upload cover image').first().json.webViewLink }})\n\nEdit, Upload, Sell!\n",
               "type": "string"
             }
           ]
@@ -456,7 +456,7 @@
       "typeVersion": 4.2,
       "position": [
         1808,
-        -512
+        -368
       ],
       "id": "b24ba922-9f7b-44b6-b644-8082a8839c95",
       "name": "Convert eBook to DOCX",
@@ -625,8 +625,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        2304,
-        -512
+        2128,
+        -368
       ],
       "id": "3459d7ab-1c75-4b71-90c3-de296e41ac86",
       "name": "Upload ebook",
@@ -721,8 +721,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        1808,
-        -352
+        2128,
+        -512
       ],
       "id": "b2bc20cc-d88f-498c-8485-4cf64eea765e",
       "name": "Upload HTML",
@@ -871,20 +871,20 @@
     },
     {
       "parameters": {
-        "jsCode": "/**\n * Turn the HTML string coming from Build HTML into a binary\n * property called  data  (base-64) so the Drive Upload node\n * can accept it.\n */\n\nconst file = $input.first().json.Files.pop();\n\nitems[0].binary = {\n  data: {\n    data: file.FileData,\n    mimeType: \"text/html\",\n    fileName: file.FileName\n  }\n};\n\nreturn items;\n"
+        "jsCode": "/**\n * Turn the HTML string coming from Build HTML into a binary\n * property called  data  (base-64) so the Drive Upload node\n * can accept it.\n */\n\nconst file = $input.first().json.Files.pop();\n\nitems[0].binary = {\n  data: {\n    data: file.FileData,\n    mimeType: \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\n    fileName: file.FileName\n  }\n};\nreturn items;"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2144,
-        -512
+        1968,
+        -368
       ],
       "id": "c84ccdcd-2dea-4a1e-b5c3-73cf742f8aea",
       "name": "Binary Data (ebook)"
     },
     {
       "parameters": {
-        "jsCode": "/**\n * Turn the HTML string coming from Build HTML into a binary\n * property called  data  (base-64) so the Drive Upload node\n * can accept it.\n */\n\nconst file = $input.first().json.Files.pop();\n\nitems[0].binary = {\n  data: {\n    data: file.FileData,\n    mimeType: \"text/html\",\n    fileName: file.FileName\n  }\n};\n\nreturn items;\n"
+        "jsCode": "/**\n * Turn the HTML string coming from Build HTML into a binary\n * property called  data  (base-64) so the Drive Upload node\n * can accept it.\n */\n\nconst file = $input.first().json.Files.pop();\n\nitems[0].binary = {\n  data: {\n    data: file.FileData,\n    mimeType: \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\n    fileName: file.FileName\n  }\n};\n\nreturn items;\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -897,7 +897,7 @@
     },
     {
       "parameters": {
-        "jsCode": "/**\n * Turn the HTML string coming from Build HTML into a binary\n * property called  data  (base-64) so the Drive Upload node\n * can accept it.\n */\nconst html = $node[\"Build HTML (ebook)\"].json.html;   // or Value Enhancer\nconst buffer = Buffer.from(html, \"utf8\");\n\nitems[0].binary = {\n  data: {\n    data: buffer.toString(\"base64\"),\n    mimeType: \"text/html\",\n    fileName: $node[\"Slugify Title\"].json.slug + \".html\"          // or \"value-enhancer.html\"\n  }\n};\n\nreturn items;\n"
+        "jsCode": "// Check if the basic path to the data exists\nif (!items[0].json || !items[0].json.html) {\n    console.log(\"N8N_LOG_DEBUG: Unexpected input structure in Binary Data (HTML ebook). Item:\", JSON.stringify(items[0]));\n    throw new Error(\"Input from 'Build HTML (ebook)' did not provide data at items[0].binary.html.data as expected.\");\n}\n\nlet inputHtmlContent = items[0].json.html;\nlet inputHtmlBuffer;\n\n// Try to create a buffer intelligently\nif (inputHtmlContent instanceof Buffer) {\n  inputHtmlBuffer = inputHtmlContent;\n} else if (typeof inputHtmlContent === 'string') {\n  inputHtmlBuffer = Buffer.from(inputHtmlContent, 'utf8');\n} else if (typeof inputHtmlContent === 'object' && inputHtmlContent.type === 'Buffer' && Array.isArray(inputHtmlContent.data)) {\n  // Sometimes Buffers get serialized to objects like { type: \"Buffer\", data: [...] }\n  inputHtmlBuffer = Buffer.from(inputHtmlContent.data);\n} else {\n  console.log(\"N8N_LOG_DEBUG: Data at items[0].binary.html.data is not a Buffer, string, or recognized Buffer object. Actual type:\", typeof inputHtmlContent, \"Value:\", JSON.stringify(inputHtmlContent));\n              throw new Error(\"Data at items[0].binary.html.data from 'Build HTML (ebook)' is not in a recognized format (Buffer, String, or serialized Buffer object).\");\n}\n\nconst inputMimeType = 'text/html';\nconst inputFileName = $(\"Slugify Title\").first().json.slug + '.html';\n\nitems[0].binary = {\n  data: {\n    data: inputHtmlBuffer.toString('base64'),\n    mimeType: inputMimeType,\n    fileName: inputFileName\n  }\n};\n\nreturn items;"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -926,8 +926,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        1984,
-        -512
+        2368,
+        -432
       ],
       "id": "78fa6481-2a08-4085-87f9-df34d64a2035",
       "name": "Merge ebook"
@@ -1076,7 +1076,7 @@
       "main": [
         [
           {
-            "node": "Merge ebook",
+            "node": "Binary Data (ebook)",
             "type": "main",
             "index": 0
           }
@@ -1136,9 +1136,9 @@
       "main": [
         [
           {
-            "node": "Value Enhancer",
+            "node": "Merge ebook",
             "type": "main",
-            "index": 0
+            "index": 1
           }
         ]
       ]
@@ -1171,7 +1171,7 @@
           {
             "node": "Merge ebook",
             "type": "main",
-            "index": 1
+            "index": 0
           }
         ]
       ]
@@ -1251,7 +1251,7 @@
       "main": [
         [
           {
-            "node": "Binary Data (ebook)",
+            "node": "Value Enhancer",
             "type": "main",
             "index": 0
           }
@@ -1263,7 +1263,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "ac1c5e5a-0fad-4d75-9428-9707430db89e",
+  "versionId": "746bc14a-5f15-4de9-8e09-6a0a6e0b6122",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "6910c6c2fc8c063d5c1ed14d7a7b2e9404e402a221682ba5e944d64a25bc5aa4"
@@ -1271,10 +1271,10 @@
   "id": "21viw58JZ3up3PWo",
   "tags": [
     {
-      "name": "Shared",
-      "id": "nC9yhGiCMMD43yvh",
       "createdAt": "2025-09-03T02:42:25.128Z",
-      "updatedAt": "2025-09-03T02:42:25.128Z"
+      "updatedAt": "2025-09-03T02:42:25.128Z",
+      "id": "nC9yhGiCMMD43yvh",
+      "name": "Shared"
     }
   ]
 }

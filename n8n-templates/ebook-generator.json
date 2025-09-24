@@ -75,6 +75,8 @@
     },
     {
       "parameters": {
+        "public": true,
+        "initialMessages": "Hi there! 👋\nI'm a pain point ebook generator. How can I assist you today?",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
@@ -212,10 +214,11 @@
               "role": "system"
             },
             {
-              "content": "=Title: “{{ $('Create Offer Title').item.json.message.content.selectedTitle }}”\n\nTarget niche: “{{ $('Map Chat Input').item.json.keyword }}”\n\nBelow is the approved outline object:\n\n{{ $('Build Outline').item.json.message.content }}\n\nWrite the full ebook using that structure:\n\n• Keep every heading exactly as listed.  \n• For each section, expand its bullet points into 300–500 words of clear prose.  \n• Tone: friendly, confident, action-oriented (6th-grade reading level).  \n• Use short paragraphs and add the occasional bold phrase for emphasis.  \n• After the Conclusion, include the 3-step action plan as a numbered list.  \n\nReturn the completed manuscript as plain text—no additional commentary or JSON.\n"
+              "content": "=Title: \"{{ $('Create Offer Title').item.json.message.content.selectedTitle }}\"\n\nTarget niche: \"{{ $('Map Chat Input').item.json.keyword }}\"\n\nBelow is the approved outline object:\n\n{{ $('Build Outline').item.json.message.content }}\n\nWrite the full ebook using that structure:\n\n• Keep every heading exactly as listed.  \n• For each section, expand its bullet points into 300–500 words of clear prose.  \n• Tone: friendly, confident, action-oriented (6th-grade reading level).  \n• Use short paragraphs and add the occasional bold phrase for emphasis.  \n• After the Conclusion, include the 3-step action plan as a numbered list.  \n\n\nReturn your answer as strict JSON with exactly these keys:\n{\n  \"title\": \"Title\",\n  \"ebookMarkdown\": \"The entire outline in markdown format, including the title as a header\"\n}\n"
             }
           ]
         },
+        "jsonOutput": true,
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.openAi",
@@ -258,48 +261,6 @@
           "name": "OpenAi account"
         }
       }
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "917f1051-7fa7-49fe-a82d-1166bdb75e9a",
-              "name": "coverLink",
-              "value": "={{ $('Get Img Link').first().json.secure_url }}?v={{ $now.toMillis() }}",
-              "type": "string"
-            },
-            {
-              "id": "78fe3bb1-8199-47d6-a1fd-bf2022bd09f6",
-              "name": "ebookMarkdown",
-              "value": "={{ $node[\"Create $100M Product\"].json[\"message\"][\"content\"] }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        1328,
-        -512
-      ],
-      "id": "47b22dd1-b645-4d5c-aa92-63c645304238",
-      "name": "Set coverLink"
-    },
-    {
-      "parameters": {
-        "jsCode": "/**\n * Build HTML optimized for DOCX conversion.\n * Expects:\n * $json.coverLink       (string)  – URL to the cover image\n * $json.ebookMarkdown   (string)  – Markdown content for the book\n *\n * Returns:\n * json.html             (string)  – Complete HTML string\n */\n\n/* -------------------------------------------------------------------------- */\n/* PULL INPUT VARIABLES                                                       */\n/* -------------------------------------------------------------------------- */\nconst coverUrl     = $json.coverLink        || '';\nconst bodyMarkdown = $json.ebookMarkdown    || '# Content Missing\\n\\nNo content was provided for the ebook.';\n\n/* -------------------------------------------------------------------------- */\n/* MARKDOWN TO HTML CONVERTER                                                 */\n/* -------------------------------------------------------------------------- */\nfunction mdToHtml(md) {\n  if (typeof md !== 'string') {\n    console.log(\"N8N_LOG_DEBUG --- mdToHtml received non-string input:\", md);\n    return '<p>Invalid content provided.</p>';\n  }\n\n  let html = md\n    .replace(/^### (.*)$/gm, '<h3>$1</h3>')\n    .replace(/^## (.*)$/gm,  '<h2>$1</h2>')\n    .replace(/^# (.*)$/gm,   '<h1>$1</h1>')\n    .replace(/\\*\\*(.*?)\\*\\*/g, '<strong>$1</strong>')\n    .replace(/\\*(.*?)\\\\*/g,     '<em>$1</em>');\n\n  const lines = html.split('\\n');\n  let inList = false;\n  let listType = ''; // 'ul' or 'ol'\n  let processedHtmlLines = [];\n\n  for (let i = 0; i < lines.length; i++) {\n    let line = lines[i];\n    const trimmedLine = line.trim();\n    const isUlItem = trimmedLine.startsWith('* ');\n    const isOlItem = /^\\d+\\.\\s/.test(trimmedLine);\n\n    if (isUlItem || isOlItem) {\n      const currentListType = isUlItem ? 'ul' : 'ol';\n      if (!inList || listType !== currentListType) {\n        if (inList) {\n          processedHtmlLines.push(`</${listType}>`);\n        }\n        processedHtmlLines.push(`<${currentListType}>`);\n        inList = true;\n        listType = currentListType;\n      }\n      const itemContent = isUlItem ? trimmedLine.substring(2) : trimmedLine.replace(/^\\d+\\.\\s/, '');\n      processedHtmlLines.push(`  <li>${itemContent.trim()}</li>`);\n    } else {\n      if (inList) {\n        processedHtmlLines.push(`</${listType}>`);\n        inList = false;\n      }\n      if (trimmedLine === '') {\n        // Skip\n      } else if (!(/^<(h[1-6]|p|ul|ol|li|blockquote|hr)/i.test(trimmedLine))) {\n        processedHtmlLines.push(`<p>${trimmedLine}</p>`);\n      } else {\n        processedHtmlLines.push(line);\n      }\n    }\n  }\n\n  if (inList) {\n    processedHtmlLines.push(`</${listType}>`);\n  }\n  \n  return processedHtmlLines.filter(line => line.trim() !== '<p></p>' && line.trim() !== '').join('\\n');\n}\n\n/* -------------------------------------------------------------------------- */\n/* ASSEMBLE FINAL HTML FOR DOCX                                               */\n/* -------------------------------------------------------------------------- */\nconst bodyHtmlContent = mdToHtml(bodyMarkdown);\n\nconst fullHtml = `\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>Ebook</title>\n  <style>\n    body {\n      font-family: Arial, Helvetica, sans-serif;\n      font-size: 16pt;\n      line-height: 1.4;\n      color: #000000;\n      margin: 2cm 1.5cm 2cm 1.5cm;\n    }\n    p { margin-top: 0; margin-bottom: 0.6em; }\n    h1, h2, h3 {\n      font-size: 20pt;\n      font-weight: bold;\n      color: #000000;\n      margin-top: 1.2em;\n      margin-bottom: 0.4em;\n      line-height: 1.2;\n      page-break-after: avoid;\n    }\n    .page-break-docx {\n      page-break-after: always;\n      height: 0pt;\n      line-height: 0pt;\n      font-size: 0pt;\n    }\n    strong, b { font-weight: bold; }\n    em, i { font-style: italic; }\n    ul, ol { margin-top: 0.3em; margin-bottom: 0.7em; padding-left: 1.8em; }\n    li { margin-bottom: 0.2em; }\n    .cover-image-container {\n      text-align: center;\n      margin: 0 auto 2cm auto;\n      page-break-after: always;\n    }\n  </style>\n</head>\n<body>\n    <!-- Simplified image approach for better DOCX compatibility -->\n    <div class=\"cover-image-container\">\n      <img src=\"${coverUrl}\" alt=\"Ebook Cover\" style=\"width:15cm; height:auto; max-width:100%;\" />\n    </div>\n\n  ${bodyHtmlContent}\n\n</body>\n</html>`;  // <-- THIS CLOSING BACKTICK WAS MISSING!\n\n/* -------------------------------------------------------------------------- */\n/* RETURN RESULT                                                              */\n/* -------------------------------------------------------------------------- */\nreturn [\n  {\n    json: { html: fullHtml }\n  }\n];"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        1488,
-        -512
-      ],
-      "id": "617f316a-6ad3-4c57-8702-173fcdc56208",
-      "name": "Build HTML (ebook)"
     },
     {
       "parameters": {
@@ -358,7 +319,7 @@
             {
               "id": "8abb96ad-9f7e-4ad6-88e2-b4a96d475db1",
               "name": "text",
-              "value": "=✅ Your product is ready!\n\n1. [Solution eBook (DOCX) ➜]({{ $('Upload ebook').first().json.webViewLink }})\n\n2. [Value Enhancer (DOCX) ➜]({{ $('Upload enhancer').first().json.webViewLink }})\n\n3. [Cover Image ➜]({{ $('Upload cover image').first().json.webViewLink }})\n\nEdit, Upload, Sell!\n",
+              "value": "=✅ Your product is ready!\n\n1. [Solution eBook (DOCX) ➜]({{ $('Upload ebook as Docx').first().json.documentUrl }})\n\n2. [Value Enhancer (DOCX) ➜]({{ $('Upload enhancer').first().json.webViewLink }})\n\n3. [Cover Image ➜]({{ $('Upload cover image').first().json.webViewLink }})\n\nEdit, Upload, Sell!\n",
               "type": "string"
             }
           ]
@@ -374,99 +335,6 @@
       "id": "a08e5545-3edf-4a67-9494-5e547d4e148f",
       "name": "Files Ready!",
       "executeOnce": false
-    },
-    {
-      "parameters": {
-        "preBuiltAgentsCalloutHttpRequest": "",
-        "httpVariantWarning": "",
-        "curlImport": "",
-        "method": "POST",
-        "": "",
-        "url": "https://v2.convertapi.com/convert/html/to/docx",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "convertApi",
-        "provideSslCertificates": false,
-        "sendQuery": false,
-        "sendHeaders": false,
-        "sendBody": true,
-        "contentType": "multipart-form-data",
-        "bodyParameters": {
-          "parameters": [
-            {
-              "parameterType": "formBinaryData",
-              "name": "File",
-              "inputDataFieldName": "data"
-            },
-            {
-              "parameterType": "formData",
-              "name": "StoreFile",
-              "value": "false"
-            },
-            {
-              "parameterType": "formData",
-              "name": "PageSize",
-              "value": "letter"
-            },
-            {
-              "parameterType": "formData",
-              "name": "MarginTop",
-              "value": "72"
-            },
-            {
-              "parameterType": "formData",
-              "name": "MarginBottom",
-              "value": "72"
-            },
-            {
-              "parameterType": "formData",
-              "name": "MarginLeft",
-              "value": "72"
-            },
-            {
-              "parameterType": "formData",
-              "name": "MarginRight",
-              "value": "72"
-            },
-            {
-              "parameterType": "formData",
-              "name": "DocumentOpenPassword",
-              "value": "``"
-            },
-            {
-              "parameterType": "formData",
-              "name": "DisableContentControl",
-              "value": "true"
-            },
-            {
-              "parameterType": "formData",
-              "name": "CompatibilityMode",
-              "value": "15"
-            },
-            {
-              "parameterType": "formData",
-              "name": "DocumentProtection",
-              "value": "none"
-            }
-          ]
-        },
-        "options": {},
-        "infoMessage": ""
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        1808,
-        -368
-      ],
-      "id": "b24ba922-9f7b-44b6-b644-8082a8839c95",
-      "name": "Convert eBook to DOCX",
-      "extendsCredential": "convertApi",
-      "credentials": {
-        "convertApi": {
-          "id": "qu9aLGk9znybZDIH",
-          "name": "ConvertAPI account"
-        }
-      }
     },
     {
       "parameters": {
@@ -625,38 +493,6 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        2128,
-        -368
-      ],
-      "id": "3459d7ab-1c75-4b71-90c3-de296e41ac86",
-      "name": "Upload ebook",
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "qWygDbp8o8iGWlrc",
-          "name": "Google Drive account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "name": "={{ $data.Files.last().FileName }}",
-        "driveId": {
-          "__rl": true,
-          "value": "My Drive",
-          "mode": "list",
-          "cachedResultName": "My Drive",
-          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
-        },
-        "folderId": {
-          "__rl": true,
-          "value": "={{ $('Create folder').first().json.id }}",
-          "mode": "id"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleDrive",
-      "typeVersion": 3,
-      "position": [
         2032,
         -144
       ],
@@ -694,38 +530,6 @@
       ],
       "id": "548ed3b2-a4b3-4c68-8274-f47dc01bb02a",
       "name": "Upload cover image",
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "qWygDbp8o8iGWlrc",
-          "name": "Google Drive account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "name": "={{ $('Slugify Title').first().json.slug }}.html",
-        "driveId": {
-          "__rl": true,
-          "value": "My Drive",
-          "mode": "list",
-          "cachedResultName": "My Drive",
-          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
-        },
-        "folderId": {
-          "__rl": true,
-          "value": "={{ $('Create folder').first().json.id }}",
-          "mode": "id"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleDrive",
-      "typeVersion": 3,
-      "position": [
-        2128,
-        -512
-      ],
-      "id": "b2bc20cc-d88f-498c-8485-4cf64eea765e",
-      "name": "Upload HTML",
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "qWygDbp8o8iGWlrc",
@@ -871,19 +675,6 @@
     },
     {
       "parameters": {
-        "jsCode": "/**\n * Turn the HTML string coming from Build HTML into a binary\n * property called  data  (base-64) so the Drive Upload node\n * can accept it.\n */\n\nconst file = $input.first().json.Files.pop();\n\nitems[0].binary = {\n  data: {\n    data: file.FileData,\n    mimeType: \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\n    fileName: file.FileName\n  }\n};\nreturn items;"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        1968,
-        -368
-      ],
-      "id": "c84ccdcd-2dea-4a1e-b5c3-73cf742f8aea",
-      "name": "Binary Data (ebook)"
-    },
-    {
-      "parameters": {
         "jsCode": "/**\n * Turn the HTML string coming from Build HTML into a binary\n * property called  data  (base-64) so the Drive Upload node\n * can accept it.\n */\n\nconst file = $input.first().json.Files.pop();\n\nitems[0].binary = {\n  data: {\n    data: file.FileData,\n    mimeType: \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\n    fileName: file.FileName\n  }\n};\n\nreturn items;\n"
       },
       "type": "n8n-nodes-base.code",
@@ -894,19 +685,6 @@
       ],
       "id": "aac163ab-62ad-4dfc-b95a-539afe9ce609",
       "name": "Binary Data (enhancer)"
-    },
-    {
-      "parameters": {
-        "jsCode": "// Check if the basic path to the data exists\nif (!items[0].json || !items[0].json.html) {\n    console.log(\"N8N_LOG_DEBUG: Unexpected input structure in Binary Data (HTML ebook). Item:\", JSON.stringify(items[0]));\n    throw new Error(\"Input from 'Build HTML (ebook)' did not provide data at items[0].binary.html.data as expected.\");\n}\n\nlet inputHtmlContent = items[0].json.html;\nlet inputHtmlBuffer;\n\n// Try to create a buffer intelligently\nif (inputHtmlContent instanceof Buffer) {\n  inputHtmlBuffer = inputHtmlContent;\n} else if (typeof inputHtmlContent === 'string') {\n  inputHtmlBuffer = Buffer.from(inputHtmlContent, 'utf8');\n} else if (typeof inputHtmlContent === 'object' && inputHtmlContent.type === 'Buffer' && Array.isArray(inputHtmlContent.data)) {\n  // Sometimes Buffers get serialized to objects like { type: \"Buffer\", data: [...] }\n  inputHtmlBuffer = Buffer.from(inputHtmlContent.data);\n} else {\n  console.log(\"N8N_LOG_DEBUG: Data at items[0].binary.html.data is not a Buffer, string, or recognized Buffer object. Actual type:\", typeof inputHtmlContent, \"Value:\", JSON.stringify(inputHtmlContent));\n              throw new Error(\"Data at items[0].binary.html.data from 'Build HTML (ebook)' is not in a recognized format (Buffer, String, or serialized Buffer object).\");\n}\n\nconst inputMimeType = 'text/html';\nconst inputFileName = $(\"Slugify Title\").first().json.slug + '.html';\n\nitems[0].binary = {\n  data: {\n    data: inputHtmlBuffer.toString('base64'),\n    mimeType: inputMimeType,\n    fileName: inputFileName\n  }\n};\n\nreturn items;"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        1648,
-        -512
-      ],
-      "id": "8083c377-d4ef-44e3-932d-777da36bc307",
-      "name": "Binary Data (HTML ebook)"
     },
     {
       "parameters": {},
@@ -921,16 +699,49 @@
     },
     {
       "parameters": {
-        "mode": "chooseBranch"
+        "content": "## TODO\n* Determine the need for image link from Cloudinary and remove\n* Can the conversion from HTML to DOCX occur in code?\n* Can Markdown be converted directly to DOCX?",
+        "height": 400,
+        "color": 3
       },
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 3.2,
+      "type": "n8n-nodes-base.stickyNote",
       "position": [
-        2368,
-        -432
+        2576,
+        -832
       ],
-      "id": "78fa6481-2a08-4085-87f9-df34d64a2035",
-      "name": "Merge ebook"
+      "typeVersion": 1,
+      "id": "5f000aad-8117-48b8-aeb5-07cb04e3f834",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $('Create folder').first().json.id }}",
+          "mode": "id"
+        },
+        "documentTitle": "={{ $('Slugify Title').first().json.slug }}-from-md.docx",
+        "markdownInput": "={{ $json.message.content.ebookMarkdown }}",
+        "additionalOptions": {}
+      },
+      "type": "n8n-nodes-md-to-docs.markdownToGoogleDocs",
+      "typeVersion": 1,
+      "position": [
+        1344,
+        -512
+      ],
+      "id": "28309468-9ff2-44d0-bd4e-05cf51d5419e",
+      "name": "Upload ebook as Docx",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "Srz2lLfBBj2CTrHT",
+          "name": "Google Docs account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -1005,7 +816,7 @@
       "main": [
         [
           {
-            "node": "Set coverLink",
+            "node": "Upload ebook as Docx",
             "type": "main",
             "index": 0
           }
@@ -1028,28 +839,6 @@
         ]
       ]
     },
-    "Set coverLink": {
-      "main": [
-        [
-          {
-            "node": "Build HTML (ebook)",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Build HTML (ebook)": {
-      "main": [
-        [
-          {
-            "node": "Binary Data (HTML ebook)",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Value Enhancer": {
       "main": [
         [
@@ -1066,17 +855,6 @@
         [
           {
             "node": "Binary Data (Value Enhancer)",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Convert eBook to DOCX": {
-      "main": [
-        [
-          {
-            "node": "Binary Data (ebook)",
             "type": "main",
             "index": 0
           }
@@ -1132,17 +910,6 @@
         []
       ]
     },
-    "Upload ebook": {
-      "main": [
-        [
-          {
-            "node": "Merge ebook",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
     "Upload enhancer": {
       "main": [
         [
@@ -1159,17 +926,6 @@
         [
           {
             "node": "Merge",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Upload HTML": {
-      "main": [
-        [
-          {
-            "node": "Merge ebook",
             "type": "main",
             "index": 0
           }
@@ -1198,38 +954,11 @@
         ]
       ]
     },
-    "Binary Data (ebook)": {
-      "main": [
-        [
-          {
-            "node": "Upload ebook",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Binary Data (enhancer)": {
       "main": [
         [
           {
             "node": "Upload enhancer",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Binary Data (HTML ebook)": {
-      "main": [
-        [
-          {
-            "node": "Upload HTML",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Convert eBook to DOCX",
             "type": "main",
             "index": 0
           }
@@ -1247,7 +976,7 @@
         ]
       ]
     },
-    "Merge ebook": {
+    "Upload ebook as Docx": {
       "main": [
         [
           {
@@ -1261,9 +990,10 @@
   },
   "active": true,
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner"
   },
-  "versionId": "746bc14a-5f15-4de9-8e09-6a0a6e0b6122",
+  "versionId": "569deb10-335e-4b1b-b689-bb563cc2281a",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "6910c6c2fc8c063d5c1ed14d7a7b2e9404e402a221682ba5e944d64a25bc5aa4"

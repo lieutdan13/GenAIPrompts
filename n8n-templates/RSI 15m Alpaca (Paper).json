@@ -1,0 +1,848 @@
+{
+  "name": "RSI 15m Alpaca (Paper)",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "0929d2de-3db4-4827-a561-8390b7fa158d",
+              "leftValue": "={{ $json.withinMarketHours }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "beefaf27-fb0c-405a-878e-4933cc9e3acf",
+      "name": "IF: Market Open?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -1872,
+        64
+      ]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "f8bdd304-c329-4e7d-85ac-a8a861d18164",
+      "name": "Split In Batches: per symbol",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 2,
+      "position": [
+        -768,
+        -16
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{$items(\"Params\")[0].json.ALPACA_TRADING_BASE_URL}}/v2/account",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpCustomAuth",
+        "options": {
+          "response": {}
+        }
+      },
+      "id": "d1ed287c-62eb-49a8-9163-5da71fd4d4ab",
+      "name": "HTTP: Get Account (equity)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -304,
+        -128
+      ],
+      "credentials": {
+        "httpCustomAuth": {
+          "id": "6B7EzGSkM5BPq2uF",
+          "name": "AlpacaHeaders"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{$items(\"Params\")[0].json.ALPACA_TRADING_BASE_URL}}/v2/positions/{{ $('Split In Batches: per symbol').item.json.symbol }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpCustomAuth",
+        "options": {
+          "allowUnauthorizedCerts": false,
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "11cd87b5-e701-4048-940c-406abe31defe",
+      "name": "HTTP: Get Position (symbol)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -96,
+        -128
+      ],
+      "alwaysOutputData": false,
+      "credentials": {
+        "httpCustomAuth": {
+          "id": "6B7EzGSkM5BPq2uF",
+          "name": "AlpacaHeaders"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "27349b0a-bf29-48d3-8433-368bc56ea2fe",
+              "leftValue": "={{ $json.signal }}",
+              "rightValue": "BUY",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "0566d6b6-ad84-4963-997a-8de3ba45cf45",
+              "leftValue": "={{ $json.signal }}",
+              "rightValue": "SELL",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "865693d5-8f26-49d5-8f21-04460a3c3477",
+      "name": "IF: Should Place Order?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        320,
+        -128
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$items(\"Params\")[0].json.ALPACA_TRADING_BASE_URL}}/v2/orders",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpCustomAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "symbol",
+              "value": "={{ $json.symbol }}"
+            },
+            {
+              "name": "qty",
+              "value": "={{ $json.intendedQty }}"
+            },
+            {
+              "name": "limit_price",
+              "value": "={{ $json.close }}"
+            },
+            {
+              "name": "type",
+              "value": "limit"
+            },
+            {
+              "name": "side",
+              "value": "={{ $json.signal.toLowerCase() }}"
+            },
+            {
+              "name": "time_in_force",
+              "value": "day"
+            }
+          ]
+        },
+        "options": {
+          "response": {}
+        }
+      },
+      "id": "8a3a1c6b-7ccc-40aa-b705-d2773a1e4519",
+      "name": "HTTP: Place Market Order (paper)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        752,
+        -128
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "httpCustomAuth": {
+          "id": "6B7EzGSkM5BPq2uF",
+          "name": "AlpacaHeaders"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "c24a9265-d203-4419-8e78-79baa54c2603",
+              "leftValue": "={{ $('Params').first().item.json.dryRun }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "cdf2fa20-43af-4e54-9b3d-11577b729f9c",
+      "name": "IF: dry_run?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        544,
+        -208
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 */15 9-15 * * 1-5"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -2272,
+        64
+      ],
+      "id": "6446af51-2054-42ff-9e7f-cb544da19904",
+      "name": "Cron: every 15m (ET)"
+    },
+    {
+      "parameters": {
+        "jsCode": "const now = new Date();\n// Use America/New_York offset via Intl\nconst fmt = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', hour12: false, hour: '2-digit', minute: '2-digit', weekday: 'short' });\nconst parts = fmt.formatToParts(now).reduce((a,p)=>{a[p.type]=p.value;return a;}, {});\nconst hh = parseInt(parts.hour);\nconst mm = parseInt(parts.minute);\nconst day = parts.weekday; // Mon, Tue, ... depends on locale; use fallback\nconst mins = hh*60+mm;\nconst open = 9*60+30, close = 16*60;\nconst weekdayOk = ['Mon','Tue','Wed','Thu','Fri'].some(d => (parts.weekday||'').startsWith(d));\nconst within = weekdayOk && mins>=open && mins<close;\nreturn [{ withinMarketHours: within, nowET: `${parts.weekday} ${parts.hour}:${parts.minute}` }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2064,
+        64
+      ],
+      "id": "8205e9fe-b1f6-4600-8438-8cdba77d88d0",
+      "name": "Function: Market Hours Guard"
+    },
+    {
+      "parameters": {
+        "jsCode": "const list = Object.keys($input.first().json) || [];\nconsole.log(list);\nreturn list.map(sym=>({symbol: sym}));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1008,
+        -16
+      ],
+      "id": "276071ad-cc62-4719-b8a7-f4e67f2585b7",
+      "name": "Function: Expand Tickers"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Expect Alpaca bars JSON: { bars: { ticker: [{t, o, h, l, c, v}, ...]} }\nfunction rma(values, period){\n  if(values.length < period) return [];\n  let rsis=[], gains=[], losses=[];\n  for(let i=1;i<values.length;i++){\n    const diff = values[i]-values[i-1];\n    gains.push(Math.max(0,diff));\n    losses.push(Math.max(0,-diff));\n  }\n  const seed = period;\n  let avgGain = gains.slice(0,seed).reduce((a,b)=>a+b,0)/seed;\n  let avgLoss = losses.slice(0,seed).reduce((a,b)=>a+b,0)/seed;\n  let rsiSeries=[];\n  rsiSeries[seed] = 100 - (100/(1+(avgGain/(avgLoss||1e-12))));\n  for(let i=seed+1;i<=gains.length;i++){\n    avgGain = (avgGain*(period-1) + gains[i-1]) / period;\n    avgLoss = (avgLoss*(period-1) + losses[i-1]) / period;\n    const rs = avgGain/(avgLoss||1e-12);\n    rsiSeries[i] = 100 - (100/(1+rs));\n  }\n  return rsiSeries.filter(x=>x!==undefined);\n}\nconst period = $(\"Params\").first().json.rsiPeriod;\nconst overbought = $(\"Params\").first().json.rsiOverbought;\nconst oversold = $(\"Params\").first().json.rsiOversold;\nconst buffer = $(\"Params\").first().json.hystBuffer;\nconst symbol = $(\"Split In Batches: per symbol\").first().json.symbol;\n\nconst bars = ($(\"Aggregate Bar Pages\").first().json[symbol] || []).map(b=>b) || [];\nconst closes = bars.map(b=>b.c);\nif(closes.length < period+2){\n  return [{ symbol, note: \"insufficient data\", signal: \"NO_ACTION\", reason: `Not enough bars (${closes.length}) for the period (${period} + 2)`, oversold: Number(oversold.toFixed(3)), overbought: Number(overbought.toFixed(3)) }];\n}\nconst rsiSeries = rma(closes, period);\nconst last = rsiSeries[rsiSeries.length-1];\nconst prev = rsiSeries[rsiSeries.length-2];\n// Hysteresis enter-on-cross: BUY when crosses up through (oversold+buffer), SELL when crosses down through (overbought-buffer)\nlet signal = \"NO_ACTION\";\nif(prev <= (oversold) && last >= (oversold+buffer)) signal = \"BUY\";\nif(prev >= (overbought) && last <= (overbought-buffer)) signal = \"SELL\";\nconst lastBar = bars[bars.length-1];\nreturn [{ symbol, rsi: Number(last.toFixed(2)), prevRsi: Number(prev.toFixed(2)), close: lastBar.c, lastBarTime: lastBar.t, signal, oversold: Number(oversold.toFixed(3)), overbought: Number(overbought.toFixed(3)) }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -512,
+        -128
+      ],
+      "id": "e823dfb9-4ba0-4db2-b8b6-df2d2d903356",
+      "name": "Function: RSI & Signal (hysteresis)"
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "tickers",
+              "value": "AMD,AMKR,AMT,ANET,ARM,BE,BNC,BNZI,CERO,CRWD,CVNA,DDOG,DLR,DVLT,ENPH,EOSE,EVGO,FORD,GDTC,GE,GEV,GOOY,HIT,HWM,HOOD,LTRX,MAIA,MCRP,MP,MVIS,NEM,NNVC,NRG,NVDA,OPRX,OSTX,PLTR,PSI,RBLX,RCL,SMCI,SMX,STX,TVTX,TZUP,WDC,WSM,YYAI,ZS"
+            },
+            {
+              "name": "ALPACA_TRADING_BASE_URL",
+              "value": "https://paper-api.alpaca.markets"
+            },
+            {
+              "name": "ALPACA_DATA_BASE_URL",
+              "value": "https://data.alpaca.markets"
+            }
+          ],
+          "number": [
+            {
+              "name": "fixedCashUSD",
+              "value": 1000
+            },
+            {
+              "name": "rsiPeriod",
+              "value": 14
+            },
+            {
+              "name": "rsiOverbought",
+              "value": 70
+            },
+            {
+              "name": "rsiOversold",
+              "value": 30
+            },
+            {
+              "name": "hystBuffer",
+              "value": 2
+            },
+            {
+              "name": "historyBars",
+              "value": 300
+            },
+            {
+              "name": "maxPosPct",
+              "value": 20
+            }
+          ],
+          "boolean": [
+            {
+              "name": "dryRun"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "da6f7a2b-db8e-43f9-b28a-ca52ef2f1c04",
+      "name": "Params",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        -1632,
+        -16
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const eq = Number($(\"HTTP: Get Account (equity)\").first().json.equity || 0);\nconst price = Number($(\"Function: RSI & Signal (hysteresis)\").first().json.close);\nconst fixedCash = Number($('Params').first().json.fixedCashUSD);\nconst maxPct = Number($('Params').first().json.maxPosPct);\nconst capCash = Math.min(fixedCash, (eq * maxPct/100));\nlet qty = Math.floor(capCash / price);\nif(!Number.isFinite(qty) || qty < 1) qty = 0;\n// Position info (if any)\nconst pos = $(\"HTTP: Get Position (symbol)\").first().json || {};\nconst hasLong = !!pos.qty && Number(pos.qty) > 0;\nconst signal = $(\"Function: RSI & Signal (hysteresis)\").first().json.signal;\nlet action = signal;\nif(signal === 'SELL' && !hasLong) action = 'NO_ACTION';\nreturn [{\n  symbol: $(\"Function: RSI & Signal (hysteresis)\").first().json.symbol,\n  rsi: $(\"Function: RSI & Signal (hysteresis)\").first().json.rsi,\n  prevRsi: $(\"Function: RSI & Signal (hysteresis)\").first().json.prevRsi,\n  close: price.toFixed(2),\n  lastBarTime: $(\"Function: RSI & Signal (hysteresis)\").first().json.lastBarTime,\n  signal: action,\n  intendedQty: qty,\n  client_order_id: `rsi-${$(\"Function: RSI & Signal (hysteresis)\").first().json.symbol}-${$(\"Function: RSI & Signal (hysteresis)\").first().json.lastBarTime}`\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        112,
+        -128
+      ],
+      "id": "c72ca6b1-1b3e-410d-ac5e-1edbf0903ce0",
+      "name": "Function: Size & Build Order"
+    },
+    {
+      "parameters": {
+        "url": "={{$('Params').item.json.ALPACA_DATA_BASE_URL}}/v2/stocks/bars",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpCustomAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "symbols",
+              "value": "={{ $json.tickers }}"
+            },
+            {
+              "name": "timeframe",
+              "value": "15Min"
+            }
+          ]
+        },
+        "options": {
+          "pagination": {
+            "pagination": {
+              "parameters": {
+                "parameters": [
+                  {
+                    "name": "page_token",
+                    "value": "={{ $response.body[\"next_page_token\"] || null }}"
+                  }
+                ]
+              },
+              "paginationCompleteWhen": "other",
+              "completeExpression": "={{ $response.body[\"next_page_token\"] == null }}"
+            }
+          }
+        }
+      },
+      "id": "405739b9-2892-4aa1-8cb9-70e165204f85",
+      "name": "HTTP: Get Bars All Tickers (15m)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -1424,
+        -16
+      ],
+      "notesInFlow": false,
+      "credentials": {
+        "httpCustomAuth": {
+          "id": "6B7EzGSkM5BPq2uF",
+          "name": "AlpacaHeaders"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\n\nlet bar_data = {};\n\n$input.all().forEach((page) => {\n  Object.keys(page.json.bars).map((ticker) => {\n    if(!Object.keys(bar_data).includes(ticker)) {\n      bar_data[ticker] = page.json.bars[ticker];\n    } else {\n      bar_data[ticker].push(...page.json.bars[ticker]);\n    }\n  });\n});\n\nreturn bar_data;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1216,
+        -16
+      ],
+      "id": "6b323e6b-75ef-44fa-b1a4-5ac449ebb2b9",
+      "name": "Aggregate Bar Pages"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1024,
+        48
+      ],
+      "id": "218b6f50-1a13-4915-8279-033af206a236",
+      "name": "End of Loop"
+    },
+    {
+      "parameters": {
+        "jsCode": "const symbol = $(\"Function: RSI & Signal (hysteresis)\").first().json.symbol;\nconsole.log(`Would have placed an order for ${symbol}`);\nreturn $(\"IF: Should Place Order?\").all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        752,
+        -288
+      ],
+      "id": "74e2e3b8-6f3f-477d-9952-fb80f18195ae",
+      "name": "Dry Run Capture"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c2b17dfd-41a1-4289-9965-96f0237010cd",
+              "leftValue": "={{ $json.hasField(\"id\") }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -496,
+        64
+      ],
+      "id": "4eccfc08-27ff-49cb-8c0e-b5c443f23b35",
+      "name": "Filtered Orders"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0f48d3f9-1467-41b8-8583-0d23be504ed8",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "b713aa09-fbf6-4b99-bc6e-d587fd810f5b",
+              "name": "symbol",
+              "value": "={{ $json.symbol }}",
+              "type": "string"
+            },
+            {
+              "id": "b8772284-2cba-4914-a45a-18021a7c7a54",
+              "name": "side",
+              "value": "={{ $json.side.toUpperCase() }}",
+              "type": "string"
+            },
+            {
+              "id": "9fd03755-1096-40ab-bbda-b8e1fad8996b",
+              "name": "order_type",
+              "value": "={{ $json.order_type }}",
+              "type": "string"
+            },
+            {
+              "id": "f03567cd-b251-40c4-80e2-db311ee8e295",
+              "name": "qty",
+              "value": "={{ $json.qty }}",
+              "type": "string"
+            },
+            {
+              "id": "ad02f7a2-37f0-4da3-bfdf-63061fa8a21f",
+              "name": "limit_price",
+              "value": "={{ $json.limit_price }}",
+              "type": "string"
+            },
+            {
+              "id": "585e1dd3-8ba5-4e8a-b231-7ff5e43de40c",
+              "name": "stop_price",
+              "value": "={{ $json.stop_price }}",
+              "type": "string"
+            },
+            {
+              "id": "dc6502bb-e46f-436a-a5e5-ab2e0f80a7b2",
+              "name": "time_in_force",
+              "value": "={{ $json.time_in_force }}",
+              "type": "string"
+            },
+            {
+              "id": "1f841f4d-8c4c-46f1-b9bd-3409b94ab232",
+              "name": "submitted_at",
+              "value": "={{ $json.submitted_at }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -288,
+        64
+      ],
+      "id": "d3f1cb35-61e4-4a6b-a342-285bda93bff0",
+      "name": "Orders Placed"
+    }
+  ],
+  "pinData": {
+    "Filtered Orders": [
+      {
+        "json": {
+          "id": "1134b344-5808-4ea2-91e2-1df25e11d3c1",
+          "client_order_id": "bbe88562-265f-46c5-a65c-3a5709fd9645",
+          "created_at": "2025-10-23T16:19:24.14144933Z",
+          "updated_at": "2025-10-23T16:19:24.143130309Z",
+          "submitted_at": "2025-10-23T16:19:24.14144933Z",
+          "filled_at": null,
+          "expired_at": null,
+          "canceled_at": null,
+          "failed_at": null,
+          "replaced_at": null,
+          "replaced_by": null,
+          "replaces": null,
+          "asset_id": "e4870680-5a31-43e0-a477-c47d158ac43d",
+          "symbol": "SMCI",
+          "asset_class": "us_equity",
+          "notional": null,
+          "qty": "20",
+          "filled_qty": "0",
+          "filled_avg_price": null,
+          "order_class": "",
+          "order_type": "limit",
+          "type": "limit",
+          "side": "buy",
+          "position_intent": "buy_to_open",
+          "time_in_force": "day",
+          "limit_price": "48.93",
+          "stop_price": null,
+          "status": "pending_new",
+          "extended_hours": false,
+          "legs": null,
+          "trail_percent": null,
+          "trail_price": null,
+          "hwm": null,
+          "subtag": null,
+          "source": null,
+          "expires_at": "2025-10-23T20:00:00Z"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "IF: Market Open?": {
+      "main": [
+        [
+          {
+            "node": "Params",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Split In Batches: per symbol": {
+      "main": [
+        [
+          {
+            "node": "Function: RSI & Signal (hysteresis)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Filtered Orders",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF: Should Place Order?": {
+      "main": [
+        [
+          {
+            "node": "IF: dry_run?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "End of Loop",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cron: every 15m (ET)": {
+      "main": [
+        [
+          {
+            "node": "Function: Market Hours Guard",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Function: Market Hours Guard": {
+      "main": [
+        [
+          {
+            "node": "IF: Market Open?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Function: Expand Tickers": {
+      "main": [
+        [
+          {
+            "node": "Split In Batches: per symbol",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Params": {
+      "main": [
+        [
+          {
+            "node": "HTTP: Get Bars All Tickers (15m)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Function: RSI & Signal (hysteresis)": {
+      "main": [
+        [
+          {
+            "node": "HTTP: Get Account (equity)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP: Get Account (equity)": {
+      "main": [
+        [
+          {
+            "node": "HTTP: Get Position (symbol)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP: Get Position (symbol)": {
+      "main": [
+        [
+          {
+            "node": "Function: Size & Build Order",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Function: Size & Build Order": {
+      "main": [
+        [
+          {
+            "node": "IF: Should Place Order?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF: dry_run?": {
+      "main": [
+        [
+          {
+            "node": "Dry Run Capture",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP: Place Market Order (paper)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP: Place Market Order (paper)": {
+      "main": [
+        [
+          {
+            "node": "End of Loop",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP: Get Bars All Tickers (15m)": {
+      "main": [
+        [
+          {
+            "node": "Aggregate Bar Pages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate Bar Pages": {
+      "main": [
+        [
+          {
+            "node": "Function: Expand Tickers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "End of Loop": {
+      "main": [
+        [
+          {
+            "node": "Split In Batches: per symbol",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dry Run Capture": {
+      "main": [
+        [
+          {
+            "node": "End of Loop",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filtered Orders": {
+      "main": [
+        [
+          {
+            "node": "Orders Placed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "5f2493b5-ec5b-46d1-ac58-79b4b5f1458a",
+  "meta": {
+    "instanceId": "6910c6c2fc8c063d5c1ed14d7a7b2e9404e402a221682ba5e944d64a25bc5aa4"
+  },
+  "id": "A7FhLwWkCHoHV6tE",
+  "tags": []
+}

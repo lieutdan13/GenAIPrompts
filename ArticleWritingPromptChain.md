@@ -8,6 +8,7 @@
 2. [Topic and Context](#topic-and-context)
    1. [Pre-written target audiences](#pre-written-target-audiences)
    2. [Context](#context)
+   3. [Context v2](#context-v2)
 3. [Generating and Choosing a Title](#generating-and-choosing-a-title)
 4. [Editing Outline](#editing-outline)
 5. [Composing the Article from the Outline](#composing-the-article-from-the-outline)
@@ -101,6 +102,44 @@ The topic of the Article:
 Description:
 ```
 
+### Context v2
+```
+Act as a professional blogger with 10+ years of experience writing engaging and relatable content. Imagine you're having a casual conversation with a friend over coffee. Your task is to write a blog post about [ARTICLE_TOPIC] that feels personal, authentic, and emotionally compelling to [TARGET_AUDIENCE]. Use the [ARTICLE_DESCRIPTION] as additional context on how to write the article.
+
+Tone & Style:
+- Conversational, persuasive, and engaging—like speaking directly to one person.
+- Use first-person singular ("I" instead of "we") for a more personal connection.
+- Prioritize clarity with short, straightforward sentences (2-3 per paragraph).
+- Use contractions, strong verbs, and natural language to make the text flow smoothly.
+- Incorporate humor, rhetorical questions, and personal anecdotes to keep it relatable.
+- Include sensory details to make the content vivid.
+
+SEO & Structure:
+- Before suggesting a title or outline, generate 15 of the strongest SEO keywords based on how [TARGET_AUDIENCE] would search for [ARTICLE_TOPIC]. Use [SEED_KEYWORD] as a base if provided.
+- Provide 5-7 title suggestions, each as a single phrase without a colon. The titles must be your absolute best options.
+- Create an outline with clear headings and unordered bullet points, formatted for easy copy-pasting into WordPress.
+- The final section of the outline should always be "Final Thoughts."
+
+Additional Guidelines:
+- Avoid overused AI-sounding words and phrases like "delve," "world of," "realm," "isn't just about," etc.
+- If using jargon or technical terms, explain them in simple terms.
+- Reference current trends or events relevant to the topic as of [DATE] for a timely feel.
+- Aim for a word count of [WORD_COUNT] and, if applicable, emulate the voice of [STYLE_REFERENCE] for added authenticity.
+
+Your goal is to create a genuinely human, engaging, and relatable blog post that flows naturally—steering clear of common AI markers.
+
+
+User Input:
+- <ARTICLE_TOPIC></ARTICLE_TOPIC>
+- <SEED_KEYWORD></SEED_KEYWORD>
+- <DATE></DATE>
+- <WORD_COUNT></WORD_COUNT>
+- <STYLE_REFERENCE>INSERT_WHO_YOU_WANT_THE_ARTICLE_TO_SOUND_LIKE</STYLE_REFERENCE>
+- <TARGET_AUDIENCE></TARGET_AUDIENCE>
+- <ARTICLE_DESCRIPTION></ARTICLE_DESCRIPTION>
+
+```
+
 
 ## Generating and Choosing a Title
 
@@ -170,8 +209,8 @@ Re-write this to sound more human and less AI and plagiarized, removing the foll
 Use this prompt if you've provided edits outside the chat, to inform the agent of how you would like to have other content written.
 
 ```
-Below is the section with the edits I made. Please explain to me the differences in what you have provided and the edits I made. I want you to apply the concepts to future sections.
-Edit:
+Below is the section with my edits. Please explain to me the differences between what you have provided and the edits I made. I want you to apply the concepts to future sections.
+Edited Section:
 
 ```
 
@@ -225,10 +264,7 @@ Smart Brevity Rules:
 5. Use active verbs; active verbs bring action to your writing. Use this formula: [who] [doing what].
 6. Embrace strong phrases; Short, crisp, punchy = memorable, clear, smart.
 7. Check yourself; After writing, look at every sentence and see if you can write it with 1 fewer syllable with stronger words.
-Do you understand?
-```
 
-```
 I want you to write a short, concise, stand-alone summary of the given article using the Smart Brevity Rules.
 If my readers only read the summary, they will understand the core concepts and points the article has made. Do not mention the article itself.
 Keep the target audience in mind and write it as if you were conversing with a target audience member.
@@ -271,7 +307,7 @@ Publish Date:
 ## Composing an Email
 
 ```
-Please write an email for my subscribed target audience to announce the article. Begin by generating 10 subject lines that are friendly, exciting, and designed to spark intrigue and encourage readers to open the email and click through to the article. Include hints at key takeaways from the article, using varied approaches to create intrigue (such as posing a question, teasing a surprising insight, or offering a benefit). Keep reasoning concise, making it easy to review all options quickly.
+Please write an email for my subscribed target audience to announce the article. Begin by generating 10 subject lines that are friendly, exciting, and designed to spark intrigue and encourage readers to open the email and click through to the article. Include hints at key takeaways from the article, using varied approaches to create intrigue (such as posing a question, teasing a surprising insight, or offering a benefit). The subject lines should also be controversial statements. Keep reasoning concise, making it easy to review all options quickly.
 
 Use the following format:
 1. Example Subject Line
@@ -317,13 +353,22 @@ At the end of your response, include a code block starting with "Article:" follo
 ### LinkedIn Topic
 A prompt to generate a post on LinkedIn on the same topic as the article, but without promoting the article.
 ```
+<INSTRUCTIONS>
 I want to create a medium-sized LinkedIn post highlighting the article's key points as a bullet list but not mentioning the article itself. I want to include a link to a page where you can sign up for my newsletter. The link will be in plain text. At the end of the post, I want to ask my audience an engaging question to respond to in the comments.
 Before writing the post, I want you to take your time to consider what a good post is and elaborate on your reasoning.
 
 Also, provide a list of 10 alternative questions, think through what a good question would be, and elaborate on your reasoning before you write out the question.
+</INSTRUCTIONS>
 
+<STEPS>
+1. Take your time to think internally about what makes a good LinkedIn post. Do not output your thoughts. Keep the discussion internally.
+2. Take some more time internally about what makes a good question to ask in a LinkedIn post. Do not output your thoughts. Keep the discussion internally.
+3. Write your best post for LinkedIn about the topic of the article. Include a question towards the end to help engage the audience
+4. At the very end of the post, include a link to the newsletter signup
+5. Provide a list of alternative questions to include in the post.
+</STEPS>
 
-Newsletter URL: https://danschaefer.dev/newsletter?utm_source=linkedin&utm_medium=post&utm_campaign=topic
+<NEWSLETTER_URL>https://danschaefer.dev/newsletter?utm_source=linkedin&utm_medium=post&utm_campaign=topic</NEWSLETTER_URL>
 ```
 
 ### LinkedIn Post

@@ -18,8 +18,7 @@
 
 ### Career Development
 
-- [Job Fit Simulator](JobFitSumulator.md)
-- [Career Advisor](CareerAdvisor.md)
+Moved to agent skills in [lieutdan13/agent-skills](https://github.com/lieutdan13/agent-skills): `jobfit` (Job Fit Simulator) and `career-roadmap` (Career Advisor).
 
 ## AI Tool Use Cases
 
